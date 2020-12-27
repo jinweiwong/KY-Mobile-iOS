@@ -28,7 +28,7 @@ struct CurrentView: View {
     @State var expandedEvent = Event(Title: "", FullDesc: "", ShortDesc: "", StartDate: "", EndDate: "", StartTime: "", EndTime: "", Venue: "", Cover: "placeholder", TimeStamp: "")
     @State var isShowingPageView = false
     
-    @State var newEvent = Event(Title: "", FullDesc: "", ShortDesc: "", StartDate: "", EndDate: "", StartTime: "", EndTime: "", Venue: "", Cover: "", Stamp: "")
+    @State var newEvent = Event(Title: "", FullDesc: "", ShortDesc: "", StartDate: "", EndDate: "", StartTime: "", EndTime: "", Venue: "", Cover: "", TimeStamp: "")
     @State var isShowingSheet: Bool = false
     
     var body: some View {
@@ -65,7 +65,7 @@ struct CurrentView: View {
                 
                 
                 
-                //ForEach_start
+                // ForEach_start
                 
                 ForEach(events.events, id: \.id) { thisEvent in
                     ZStack{

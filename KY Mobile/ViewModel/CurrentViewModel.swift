@@ -1,9 +1,8 @@
 //
 //  CurrentViewModel.swift
-//  KYMobile
+//  KY Mobile
 //
-//  Created by Wong Jin Wei on 21/09/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
+//  Created by Wong Jin Wei on 27/12/2020.
 //
 
 import Foundation
@@ -60,107 +59,3 @@ class CurrentViewModel: ObservableObject {
         }
     }
 }
-
-
-//class StorageImage {
-//    var currentImage: UIImage? = nil
-//    
-//    init(url: String) {
-//        RetrieveImage(url: url)
-//        print(url)
-//    }
-//
-//    func RetrieveImage(url: String) {
-//        let ref = Storage.storage().reference(forURL: url)
-//        
-//        ref.getData(maxSize: 1 * 16384 * 16384) {data, error in
-//            if let error = error {
-//                print("\(error)")
-//            }
-//            else {
-//                print("successful")
-//                self.currentImage = UIImage(data: data!)!
-//            }
-//        }
-//    }
-//}
-
-//    func RetrieveImage(url: String) -> UIImage {
-//        let ref = Storage.storage().reference(forURL: url)
-//        var _data: Data? = nil
-//
-//        print("can")
-//        ref.getData(maxSize: 1 * 4096 * 4096) {data, error in
-//            if let error = error {
-//                print("\(error)")
-//                print("There was an error")
-//                return
-//            }
-//            else {
-//                print("successful")
-//                _data = data!
-//            }
-//        }
-//        print("can")
-//        return UIImage(data: _data!)!
-//    }
-
-//func downloadImages(url: String) -> String {
-//
-//    let reference = Storage.storage().reference(forURL: url)
-//    reference.getData(maxSize: (1 * 4096 * 4096)) { (data, error) in
-//
-//        if let error = error{
-//            print(error)
-//        }
-//        
-//        else {
-//            if let _data  = data {
-//                return UIImage(data: _data)
-//            }
-//        }
-//    }
-//}
-
-//struct StorageImage: View {
-//
-//    let url: String = "https://firebasestorage.googleapis.com/v0/b/ky-mobile.appspot.com/o/Events%2FEventCovers_1590212840278?alt=media&token=277d4096-eae7-41c3-9082-a73894d1b6fa"
-//    var img: UIImage?
-//    var error: Error
-//
-//    init() {
-//        downloadImages(url: url,
-//                       success: { (img) in
-//                        self.img = img
-//                       }) { (error) in
-//            self.error = error
-//        }
-//    }
-//
-//    func downloadImages(url: String,
-//                        success: @escaping (_ image: UIImage) -> (),
-//                        failure: @escaping (_ error: Error) -> () ){
-//
-//        let reference = Storage.storage().reference(forURL: url)
-//        reference.getData(maxSize: (1 * 4096 * 4096)) { (data, error) in
-//            if let _error = error{
-//                print(_error)
-//                failure(_error)
-//
-//            } else {
-//                if let _data  = data {
-//                    let myImage:UIImage! = UIImage(data: _data)
-//                    success(myImage)
-//                }
-//            }
-//        }
-//    }
-//
-//    var body: some View {
-//        Image(uiImage: self.img!)
-//    }
-//}
-
-
-
-

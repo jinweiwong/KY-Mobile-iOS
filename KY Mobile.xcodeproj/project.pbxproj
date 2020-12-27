@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50662598245F00CA710E /* KY_MobileApp.swift */; };
-		5F3B50692598245F00CA710E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50682598245F00CA710E /* ContentView.swift */; };
 		5F3B506B2598246500CA710E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506A2598246500CA710E /* Assets.xcassets */; };
 		5F3B506E2598246500CA710E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506D2598246500CA710E /* Preview Assets.xcassets */; };
 		5F3B509125982FF600CA710E /* TextfieldCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B509025982FF600CA710E /* TextfieldCheck.swift */; };
@@ -32,7 +31,6 @@
 		5F3B513225983B2400CA710E /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512F25983B2400CA710E /* NewEventSheet.swift */; };
 		5F3B513525983B3000CA710E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513425983B3000CA710E /* ProfileView.swift */; };
 		5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513725983B4200CA710E /* HomeViewModel.swift */; };
-		5F3B513B25983B5A00CA710E /* CurrentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513A25983B5A00CA710E /* CurrentViewModel.swift */; };
 		5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513D25983B6100CA710E /* NoticesViewModel.swift */; };
 		5F3B514625983B7B00CA710E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514025983B7A00CA710E /* ImagePicker.swift */; };
 		5F3B514725983B7B00CA710E /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514125983B7B00CA710E /* FirebaseImage.swift */; };
@@ -40,12 +38,18 @@
 		5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */; };
 		5F3B514A25983B7B00CA710E /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514425983B7B00CA710E /* TabBarView.swift */; };
 		5F3B514B25983B7B00CA710E /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514525983B7B00CA710E /* Time.swift */; };
+		5F3B514F259874B200CA710E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B514E259874B200CA710E /* GoogleService-Info.plist */; };
+		5F3B5184259878EF00CA710E /* CurrentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B5183259878EF00CA710E /* CurrentViewModel.swift */; };
+		5F3B51A325987C0100CA710E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B51A125987BFF00CA710E /* Images.xcassets */; };
+		5F3B51A425987C0100CA710E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B51A225987C0100CA710E /* Colors.xcassets */; };
+		5F3B51A725987CC000CA710E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B51A625987CC000CA710E /* ViewController.swift */; };
+		D83A57C49FD7843360ED3553 /* Pods_KY_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KY_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3B50632598245F00CA710E /* KY Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KY Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3B50662598245F00CA710E /* KY_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KY_MobileApp.swift; sourceTree = "<group>"; };
-		5F3B50682598245F00CA710E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5F3B506A2598246500CA710E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F3B506D2598246500CA710E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5F3B506F2598246500CA710E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +74,6 @@
 		5F3B512F25983B2400CA710E /* NewEventSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		5F3B513425983B3000CA710E /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5F3B513725983B4200CA710E /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		5F3B513A25983B5A00CA710E /* CurrentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentViewModel.swift; sourceTree = "<group>"; };
 		5F3B513D25983B6100CA710E /* NoticesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticesViewModel.swift; sourceTree = "<group>"; };
 		5F3B514025983B7A00CA710E /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5F3B514125983B7B00CA710E /* FirebaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
@@ -78,6 +81,13 @@
 		5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserInfo.swift; sourceTree = "<group>"; };
 		5F3B514425983B7B00CA710E /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		5F3B514525983B7B00CA710E /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		5F3B514E259874B200CA710E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5F3B5183259878EF00CA710E /* CurrentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentViewModel.swift; sourceTree = "<group>"; };
+		5F3B51A125987BFF00CA710E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5F3B51A225987C0100CA710E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		5F3B51A625987CC000CA710E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9205D62AB0E92D1444612072 /* Pods-KY Mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KY Mobile.debug.xcconfig"; path = "Target Support Files/Pods-KY Mobile/Pods-KY Mobile.debug.xcconfig"; sourceTree = "<group>"; };
+		ECBE65C51E2FB277E9BA3BFC /* Pods-KY Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KY Mobile.release.xcconfig"; path = "Target Support Files/Pods-KY Mobile/Pods-KY Mobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83A57C49FD7843360ED3553 /* Pods_KY_Mobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +107,8 @@
 			children = (
 				5F3B50652598245F00CA710E /* KY Mobile */,
 				5F3B50642598245F00CA710E /* Products */,
+				7254CF23D1B0A2C4CAACB0B6 /* Pods */,
+				ACB799899D5369956FB92BB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,14 +124,17 @@
 			isa = PBXGroup;
 			children = (
 				5F3B50662598245F00CA710E /* KY_MobileApp.swift */,
-				5F3B50682598245F00CA710E /* ContentView.swift */,
+				5F3B51A625987CC000CA710E /* ViewController.swift */,
 				5F3B507A2598283300CA710E /* View */,
 				5F3B50792598282B00CA710E /* ViewModel */,
 				5F3B50782598281B00CA710E /* Model */,
 				5F3B50762598280B00CA710E /* Firebase */,
 				5F3B50972598321F00CA710E /* Utilities */,
 				5F3B506A2598246500CA710E /* Assets.xcassets */,
+				5F3B51A225987C0100CA710E /* Colors.xcassets */,
+				5F3B51A125987BFF00CA710E /* Images.xcassets */,
 				5F3B506F2598246500CA710E /* Info.plist */,
+				5F3B514E259874B200CA710E /* GoogleService-Info.plist */,
 				5F3B506C2598246500CA710E /* Preview Content */,
 			);
 			path = "KY Mobile";
@@ -158,7 +174,7 @@
 			children = (
 				5F3B513725983B4200CA710E /* HomeViewModel.swift */,
 				5F3B513D25983B6100CA710E /* NoticesViewModel.swift */,
-				5F3B513A25983B5A00CA710E /* CurrentViewModel.swift */,
+				5F3B5183259878EF00CA710E /* CurrentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -236,6 +252,23 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		7254CF23D1B0A2C4CAACB0B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9205D62AB0E92D1444612072 /* Pods-KY Mobile.debug.xcconfig */,
+				ECBE65C51E2FB277E9BA3BFC /* Pods-KY Mobile.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ACB799899D5369956FB92BB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -243,9 +276,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F3B50722598246500CA710E /* Build configuration list for PBXNativeTarget "KY Mobile" */;
 			buildPhases = (
+				42BEC0FF4A3B2C900A55817C /* [CP] Check Pods Manifest.lock */,
 				5F3B505F2598245F00CA710E /* Sources */,
 				5F3B50602598245F00CA710E /* Frameworks */,
 				5F3B50612598245F00CA710E /* Resources */,
+				A68593F387EA2E7D62A1C4E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,21 +328,65 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3B51A425987C0100CA710E /* Colors.xcassets in Resources */,
 				5F3B506E2598246500CA710E /* Preview Assets.xcassets in Resources */,
+				5F3B51A325987C0100CA710E /* Images.xcassets in Resources */,
+				5F3B514F259874B200CA710E /* GoogleService-Info.plist in Resources */,
 				5F3B506B2598246500CA710E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		42BEC0FF4A3B2C900A55817C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KY Mobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A68593F387EA2E7D62A1C4E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KY Mobile/Pods-KY Mobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KY Mobile/Pods-KY Mobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KY Mobile/Pods-KY Mobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5F3B505F2598245F00CA710E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3B5184259878EF00CA710E /* CurrentViewModel.swift in Sources */,
 				5F3B514B25983B7B00CA710E /* Time.swift in Sources */,
-				5F3B513B25983B5A00CA710E /* CurrentViewModel.swift in Sources */,
-				5F3B50692598245F00CA710E /* ContentView.swift in Sources */,
 				5F3B511E25983AA800CA710E /* ForgotPasswordView.swift in Sources */,
 				5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */,
 				5F3B512425983AD800CA710E /* HomeView.swift in Sources */,
@@ -315,6 +394,7 @@
 				5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */,
 				5F3B512925983AE700CA710E /* NewNoticeSheet.swift in Sources */,
 				5F3B50AE259834A200CA710E /* FBFirestoreFunctions.swift in Sources */,
+				5F3B51A725987CC000CA710E /* ViewController.swift in Sources */,
 				5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */,
 				5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */,
 				5F3B512025983AA800CA710E /* IntroductionView.swift in Sources */,
@@ -460,6 +540,7 @@
 		};
 		5F3B50732598246500CA710E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9205D62AB0E92D1444612072 /* Pods-KY Mobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -482,6 +563,7 @@
 		};
 		5F3B50742598246500CA710E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECBE65C51E2FB277E9BA3BFC /* Pods-KY Mobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

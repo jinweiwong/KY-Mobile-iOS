@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ImagePickerView: UIViewControllerRepresentable {
     
-    
     @Binding var isPresented: Bool
     @Binding var selectedImage: UIImage
     
