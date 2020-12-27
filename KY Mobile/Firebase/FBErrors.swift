@@ -1,9 +1,8 @@
 //
-//  FBFireStoreError.swift
-//  KYMobile
+//  FBErrors.swift
+//  KY Mobile
 //
-//  Created by Wong Jin Wei on 24/05/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
+//  Created by Wong Jin Wei on 27/12/2020.
 //
 
 import Foundation

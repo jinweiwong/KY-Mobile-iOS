@@ -1,9 +1,8 @@
 //
-//  FBUser.swift
-//  KYMobile
+//  UserModel.swift
+//  KY Mobile
 //
-//  Created by Wong Jin Wei on 24/05/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
+//  Created by Wong Jin Wei on 27/12/2020.
 //
 
 import Foundation
@@ -26,7 +25,7 @@ struct User {
         self.StudentID = StudentID
     }
     
-    // Adding information to FBUser using a retrieved document
+    // Adding information to FBUser using a retrieved document from Firebase
     init?(UserData: [String: Any]) {
     self.init(UID: UserData["UID"] as? String ?? "",
               Name: UserData["Name"] as? String ?? "",
@@ -36,6 +35,3 @@ struct User {
               StudentID: UserData["StudentID"] as? String ?? "")
     }
 }
-
-
-

@@ -1,9 +1,8 @@
 //
 //  FBFirestoreFunctions.swift
-//  KYMobile
+//  KY Mobile
 //
-//  Created by Wong Jin Wei on 26/05/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
+//  Created by Wong Jin Wei on 27/12/2020.
 //
 
 import Foundation
