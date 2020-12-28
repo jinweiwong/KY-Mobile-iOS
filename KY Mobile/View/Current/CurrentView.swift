@@ -1,11 +1,3 @@
-//
-//  CurrentViewNew.swift
-//  KYMobile
-//
-//  Created by Wong Jin Wei on 20/09/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 import FirebaseFirestore

@@ -1,12 +1,3 @@
-//
-//  ForgotPasswordView.swift
-//  KYMobile
-//
-//  Created by Wong Jin Wei on 31/08/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
-//
-
-import Foundation
 import SwiftUI
 
 struct ForgotPasswordView: View {

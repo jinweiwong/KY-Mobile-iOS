@@ -1,11 +1,3 @@
-//
-//  NewIntro.swift
-//  KYMobile
-//
-//  Created by Wong Jin Wei on 24/06/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
-//
-
 import SwiftUI
 
 struct IntroductionView: View {

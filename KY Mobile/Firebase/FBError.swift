@@ -1,10 +1,3 @@
-//
-//  FBErrors.swift
-//  KY Mobile
-//
-//  Created by Wong Jin Wei on 27/12/2020.
-//
-
 import Foundation
 
 enum FirebaseError: Error {

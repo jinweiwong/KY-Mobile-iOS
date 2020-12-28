@@ -1,16 +1,5 @@
-//
-//  FBAuthentication.swift
-//  KY Mobile
-//
-//  Created by Wong Jin Wei on 27/12/2020.
-//
-
-import Foundation
-import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
-import CryptoKit
-import AuthenticationServices
 
 class FBAuthFunctions {
     // Creates a new user

@@ -1,11 +1,3 @@
-//
-//  NoticesElements.swift
-//  KYMobile
-//
-//  Created by Wong Jin Wei on 22/09/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
-//
-
 import SwiftUI
 import SwiftUI
 import FirebaseStorage

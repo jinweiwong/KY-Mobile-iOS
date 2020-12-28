@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  KYMobile
-//
-//  Created by Wong Jin Wei on 23/05/2020.
-//  Copyright © 2020 Jin Wei & Faiz. All rights reserved.
-//
-
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
