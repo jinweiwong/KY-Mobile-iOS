@@ -62,7 +62,7 @@ struct ViewController: View {
                     guard let uid = Auth.auth().currentUser?.uid else {
                         return
                     }
-                    FBUtilities.retrieveFBUser(uid: uid) { (result) in
+                    FBService.retrieveFBUser(uid: uid) { (result) in
                         switch result {
                         case .failure(let error):
                             print(error.localizedDescription)

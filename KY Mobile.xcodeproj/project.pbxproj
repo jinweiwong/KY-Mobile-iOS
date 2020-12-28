@@ -10,14 +10,14 @@
 		5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50662598245F00CA710E /* KY_MobileApp.swift */; };
 		5F3B506B2598246500CA710E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506A2598246500CA710E /* Assets.xcassets */; };
 		5F3B506E2598246500CA710E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506D2598246500CA710E /* Preview Assets.xcassets */; };
-		5F3B509125982FF600CA710E /* TextfieldCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B509025982FF600CA710E /* TextfieldCheck.swift */; };
+		5F3B509125982FF600CA710E /* NewUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B509025982FF600CA710E /* NewUserModel.swift */; };
 		5F3B5099259833DA00CA710E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B5098259833DA00CA710E /* UserModel.swift */; };
-		5F3B509D2598340600CA710E /* RecentPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B509C2598340600CA710E /* RecentPostModel.swift */; };
+		5F3B509D2598340600CA710E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B509C2598340600CA710E /* NotificationModel.swift */; };
 		5F3B50A12598342600CA710E /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50A02598342600CA710E /* EventModel.swift */; };
 		5F3B50A42598343400CA710E /* NoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50A32598343400CA710E /* NoticeModel.swift */; };
 		5F3B50A82598348B00CA710E /* FBAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50A72598348B00CA710E /* FBAuthentication.swift */; };
 		5F3B50AB2598349200CA710E /* FBErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50AA2598349200CA710E /* FBErrors.swift */; };
-		5F3B50AE259834A200CA710E /* FBFirestoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50AD259834A200CA710E /* FBFirestoreFunctions.swift */; };
+		5F3B50AE259834A200CA710E /* FBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50AD259834A200CA710E /* FBService.swift */; };
 		5F3B511E25983AA800CA710E /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B511A25983AA700CA710E /* ForgotPasswordView.swift */; };
 		5F3B511F25983AA800CA710E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B511B25983AA700CA710E /* SignUpView.swift */; };
 		5F3B512025983AA800CA710E /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B511C25983AA700CA710E /* IntroductionView.swift */; };
@@ -32,7 +32,7 @@
 		5F3B513525983B3000CA710E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513425983B3000CA710E /* ProfileView.swift */; };
 		5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513725983B4200CA710E /* HomeViewModel.swift */; };
 		5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513D25983B6100CA710E /* NoticesViewModel.swift */; };
-		5F3B514625983B7B00CA710E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514025983B7A00CA710E /* ImagePicker.swift */; };
+		5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514025983B7A00CA710E /* ImagePickerView.swift */; };
 		5F3B514725983B7B00CA710E /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514125983B7B00CA710E /* FirebaseImage.swift */; };
 		5F3B514825983B7B00CA710E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514225983B7B00CA710E /* Elements.swift */; };
 		5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */; };
@@ -53,14 +53,14 @@
 		5F3B506A2598246500CA710E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F3B506D2598246500CA710E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5F3B506F2598246500CA710E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F3B509025982FF600CA710E /* TextfieldCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldCheck.swift; sourceTree = "<group>"; };
+		5F3B509025982FF600CA710E /* NewUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserModel.swift; sourceTree = "<group>"; };
 		5F3B5098259833DA00CA710E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		5F3B509C2598340600CA710E /* RecentPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostModel.swift; sourceTree = "<group>"; };
+		5F3B509C2598340600CA710E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		5F3B50A02598342600CA710E /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		5F3B50A32598343400CA710E /* NoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeModel.swift; sourceTree = "<group>"; };
 		5F3B50A72598348B00CA710E /* FBAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthentication.swift; sourceTree = "<group>"; };
 		5F3B50AA2598349200CA710E /* FBErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBErrors.swift; sourceTree = "<group>"; };
-		5F3B50AD259834A200CA710E /* FBFirestoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFirestoreFunctions.swift; sourceTree = "<group>"; };
+		5F3B50AD259834A200CA710E /* FBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBService.swift; sourceTree = "<group>"; };
 		5F3B511A25983AA700CA710E /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5F3B511B25983AA700CA710E /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5F3B511C25983AA700CA710E /* IntroductionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		5F3B513425983B3000CA710E /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5F3B513725983B4200CA710E /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5F3B513D25983B6100CA710E /* NoticesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticesViewModel.swift; sourceTree = "<group>"; };
-		5F3B514025983B7A00CA710E /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		5F3B514025983B7A00CA710E /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		5F3B514125983B7B00CA710E /* FirebaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
 		5F3B514225983B7B00CA710E /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
 		5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserInfo.swift; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 				5F3B51A625987CC000CA710E /* ViewController.swift */,
 				5F3B507A2598283300CA710E /* View */,
 				5F3B50792598282B00CA710E /* ViewModel */,
-				5F3B50782598281B00CA710E /* Model */,
 				5F3B50762598280B00CA710E /* Firebase */,
+				5F3B50782598281B00CA710E /* Model */,
 				5F3B50972598321F00CA710E /* Utilities */,
 				5F3B506A2598246500CA710E /* Assets.xcassets */,
 				5F3B51A225987C0100CA710E /* Colors.xcassets */,
@@ -151,9 +151,8 @@
 		5F3B50762598280B00CA710E /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				5F3B50A72598348B00CA710E /* FBAuthentication.swift */,
+				5F3B50AD259834A200CA710E /* FBService.swift */,
 				5F3B50AA2598349200CA710E /* FBErrors.swift */,
-				5F3B50AD259834A200CA710E /* FBFirestoreFunctions.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -162,7 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				5F3B5098259833DA00CA710E /* UserModel.swift */,
-				5F3B509C2598340600CA710E /* RecentPostModel.swift */,
+				5F3B509025982FF600CA710E /* NewUserModel.swift */,
+				5F3B509C2598340600CA710E /* NotificationModel.swift */,
 				5F3B50A02598342600CA710E /* EventModel.swift */,
 				5F3B50A32598343400CA710E /* NoticeModel.swift */,
 			);
@@ -196,11 +196,10 @@
 			children = (
 				5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */,
 				5F3B514225983B7B00CA710E /* Elements.swift */,
+				5F3B514025983B7A00CA710E /* ImagePickerView.swift */,
 				5F3B514125983B7B00CA710E /* FirebaseImage.swift */,
-				5F3B514025983B7A00CA710E /* ImagePicker.swift */,
 				5F3B514425983B7B00CA710E /* TabBarView.swift */,
 				5F3B514525983B7B00CA710E /* Time.swift */,
-				5F3B509025982FF600CA710E /* TextfieldCheck.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -244,10 +243,11 @@
 		5F3B511925983A9A00CA710E /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				5F3B511A25983AA700CA710E /* ForgotPasswordView.swift */,
 				5F3B511C25983AA700CA710E /* IntroductionView.swift */,
-				5F3B511D25983AA800CA710E /* SignInView.swift */,
 				5F3B511B25983AA700CA710E /* SignUpView.swift */,
+				5F3B511D25983AA800CA710E /* SignInView.swift */,
+				5F3B511A25983AA700CA710E /* ForgotPasswordView.swift */,
+				5F3B50A72598348B00CA710E /* FBAuthentication.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -393,24 +393,24 @@
 				5F3B513025983B2400CA710E /* CurrentElements.swift in Sources */,
 				5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */,
 				5F3B512925983AE700CA710E /* NewNoticeSheet.swift in Sources */,
-				5F3B50AE259834A200CA710E /* FBFirestoreFunctions.swift in Sources */,
+				5F3B50AE259834A200CA710E /* FBService.swift in Sources */,
 				5F3B51A725987CC000CA710E /* ViewController.swift in Sources */,
 				5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */,
 				5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */,
 				5F3B512025983AA800CA710E /* IntroductionView.swift in Sources */,
 				5F3B511F25983AA800CA710E /* SignUpView.swift in Sources */,
 				5F3B512B25983AE700CA710E /* NoticeCardView.swift in Sources */,
-				5F3B514625983B7B00CA710E /* ImagePicker.swift in Sources */,
+				5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */,
 				5F3B514825983B7B00CA710E /* Elements.swift in Sources */,
 				5F3B514725983B7B00CA710E /* FirebaseImage.swift in Sources */,
-				5F3B509125982FF600CA710E /* TextfieldCheck.swift in Sources */,
+				5F3B509125982FF600CA710E /* NewUserModel.swift in Sources */,
 				5F3B50A82598348B00CA710E /* FBAuthentication.swift in Sources */,
 				5F3B513225983B2400CA710E /* NewEventSheet.swift in Sources */,
 				5F3B512A25983AE700CA710E /* NoticesView.swift in Sources */,
 				5F3B512125983AA800CA710E /* SignInView.swift in Sources */,
 				5F3B50AB2598349200CA710E /* FBErrors.swift in Sources */,
 				5F3B50A42598343400CA710E /* NoticeModel.swift in Sources */,
-				5F3B509D2598340600CA710E /* RecentPostModel.swift in Sources */,
+				5F3B509D2598340600CA710E /* NotificationModel.swift in Sources */,
 				5F3B50A12598342600CA710E /* EventModel.swift in Sources */,
 				5F3B513125983B2400CA710E /* CurrentView.swift in Sources */,
 				5F3B513525983B3000CA710E /* ProfileView.swift in Sources */,

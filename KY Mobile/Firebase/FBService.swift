@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 
-enum FBUtilities {
+class FBService {
     
     //  Retrieves FBUser information using its UUID
     static func retrieveFBUser(uid: String,
@@ -29,17 +29,14 @@ enum FBUtilities {
                 completion(.failure(FirebaseError.noDocumentSnapshot))
                 return
             }
-            
             guard let data = documentSnapshot.data() else {
                 completion(.failure(FirebaseError.noSnapshotData))
                 return
             }
-            
             guard let userInformation = User(UserData: data) else {
                 completion(.failure(FirebaseError.noUser))
                 return
             }
-            
             completion(.success(userInformation))
         }
     }
@@ -53,27 +50,28 @@ enum FBUtilities {
             .collection("Users")
             .document(uid)
         
-        reference.setData(info, merge: true) { (err) in
-            if let err = err {
-                completion(.failure(err))
+        reference.setData(info, merge: true) { (error) in
+            if let error = error {
+                completion(.failure(error))
                 return
             }
             completion(.success(true))
         }
     }
     
+    
     static func uploadImage(chosenImage: UIImage,
                             location: String,
                             completionHandler: @escaping (Result<URL, Error>) -> () ){
         
-        let storageRef = Storage.storage().reference().child(location)
+        let storageRef = Storage.storage().reference().child(location).child("123")
         let imagePNG = chosenImage.pngData()
         
         storageRef.putData(imagePNG!, metadata: nil) { (metadata, error) in
             if error == nil {
-                storageRef.downloadURL { (url, error) in
+                storageRef.downloadURL { (url, err) in
                     guard let imageURL = url else {
-                        completionHandler(.failure(error!.localizedDescription as! Error))
+                        completionHandler(.failure(err!))
                         return
                     }
                     completionHandler(.success(imageURL))
@@ -81,9 +79,45 @@ enum FBUtilities {
                 }
             }
             else {
-                completionHandler(.failure(error!.localizedDescription as! Error))
+                completionHandler(.failure(error!))
                 return
             }
         }
     }
+    
+    
+//    static func countAccountsWithStudentID(studentID: String) -> Int {
+//        var number: Int = 0
+//        let reference = Firestore
+//            .firestore()
+//            .collection("Users")
+//            .whereField("StudentID", isEqualTo: studentID)
+//
+//        reference.getDocuments() { (querySnapshot, error) in
+//            if error != nil {
+//                number = querySnapshot!.documents.count
+//            } else {
+//                number = -1
+//            }
+//        }
+//        return number
+//    }
+//
+//
+//    static func retrieveEmailFromStudentID(studentID: String) -> String {
+//
+//        var email: String = ""
+//        let reference = Firestore
+//            .firestore()
+//            .collection("Users")
+//            .whereField("StudentID", isEqualTo: studentID)
+//
+//
+//        reference.getDocuments() { (querySnapshot, error) in
+//            if error != nil {
+//                email = querySnapshot!.documents[0]["Email"] as! String
+//            }
+//        }
+//        return email
+//    }
 }

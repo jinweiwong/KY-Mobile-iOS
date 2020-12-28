@@ -11,7 +11,7 @@ import SwiftUI
 import FirebaseFirestore
 
 class RecentPostsViewModel: ObservableObject {
-    @Published var recentPosts: [RecentPost] = []
+    @Published var recentPosts: [NotificationModel] = []
     
     init() {
         getAllRecentPosts()
@@ -32,7 +32,7 @@ class RecentPostsViewModel: ObservableObject {
                         
                         if TimeStamp != nil {
                             if Int(TimeStamp!)! > Int(Int(Date().timeIntervalSince1970 * 1000) - 86400000) {
-                            self.recentPosts.append(RecentPost(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
+                            self.recentPosts.append(NotificationModel(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
                             }
                         }
                     }
@@ -51,7 +51,7 @@ class RecentPostsViewModel: ObservableObject {
                         
                         if TimeStamp != nil {
                             if Int(TimeStamp!)! > Int(Int(Date().timeIntervalSince1970 * 1000) - 86400000) {
-                            self.recentPosts.append(RecentPost(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
+                            self.recentPosts.append(NotificationModel(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
                             }
                         }
                     }

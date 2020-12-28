@@ -14,7 +14,7 @@ struct NoticesView: View {
     @ObservedObject var notices = NoticesViewModel()
     
     @State var isShowingSheet: Bool = false
-    @State var newNotice = Notice(Title: "", Exco: "", Body: "", TimeStamp: "")
+    @State var newNotice = Notice()
     
     
     //@State var TimePeriodBefore: String = ""

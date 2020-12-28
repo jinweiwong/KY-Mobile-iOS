@@ -25,10 +25,10 @@ struct CurrentView: View {
         return formatter
     }
     
-    @State var expandedEvent = Event(Title: "", FullDesc: "", ShortDesc: "", StartDate: "", EndDate: "", StartTime: "", EndTime: "", Venue: "", Cover: "placeholder", TimeStamp: "")
+    @State var expandedEvent = Event()
     @State var isShowingPageView = false
     
-    @State var newEvent = Event(Title: "", FullDesc: "", ShortDesc: "", StartDate: "", EndDate: "", StartTime: "", EndTime: "", Venue: "", Cover: "", TimeStamp: "")
+    @State var newEvent = Event()
     @State var isShowingSheet: Bool = false
     
     var body: some View {

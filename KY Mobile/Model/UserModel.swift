@@ -8,30 +8,40 @@
 import Foundation
 
 struct User {
-    let UID: String
-    let Name: String
-    let Image: String
-    let Email: String
-    let Batch: String
-    let StudentID: String
+    var UID: String
+    var Name: String
+    var Image: String
+    var Email: String
+    var Batch: String
+    var StudentID: String
     
-    // Adding information to FBUser
-    init(UID: String, Name: String, Image: String, Email: String, Batch: String, StudentID: String) {
-        self.UID = UID
-        self.Name = Name
-        self.Image = Image
-        self.Email = Email
-        self.Batch = Batch
-        self.StudentID = StudentID
+    init() {
+        self.UID = ""
+        self.Name = ""
+        self.Image = ""
+        self.Email = ""
+        self.Batch = ""
+        self.StudentID = ""
     }
-    
-    // Adding information to FBUser using a retrieved document from Firebase
+
+    // Adding data to FBUser using a retrieved document from Firebase
     init?(UserData: [String: Any]) {
-    self.init(UID: UserData["UID"] as? String ?? "",
-              Name: UserData["Name"] as? String ?? "",
-              Image: UserData["Image"] as? String ?? "",
-              Email: UserData["Email"] as? String ?? "",
-              Batch: UserData["Batch"] as? String ?? "",
-              StudentID: UserData["StudentID"] as? String ?? "")
+        self.UID = UserData["UID"] as? String ?? ""
+        self.Name = UserData["Name"] as? String ?? ""
+        self.Image = UserData["Image"] as? String ?? ""
+        self.Email = UserData["Email"] as? String ?? ""
+        self.Batch = UserData["Batch"] as? String ?? ""
+        self.StudentID = UserData["StudentID"] as? String ?? ""
     }
+    
+    
+//    // Adding information to FBUser
+//    init(UID: String, Name: String, Image: String, Email: String, Batch: String, StudentID: String) {
+//        self.UID = UID
+//        self.Name = Name
+//        self.Image = Image
+//        self.Email = Email
+//        self.Batch = Batch
+//        self.StudentID = StudentID
+//    }
 }

@@ -19,4 +19,32 @@ struct Event: Identifiable {
     var Venue: String
     var Cover: String  // URL to Firebase Storage
     var TimeStamp: String  // Epoch Time
+    
+    init() {
+        self.id = UUID()
+        self.Title = ""
+        self.FullDesc = ""
+        self.ShortDesc = ""
+        self.StartDate = ""
+        self.EndDate = ""
+        self.StartTime = ""
+        self.EndTime = ""
+        self.Venue = ""
+        self.Cover = "placeholder"
+        self.TimeStamp = ""
+    }
+    
+    init(Title: String, FullDesc: String, ShortDesc: String, StartDate: String, EndDate: String, StartTime: String, EndTime: String, Venue: String, Cover: String, TimeStamp: String) {
+        self.id = UUID()
+        self.Title = Title
+        self.FullDesc = FullDesc
+        self.ShortDesc = ShortDesc
+        self.StartDate = StartDate
+        self.EndDate = EndDate
+        self.StartTime = StartTime
+        self.EndTime = EndTime
+        self.Venue = Venue
+        self.Cover = Cover
+        self.TimeStamp = TimeStamp
+    }
 }

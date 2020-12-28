@@ -7,32 +7,42 @@
 
 import Foundation
 
-struct FBTextFieldFunctions {
-    var name: String = ""
-    var studentID: String = ""
-    var batch: String = ""
-    var email: String = ""
-    var password: String = ""
-    var confirmPassword: String = ""
-    var image: String = ""
+struct NewUser {
+    var name: String
+    var studentID: String
+    var batch: String
+    var email: String
+    var image: String
+    var password: String
+    var confirmPassword: String
+    
+    init() {
+        self.name = ""
+        self.studentID = ""
+        self.batch = ""
+        self.email = ""
+        self.image = ""
+        self.password = ""
+        self.confirmPassword = ""
+    }
     
     
-    func isEmpty(_field: String) -> Bool {
+    func isNameEmpty() -> Bool {
         // Leading, trailing whitespaces and newlines are ignored
-        return _field.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     
-    func isStudentIDValid(_studentID: String) -> Bool {
-        return _studentID.count == 4
+    func isStudentIDValid() -> Bool {
+        return studentID.count == 4
     }
     
     
-    func isBatchValid(_batch: String) -> Bool {
+    func isBatchValid() -> Bool {
         let currentYear = Calendar.current.component(.year, from: Date())
         let allowedBatches = [currentYear - 1999, currentYear - 1998, currentYear - 1997]
         
-        let splitedUpBatch = _batch.split(separator: ".")
+        let splitedUpBatch = batch.split(separator: ".")
         
         if splitedUpBatch.count == 2 {
             if allowedBatches.contains((splitedUpBatch[0] as NSString).integerValue) {
@@ -45,14 +55,14 @@ struct FBTextFieldFunctions {
     }
     
     
-    func isEmailValid(_email: String) -> Bool {
+    func isEmailValid() -> Bool {
         let emailTest = NSPredicate(format: "SELF MATCHES %@",
                                        "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
         return emailTest.evaluate(with: email)
     }
     
     
-    func isPasswordValid(_password: String)  -> Bool {
+    func isPasswordValid()  -> Bool {
         // Password must be 8 chars, contain a capital letter and a number
         let passwordTest = NSPredicate(format: "SELF MATCHES %@",
                                        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
@@ -60,18 +70,14 @@ struct FBTextFieldFunctions {
     }
     
     
-    func passwordMatch(_confirmPW: String) -> Bool {
-        return _confirmPW == password
+    func passwordMatch() -> Bool {
+        return confirmPassword == password
     }
     
     
     // Checks Name, StudentID, Batch, Email, MatchingPasswords.
     var isSignInComplete: Bool {
-        if isEmpty(_field: name) ||
-            !isStudentIDValid(_studentID: studentID) ||
-            !isBatchValid(_batch: batch) ||
-            !isEmailValid(_email: email) ||
-            !passwordMatch(_confirmPW: confirmPassword) {
+        if isNameEmpty() || !isStudentIDValid() || !isBatchValid() || !isEmailValid() || !passwordMatch() {
             return false
         }
         return true
@@ -80,13 +86,9 @@ struct FBTextFieldFunctions {
     
     // Checks Email and Password
     var isLogInComplete: Bool {
-        if !isEmailValid(_email: email) ||
-            !isPasswordValid(_password: password) {
+        if !isEmailValid() || !isPasswordValid() {
             return false
         }
         return true
     }
-    
-    
-    
 }

@@ -1,5 +1,5 @@
 //
-//  NoticeModel.swift
+//  RecentPostModel.swift
 //  KY Mobile
 //
 //  Created by Wong Jin Wei on 27/12/2020.
@@ -7,24 +7,18 @@
 
 import Foundation
 
-struct Notice: Identifiable {
+struct NotificationModel: Identifiable {
     var id = UUID()
     var Title: String
-    var Exco: String  // eg. Academic, Welfare, General
-    var Body: String
     var TimeStamp: String // Epoch Time
     
     init() {
         self.Title = ""
-        self.Exco = ""
-        self.Body = ""
         self.TimeStamp = ""
     }
     
-    init(Title: String, Exco: String, Body: String, TimeStamp: String) {
+    init(Title: String, TimeStamp: String) {
         self.Title = Title
-        self.Exco = Exco
-        self.Body = Body
         self.TimeStamp = TimeStamp
     }
 }

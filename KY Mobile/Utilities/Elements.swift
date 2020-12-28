@@ -24,7 +24,6 @@ struct LargeButton: ViewModifier {
     }
 }
 
-
 struct Title: ViewModifier {
     var textColor: Color
     

@@ -16,8 +16,7 @@ class CurrentUserInfo: ObservableObject {
     }
     
     @Published var isUserAuthenticated: FBAuthState = .undefined
-    @Published var currentUser: User = .init(UID: "", Name: "", Image: "", Email: "", Batch: "", StudentID: "")
-    
+    @Published var currentUser: User = User()
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     
     func configureFirebaseStateDidChange() {
@@ -26,9 +25,7 @@ class CurrentUserInfo: ObservableObject {
                 self.isUserAuthenticated = .signedOut
                 return
             }
-            
             self.isUserAuthenticated = .signedIn
-            
         })
     }
 }
