@@ -8,7 +8,6 @@ struct NoticesView: View {
     @State var isShowingSheet: Bool = false
     @State var newNotice = Notice()
     
-    
     //@State var TimePeriodBefore: String = ""
     
     var body: some View {

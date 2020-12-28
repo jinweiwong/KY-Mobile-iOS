@@ -1,10 +1,3 @@
-//
-//  FBFirestoreFunctions.swift
-//  KY Mobile
-//
-//  Created by Wong Jin Wei on 27/12/2020.
-//
-
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
@@ -86,6 +79,30 @@ class FBService {
     }
     
     
+    static func uploadNewEvent(newEvent: Event, completion: @escaping (Result<Bool, Error>) -> () ) {
+        var _newEvent = newEvent
+        _newEvent.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
+        
+        if _newEvent.Cover == "placeholder" {
+            _newEvent.Cover = ""
+        }
+        
+        let reference = Firestore
+            .firestore()
+            .collection("Events")
+            .document(_newEvent.TimeStamp)
+    
+        reference.setData(_newEvent.eventToDict(), merge: true) { (error) in
+            if error != nil {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(true))
+        }
+    }
+}
+    
+    
 //    static func countAccountsWithStudentID(studentID: String) -> Int {
 //        var number: Int = 0
 //        let reference = Firestore
@@ -120,4 +137,3 @@ class FBService {
 //        }
 //        return email
 //    }
-}

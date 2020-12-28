@@ -29,7 +29,7 @@ class CurrentViewModel: ObservableObject {
                         let EndTime = diff.document.data()["EndTime"] as? String
                         let Venue = diff.document.data()["Venue"] as? String
                         let Cover = diff.document.data()["Cover"] as? String
-                        let TimeStamp = diff.document.data()["timestamp"] as? String
+                        let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
                         self.events.append(Event(Title: Title ?? "0",
                                                  FullDesc: FullDesc ?? "0",

@@ -26,14 +26,13 @@
 		5F3B512925983AE700CA710E /* NewNoticeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512625983AE700CA710E /* NewNoticeSheet.swift */; };
 		5F3B512A25983AE700CA710E /* NoticesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512725983AE700CA710E /* NoticesView.swift */; };
 		5F3B512B25983AE700CA710E /* NoticeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512825983AE700CA710E /* NoticeCardView.swift */; };
-		5F3B513025983B2400CA710E /* CurrentElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512D25983B2400CA710E /* CurrentElements.swift */; };
+		5F3B513025983B2400CA710E /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512D25983B2400CA710E /* EventCardView.swift */; };
 		5F3B513125983B2400CA710E /* CurrentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512E25983B2400CA710E /* CurrentView.swift */; };
 		5F3B513225983B2400CA710E /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B512F25983B2400CA710E /* NewEventSheet.swift */; };
 		5F3B513525983B3000CA710E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513425983B3000CA710E /* ProfileView.swift */; };
 		5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513725983B4200CA710E /* HomeViewModel.swift */; };
 		5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513D25983B6100CA710E /* NoticesViewModel.swift */; };
 		5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514025983B7A00CA710E /* ImagePickerView.swift */; };
-		5F3B514725983B7B00CA710E /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514125983B7B00CA710E /* FirebaseImage.swift */; };
 		5F3B514825983B7B00CA710E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514225983B7B00CA710E /* Elements.swift */; };
 		5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */; };
 		5F3B514A25983B7B00CA710E /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514425983B7B00CA710E /* TabBarView.swift */; };
@@ -43,6 +42,9 @@
 		5F3B51A325987C0100CA710E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B51A125987BFF00CA710E /* Images.xcassets */; };
 		5F3B51A425987C0100CA710E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B51A225987C0100CA710E /* Colors.xcassets */; };
 		5F3B51A725987CC000CA710E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B51A625987CC000CA710E /* ViewController.swift */; };
+		5FD6E2D82599BC6D0085132B /* EventFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6E2D72599BC6D0085132B /* EventFullView.swift */; };
+		5FD6E2DC2599D7D30085132B /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6E2DB2599D7D30085132B /* URLImage.swift */; };
+		5FD6E2E42599DFDE0085132B /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6E2E32599DFDE0085132B /* ImageLoaderViewModel.swift */; };
 		D83A57C49FD7843360ED3553 /* Pods_KY_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,14 +71,13 @@
 		5F3B512625983AE700CA710E /* NewNoticeSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewNoticeSheet.swift; sourceTree = "<group>"; };
 		5F3B512725983AE700CA710E /* NoticesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticesView.swift; sourceTree = "<group>"; };
 		5F3B512825983AE700CA710E /* NoticeCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeCardView.swift; sourceTree = "<group>"; };
-		5F3B512D25983B2400CA710E /* CurrentElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentElements.swift; sourceTree = "<group>"; };
+		5F3B512D25983B2400CA710E /* EventCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		5F3B512E25983B2400CA710E /* CurrentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentView.swift; sourceTree = "<group>"; };
 		5F3B512F25983B2400CA710E /* NewEventSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		5F3B513425983B3000CA710E /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5F3B513725983B4200CA710E /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5F3B513D25983B6100CA710E /* NoticesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticesViewModel.swift; sourceTree = "<group>"; };
 		5F3B514025983B7A00CA710E /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		5F3B514125983B7B00CA710E /* FirebaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
 		5F3B514225983B7B00CA710E /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
 		5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserInfo.swift; sourceTree = "<group>"; };
 		5F3B514425983B7B00CA710E /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -86,6 +87,9 @@
 		5F3B51A125987BFF00CA710E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5F3B51A225987C0100CA710E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5F3B51A625987CC000CA710E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5FD6E2D72599BC6D0085132B /* EventFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFullView.swift; sourceTree = "<group>"; };
+		5FD6E2DB2599D7D30085132B /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
+		5FD6E2E32599DFDE0085132B /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
 		9205D62AB0E92D1444612072 /* Pods-KY Mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KY Mobile.debug.xcconfig"; path = "Target Support Files/Pods-KY Mobile/Pods-KY Mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBE65C51E2FB277E9BA3BFC /* Pods-KY Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KY Mobile.release.xcconfig"; path = "Target Support Files/Pods-KY Mobile/Pods-KY Mobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				5F3B513725983B4200CA710E /* HomeViewModel.swift */,
+				5FD6E2E32599DFDE0085132B /* ImageLoaderViewModel.swift */,
 				5F3B513D25983B6100CA710E /* NoticesViewModel.swift */,
 				5F3B5183259878EF00CA710E /* CurrentViewModel.swift */,
 			);
@@ -185,8 +190,8 @@
 			children = (
 				5F3B511925983A9A00CA710E /* Auth */,
 				5F3B511025983A1500CA710E /* Home */,
-				5F3B511125983A2300CA710E /* Notice */,
 				5F3B511225983A3000CA710E /* Current */,
+				5F3B511125983A2300CA710E /* Notice */,
 				5F3B511325983A3500CA710E /* Profile */,
 			);
 			path = View;
@@ -196,11 +201,11 @@
 			isa = PBXGroup;
 			children = (
 				5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */,
+				5FD6E2DB2599D7D30085132B /* URLImage.swift */,
 				5F3B514225983B7B00CA710E /* Elements.swift */,
 				5F3B514025983B7A00CA710E /* ImagePickerView.swift */,
 				5F3B514425983B7B00CA710E /* TabBarView.swift */,
 				5F3B514525983B7B00CA710E /* Time.swift */,
-				5F3B514125983B7B00CA710E /* FirebaseImage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -216,9 +221,9 @@
 		5F3B511125983A2300CA710E /* Notice */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B512725983AE700CA710E /* NoticesView.swift */,
 				5F3B512625983AE700CA710E /* NewNoticeSheet.swift */,
 				5F3B512825983AE700CA710E /* NoticeCardView.swift */,
-				5F3B512725983AE700CA710E /* NoticesView.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -226,8 +231,9 @@
 		5F3B511225983A3000CA710E /* Current */ = {
 			isa = PBXGroup;
 			children = (
-				5F3B512D25983B2400CA710E /* CurrentElements.swift */,
 				5F3B512E25983B2400CA710E /* CurrentView.swift */,
+				5F3B512D25983B2400CA710E /* EventCardView.swift */,
+				5FD6E2D72599BC6D0085132B /* EventFullView.swift */,
 				5F3B512F25983B2400CA710E /* NewEventSheet.swift */,
 			);
 			path = Current;
@@ -390,11 +396,13 @@
 				5F3B511E25983AA800CA710E /* AuthForgotPw.swift in Sources */,
 				5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */,
 				5F3B512425983AD800CA710E /* HomeView.swift in Sources */,
-				5F3B513025983B2400CA710E /* CurrentElements.swift in Sources */,
+				5F3B513025983B2400CA710E /* EventCardView.swift in Sources */,
 				5F3B513825983B4200CA710E /* HomeViewModel.swift in Sources */,
+				5FD6E2E42599DFDE0085132B /* ImageLoaderViewModel.swift in Sources */,
 				5F3B512925983AE700CA710E /* NewNoticeSheet.swift in Sources */,
 				5F3B50AE259834A200CA710E /* FBService.swift in Sources */,
 				5F3B51A725987CC000CA710E /* ViewController.swift in Sources */,
+				5FD6E2DC2599D7D30085132B /* URLImage.swift in Sources */,
 				5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */,
 				5F3B513E25983B6100CA710E /* NoticesViewModel.swift in Sources */,
 				5F3B512025983AA800CA710E /* AuthIntro.swift in Sources */,
@@ -402,7 +410,6 @@
 				5F3B512B25983AE700CA710E /* NoticeCardView.swift in Sources */,
 				5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */,
 				5F3B514825983B7B00CA710E /* Elements.swift in Sources */,
-				5F3B514725983B7B00CA710E /* FirebaseImage.swift in Sources */,
 				5F3B509125982FF600CA710E /* NewUserModel.swift in Sources */,
 				5F3B50A82598348B00CA710E /* FBAuth.swift in Sources */,
 				5F3B513225983B2400CA710E /* NewEventSheet.swift in Sources */,
@@ -415,6 +422,7 @@
 				5F3B513125983B2400CA710E /* CurrentView.swift in Sources */,
 				5F3B513525983B3000CA710E /* ProfileView.swift in Sources */,
 				5F3B514A25983B7B00CA710E /* TabBarView.swift in Sources */,
+				5FD6E2D82599BC6D0085132B /* EventFullView.swift in Sources */,
 				5F3B5099259833DA00CA710E /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

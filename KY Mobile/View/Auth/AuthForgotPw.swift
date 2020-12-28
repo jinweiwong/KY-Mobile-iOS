@@ -111,6 +111,7 @@ struct ForgotPasswordView: View {
             }
         }
     }
+}
     
     
 //    var divider: some View {
@@ -190,15 +191,3 @@ struct ForgotPasswordView: View {
 //            }
 //        }
 //    }
-}
-
-
-//}.padding(.horizontal, 25)
-
-//struct ForgotPasswordView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            ForgotPasswordView(newUser: Binding.constant(newUser()))
-//        }
-//    }
-//}
