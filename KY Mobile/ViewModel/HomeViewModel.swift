@@ -20,7 +20,7 @@ class RecentPostsViewModel: ObservableObject {
                 querySnapshot!.documentChanges.forEach { diff in
                     if diff.type == .added {
                         let Title = diff.document.data()["Title"] as? String
-                        let TimeStamp = diff.document.data()["timestamp"] as? String
+                        let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
                         if TimeStamp != nil {
                             if Int(TimeStamp!)! > Int(Int(Date().timeIntervalSince1970 * 1000) - 86400000) {

@@ -20,9 +20,10 @@ struct EventFullView: View {
                     timeStamp
                     divider
                     fullDesc
-                }
+                }.padding(.bottom, 100)
             }
-        }.edgesIgnoringSafeArea(.all)
+        }.padding(.bottom)
+        .edgesIgnoringSafeArea(.all)
         
     }
     var title: some View {

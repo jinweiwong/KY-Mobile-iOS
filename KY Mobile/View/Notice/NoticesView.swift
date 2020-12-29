@@ -2,82 +2,95 @@ import Foundation
 import SwiftUI
 
 struct NoticesView: View {
-    @EnvironmentObject var currentUserInfo: CurrentUserInfo
     @ObservedObject var notices = NoticesViewModel()
     
     @State var isShowingSheet: Bool = false
     @State var newNotice = Notice()
     
+    @State private var errorMessage: String = "Unknown Error"
+    @State private var showErrorMessage = false
+    
     //@State var TimePeriodBefore: String = ""
     
     var body: some View {
-        //Header
         ZStack{
             Color("VeryLightGrey")
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView{
-                HStack{
-                    VStack (alignment: .leading) {
-                        
-                        Text("Student Council")
-                            .font(.system(size: 34, weight: .bold, design: .default))
-                            .foregroundColor(.black)
-                        
-                    }
-                    Spacer()
+                header
+                noticeFeed
                     
-                    Button(action: {
-                        isShowingSheet = true
-                    }) {
-                        Image(systemName: "square.and.pencil")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                    }
-                    
-                }.padding(.leading)
-                .padding(.top)
-                .padding(.bottom, 10)
-                .padding(.trailing, 30)
-                
-                //ForEach_start
-                
-                ForEach(notices.notices, id: \.id) { thisNotice in
-                    
-                    //                    if TimePeriodBefore != EpochTimePeriod(epochTime: thisNotice.TimeStamp) {
-                    //
-                    //                        HStack (spacing: 15) {
-                    //
-                    //                            VStack { Divider()
-                    //                                .background(Color("DarkGrey"))
-                    //                            }.padding(0)
-                    //
-                    //                            Text("\(ChangeTimePeriodBefore(epochTime: thisNotice.TimeStamp, TimePeriodBefore: &TimePeriodBefore))")
-                    //                                .foregroundColor(Color("DarkGrey"))
-                    //
-                    //                            VStack { Divider()
-                    //                                .background(Color("DarkGrey"))
-                    //                            }.padding(0)
-                    //
-                    //                        }.padding(.horizontal, 25)
-                    //                    }
-                    
-                    ZStack {
-                        NoticeCardView(thisNotice: thisNotice)
-                    }
-                    .padding(.leading, 10)
-                    .padding(.trailing, 10)
-                    .padding(.bottom, 10)
-                    
-                }
-            }
-        }
-        .animation(.easeIn)
+            }.padding(.bottom)
+        }//.animation(.easeIn)
         .sheet(isPresented: $isShowingSheet,
-                content: {
-                    NewNoticeSheet(isPresented: $isShowingSheet,
-                                   newNotice: $newNotice)
-                })
+               content: { NewNoticeSheet(isPresented: $isShowingSheet,
+                                         newNotice: $newNotice,
+                                         errorMessage: $errorMessage,
+                                         showErrorMessage: $showErrorMessage) })
+        
+        .alert(isPresented: self.$showErrorMessage) {
+            Alert(title: Text("Error"),
+                  message: Text(self.errorMessage),
+                  dismissButton: .default(Text("OK")))
+        }
+    }
+    
+    var header: some View {
+        HStack{
+            VStack (alignment: .leading) {
+                
+                Text("Student Council")
+                    .font(.system(size: 34, weight: .bold, design: .default))
+                    .foregroundColor(.black)
+                
+            }
+            Spacer()
+            
+            Button(action: {
+                isShowingSheet = true
+            }) {
+                Image(systemName: "square.and.pencil")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            
+        }.padding(.leading)
+        .padding(.top)
+        .padding(.bottom, 10)
+        .padding(.trailing, 30)
+    }
+    
+    
+    var noticeFeed: some View {
+        ForEach(notices.notices, id: \.id) { thisNotice in
+            
+//            if TimePeriodBefore != EpochTimePeriod(epochTime: thisNotice.TimeStamp) {
+//
+//                HStack (spacing: 15) {
+//
+//                    VStack { Divider()
+//                        .background(Color("DarkGrey"))
+//                    }.padding(0)
+//
+//                    Text("\(ChangeTimePeriodBefore(epochTime: thisNotice.TimeStamp, TimePeriodBefore: &TimePeriodBefore))")
+//                        .foregroundColor(Color("DarkGrey"))
+//
+//                    VStack { Divider()
+//                        .background(Color("DarkGrey"))
+//                    }.padding(0)
+//
+//                }.padding(.horizontal, 25)
+//            }
+            
+            ZStack {
+                NoticeCardView(thisNotice: thisNotice)
+            }
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
+            .padding(.bottom, 10)
+            
+        }
     }
 }
 

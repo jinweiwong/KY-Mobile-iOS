@@ -28,14 +28,13 @@ struct SignUpView: View {
                     profilePicturePicker
                     textfields
                     buttons
-                
                         .alert(isPresented: self.$showErrorMessage) {
-                        Alert(title: Text("Error creating account"),
-                              message: Text(self.errorMessage),
-                              dismissButton: .default(Text("OK")))
-                    }
-                }
-            //.modifier(Keyboard())
+                            Alert(title: Text("Error creating account"),
+                                  message: Text(self.errorMessage),
+                                  dismissButton: .default(Text("OK")))
+                        }
+                }.padding(.bottom)
+                //.modifier(Keyboard())
             }
         }.navigationBarTitle("Sign Up", displayMode: .inline)
     }

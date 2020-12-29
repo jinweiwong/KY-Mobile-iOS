@@ -4,7 +4,6 @@ import FirebaseAuth
 
 struct HomeView: View {
     
-    @EnvironmentObject var currentUserInfo: CurrentUserInfo
     @ObservedObject var recentPosts = RecentPostsViewModel()
     
     let currentDate = Date()

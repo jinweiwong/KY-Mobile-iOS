@@ -26,15 +26,4 @@ struct User {
         self.Batch = UserData["Batch"] as? String ?? ""
         self.StudentID = UserData["StudentID"] as? String ?? ""
     }
-    
-    
-//    // Adding information to FBUser
-//    init(UID: String, Name: String, Image: String, Email: String, Batch: String, StudentID: String) {
-//        self.UID = UID
-//        self.Name = Name
-//        self.Image = Image
-//        self.Email = Email
-//        self.Batch = Batch
-//        self.StudentID = StudentID
-//    }
 }

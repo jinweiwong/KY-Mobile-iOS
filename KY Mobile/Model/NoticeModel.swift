@@ -20,4 +20,18 @@ struct Notice: Identifiable {
         self.Body = Body
         self.TimeStamp = TimeStamp
     }
+    
+    func noticeToDict() -> [String: Any] {
+        return ["Title": self.Title,
+                "Exco": self.Exco,
+                "Body": self.Body,
+                "TimeStamp": self.TimeStamp]
+    }
+    
+    func noticeWithRandomTimeStamp() -> Notice {
+        return Notice(Title: self.Title,
+                      Exco: self.Exco,
+                      Body: self.Body,
+                      TimeStamp: "1597666032353")
+    }
 }

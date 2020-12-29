@@ -81,18 +81,35 @@ class FBService {
     
     static func uploadNewEvent(newEvent: Event, completion: @escaping (Result<Bool, Error>) -> () ) {
         var _newEvent = newEvent
-        _newEvent.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
-        
         if _newEvent.Cover == "placeholder" {
             _newEvent.Cover = ""
         }
+        _newEvent.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
         
         let reference = Firestore
             .firestore()
             .collection("Events")
             .document(_newEvent.TimeStamp)
-    
+        
         reference.setData(_newEvent.eventToDict(), merge: true) { (error) in
+            if error != nil {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(true))
+        }
+    }
+    
+    static func uploadNewNotice(newNotice: Notice, completion: @escaping (Result<Bool, Error>) -> () ) {
+        var _newNotice = newNotice
+        _newNotice.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
+        
+        let reference = Firestore
+            .firestore()
+            .collection("Notice")
+            .document(newNotice.TimeStamp)
+        
+        reference.setData(_newNotice.noticeToDict(), merge: true) { (error) in
             if error != nil {
                 completion(.failure(error!))
                 return

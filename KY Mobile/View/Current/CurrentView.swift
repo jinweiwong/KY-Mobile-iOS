@@ -4,7 +4,6 @@ import FirebaseFirestore
 import FirebaseStorage
 
 struct CurrentView: View {
-    @EnvironmentObject var currentUserInfo: CurrentUserInfo
     @ObservedObject var events = CurrentViewModel()
     
     let cardHeight: CGFloat = 125
@@ -35,13 +34,20 @@ struct CurrentView: View {
                     
                     header
                     eventFeed
-                    
-                }.sheet(isPresented: $isShowingSheet,
+                        
+                }.padding(.bottom)
+                .sheet(isPresented: $isShowingSheet,
                         content: {
                             NewEventSheet(isPresented: $isShowingSheet,
                                           newEvent: $newEvent,
                                           errorMessage: $errorMessage,
                                           showErrorMessage: $showErrorMessage)})
+                
+                .alert(isPresented: self.$showErrorMessage) {
+                    Alert(title: Text("Error"),
+                          message: Text(self.errorMessage),
+                          dismissButton: .default(Text("OK")))
+                }
             }.navigationBarHidden(true)
         }
     }

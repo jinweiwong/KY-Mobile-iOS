@@ -22,6 +22,7 @@ struct NewEventSheet: View {
                 date
                 time
                 demo
+                    .padding(.bottom)
             }.navigationBarTitle("New Event", displayMode: .inline)
             .navigationBarItems(
                 
@@ -74,7 +75,8 @@ struct NewEventSheet: View {
                 }
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var shortDesc: some View {
@@ -101,7 +103,8 @@ struct NewEventSheet: View {
                 }
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var fullDesc: some View {
@@ -124,7 +127,8 @@ struct NewEventSheet: View {
                 }
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var venue: some View {
@@ -151,7 +155,8 @@ struct NewEventSheet: View {
                 }
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var date: some View {
@@ -178,7 +183,8 @@ struct NewEventSheet: View {
                 
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var time: some View {
@@ -205,7 +211,8 @@ struct NewEventSheet: View {
                 
                 Spacer()
             }
-        }.padding()
+        }.padding(.horizontal)
+        .padding(.top)
     }
     
     var demo: some View {
@@ -220,15 +227,11 @@ struct NewEventSheet: View {
             .padding(.top)
             
             // Demo Card
-            ZStack {
-                Color("VeryLightGrey")
-                
-                NavigationLink(destination: EventFullView(thisEvent:
-                                                            newEvent.eventWithRandomTimeStamp()),
-                               isActive: $showDemoPage) {
-                    EventCardView(thisEvent: newEvent.eventWithRandomTimeStamp())
-                }.frame(width: UIScreen.main.bounds.width, height: 200)
-            }
+            NavigationLink(destination: EventFullView(thisEvent:
+                                                        newEvent.eventWithRandomTimeStamp()),
+                           isActive: $showDemoPage) {
+                EventCardView(thisEvent: newEvent.eventWithRandomTimeStamp())
+            }.padding(.horizontal)
         }
     }
 }

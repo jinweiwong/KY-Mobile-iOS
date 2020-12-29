@@ -51,7 +51,7 @@ struct Event: Identifiable {
                 "EndTime": self.EndTime,
                 "Venue": self.Venue,
                 "Cover": self.Cover,
-                "timestamp": self.TimeStamp]
+                "TimeStamp": self.TimeStamp]
     }
     
     func eventWithRandomTimeStamp() -> Event {

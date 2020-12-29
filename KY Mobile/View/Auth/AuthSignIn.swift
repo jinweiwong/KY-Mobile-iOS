@@ -31,7 +31,8 @@ struct SignInView: View {
                         }
                 }
             }
-        }.navigationBarTitle("Sign In", displayMode: .inline)
+        }
+        .navigationBarTitle("Sign In", displayMode: .inline)
     }
     
     var header: some View {
