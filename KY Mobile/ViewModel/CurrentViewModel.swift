@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 import FirebaseFirestore
-import FirebaseStorage
 
 class CurrentViewModel: ObservableObject {
     

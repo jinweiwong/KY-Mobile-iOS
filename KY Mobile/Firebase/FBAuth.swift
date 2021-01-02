@@ -1,3 +1,5 @@
+import Foundation
+import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 

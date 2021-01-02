@@ -41,7 +41,7 @@ class FBService {
         let reference = Firestore
             .firestore()
             .collection("Users")
-            .document(uid)
+            .document("\(info["Name"]!)_\(UUID())")
         
         reference.setData(info, merge: true) { (error) in
             if let error = error {
@@ -55,9 +55,13 @@ class FBService {
     
     static func uploadImage(chosenImage: UIImage,
                             location: String,
+                            timeStamp: String,
+                            name: String,
                             completionHandler: @escaping (Result<URL, Error>) -> () ){
         
-        let storageRef = Storage.storage().reference().child(location).child("123")
+        let storageRef = Storage.storage().reference()
+            .child(location)
+            .child("\(timeStamp)_\(name.replacingOccurrences(of: " ", with: ""))")
         let imagePNG = chosenImage.pngData()
         
         storageRef.putData(imagePNG!, metadata: nil) { (metadata, error) in
@@ -79,23 +83,40 @@ class FBService {
     }
     
     
-    static func uploadNewEvent(newEvent: Event, completion: @escaping (Result<Bool, Error>) -> () ) {
-        var _newEvent = newEvent
-        if _newEvent.Cover == "placeholder" {
-            _newEvent.Cover = ""
+    static func uploadNewEvent(newEvent: NewEvent,
+                               boolAllDay: Bool,
+                               boolStart: Bool,
+                               boolEnd: Bool,
+                               completion: @escaping (Result<Bool, Error>) -> () ) {
+        
+        var _newEvent = newEvent.convertAllToString()
+        
+        if boolAllDay {
+            _newEvent.StartTime = ""
+            _newEvent.EndTime = ""
         }
-        _newEvent.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
+        
+        if !boolStart {
+            _newEvent.StartDate = ""
+            _newEvent.StartTime = ""
+        }
+        
+        if !boolEnd {
+            _newEvent.EndDate = ""
+            _newEvent.EndTime = ""
+        }
         
         let reference = Firestore
             .firestore()
             .collection("Events")
-            .document(_newEvent.TimeStamp)
+            .document("\(_newEvent.TimeStamp)_\(_newEvent.Title.replacingOccurrences(of: " ", with: ""))")
         
         reference.setData(_newEvent.eventToDict(), merge: true) { (error) in
             if error != nil {
                 completion(.failure(error!))
                 return
             }
+            print("EventToDict: \(_newEvent.eventToDict())")
             completion(.success(true))
         }
     }
@@ -107,7 +128,7 @@ class FBService {
         let reference = Firestore
             .firestore()
             .collection("Notice")
-            .document(newNotice.TimeStamp)
+            .document("\(_newNotice.TimeStamp)_\(_newNotice.Title.replacingOccurrences(of: " ", with: ""))")
         
         reference.setData(_newNotice.noticeToDict(), merge: true) { (error) in
             if error != nil {

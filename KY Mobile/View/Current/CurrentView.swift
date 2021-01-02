@@ -1,15 +1,15 @@
 import Foundation
 import SwiftUI
-import FirebaseFirestore
-import FirebaseStorage
 
 struct CurrentView: View {
     @ObservedObject var events = CurrentViewModel()
     
+    @State var newEvent: NewEvent = NewEvent()
+    @State var isShowingSheet: Bool = false
+    
     let cardHeight: CGFloat = 125
     let cardWidth = UIScreen.main.bounds.width - 40
     
-    let currentDate = Date()
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, dd MMMM"
@@ -18,10 +18,6 @@ struct CurrentView: View {
     
     @State private var errorMessage: String = "Unknown Error"
     @State private var showErrorMessage = false
-    
-    @State var newEvent: Event = Event()
-    @State var isShowingSheet: Bool = false
-    
     
     var body: some View {
         //Header
@@ -35,8 +31,7 @@ struct CurrentView: View {
                     header
                     eventFeed
                         
-                }.padding(.bottom)
-                .sheet(isPresented: $isShowingSheet,
+                }.sheet(isPresented: $isShowingSheet,
                         content: {
                             NewEventSheet(isPresented: $isShowingSheet,
                                           newEvent: $newEvent,
@@ -56,7 +51,7 @@ struct CurrentView: View {
     var header: some View {
         HStack{
             VStack (alignment: .leading) {
-                Text("\(dateFormatter.string(from: currentDate))")
+                Text("\(dateFormatter.string(from: Date()))")
                     .foregroundColor(Color("VeryDarkGrey"))
                 
                 Text("Today")
@@ -80,12 +75,14 @@ struct CurrentView: View {
     
     var eventFeed: some View {
         ForEach(events.events, id: \.id) { thisEvent in
-            NavigationLink(destination: EventFullView(thisEvent: thisEvent)) {
-                EventCardView(thisEvent: thisEvent)
-                    .frame(height: 125)
+            NavigationLink(destination: EventFullView(thisEvent: thisEvent,
+                                                      demoCardImage: UIImage())) {
+                EventCardView(thisEvent: thisEvent,
+                              demoCardImage: UIImage())
+                    .frame(height: 120)
                     .padding(.leading, 16)
                     .padding(.trailing, 10)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 5)
             }
         }
     }  

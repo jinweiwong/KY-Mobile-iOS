@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum FirebaseError: Error {
     case noAuthDataResult

@@ -1,6 +1,5 @@
+import Foundation
 import SwiftUI
-import FirebaseFirestore
-import FirebaseAuth
 
 struct HomeView: View {
     

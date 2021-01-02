@@ -53,17 +53,4 @@ struct Event: Identifiable {
                 "Cover": self.Cover,
                 "TimeStamp": self.TimeStamp]
     }
-    
-    func eventWithRandomTimeStamp() -> Event {
-        return Event(Title: self.Title,
-                     FullDesc: self.FullDesc,
-                     ShortDesc: self.ShortDesc,
-                     StartDate: self.StartDate,
-                     EndDate: self.EndDate,
-                     StartTime: self.StartTime,
-                     EndTime: self.EndTime,
-                     Venue: self.Venue,
-                     Cover: self.Cover,
-                     TimeStamp: "1597666032353")
-    }
 }

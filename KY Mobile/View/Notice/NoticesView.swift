@@ -10,19 +10,19 @@ struct NoticesView: View {
     @State private var errorMessage: String = "Unknown Error"
     @State private var showErrorMessage = false
     
-    //@State var TimePeriodBefore: String = ""
+//    @State var TimePeriodBefore: String = ""
     
     var body: some View {
         ZStack{
             Color("VeryLightGrey")
                 .edgesIgnoringSafeArea(.all)
             
-            ScrollView{
+            ScrollView {
                 header
                 noticeFeed
                     
-            }.padding(.bottom)
-        }//.animation(.easeIn)
+            }
+        }
         .sheet(isPresented: $isShowingSheet,
                content: { NewNoticeSheet(isPresented: $isShowingSheet,
                                          newNotice: $newNotice,
@@ -150,10 +150,3 @@ struct NoticesView: View {
 //        return "Today"
 //    }
 //}
-
-
-struct NoticesView_Previews: PreviewProvider {
-    static var previews: some View {
-        NoticesView()
-    }
-}

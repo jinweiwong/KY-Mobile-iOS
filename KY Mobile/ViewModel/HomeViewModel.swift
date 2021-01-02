@@ -11,7 +11,7 @@ class RecentPostsViewModel: ObservableObject {
     
     func getAllRecentPosts() {
         let eventsRef = Firestore.firestore().collection("Events")
-        let noticesRef = Firestore.firestore().collection("Notice")
+        let noticesRef = Firestore.firestore().collection("Notices")
         
         eventsRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {

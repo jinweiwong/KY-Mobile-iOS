@@ -1,23 +1,33 @@
 import Foundation
 import SwiftUI
-import FirebaseStorage
 
 struct EventCardView: View {
     
     let thisEvent: Event
+    let demoCardImage: UIImage
+    
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
     
     var body: some View {
         ZStack{
             Rectangle()
                 .fill(Color.white)
-                .frame(width: self.cardWidth, height: 125)
+                .frame(width: self.cardWidth, height: 120)
                 .cornerRadius(15)
                 .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 2 , x: -1, y: 1)
+                        , radius: 1 , x: -1, y: 0)
             
             HStack (spacing: 12) {
-                EventCardImage(url: thisEvent.Cover)
+                
+                
+                Group {
+                    if demoCardImage != UIImage() {
+                        Image(uiImage: demoCardImage).EventCardImage()
+                    } else {
+                        EventCardImage(url: thisEvent.Cover)
+                    }
+                }
+                
                 VStack (spacing: 8) {
                     title
                     shortDesc
@@ -82,25 +92,21 @@ struct EventCardImage: View {
     
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipped()
-                .cornerRadius(10)
-                .padding(.leading, 15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 1 , x: -1, y: 1)
+            return Image(uiImage: UIImage(data: data)!).EventCardImage()
         } else {
-            return Image("placeholder")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipped()
-                .cornerRadius(10)
-                .padding(.leading, 15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 1 , x: -1, y: 1)
+            return Image("placeholder").EventCardImage()
         }
+    }
+}
+
+extension Image {
+    func EventCardImage() -> some View {
+        self
+            .resizable()
+            .scaledToFill()
+            .frame(width: 100, height: 100)
+            .clipped()
+            .cornerRadius(10)
+            .padding(.leading, 15)
     }
 }

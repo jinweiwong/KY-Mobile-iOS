@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 import FirebaseFirestore
-import FirebaseStorage
 
 class NoticesViewModel: ObservableObject {
     
@@ -12,7 +11,7 @@ class NoticesViewModel: ObservableObject {
     }
     
     func getAllNotices() {
-        let docRef = Firestore.firestore().collection("Notice")
+        let docRef = Firestore.firestore().collection("Notices")
         
         docRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {

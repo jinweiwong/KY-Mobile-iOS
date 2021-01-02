@@ -1,29 +1,143 @@
 import Foundation
 import SwiftUI
-import FirebaseFirestore
-import FirebaseStorage
 
 struct NewEventSheet: View {
     @Binding var isPresented: Bool
-    @Binding var newEvent: Event
+    @Binding var newEvent: NewEvent
     
     @Binding var errorMessage: String
     @Binding var showErrorMessage: Bool
     
+    @State private var boolAllDay: Bool = false
+    @State private var boolStart: Bool = false
+    @State private var boolEnd: Bool = false
+    @State private var boolTimeStamp: Bool = false
+    
+    @State private var isShowingImagePicker: Bool = false
     @State private var showDemoPage: Bool = false
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                title
-                shortDesc
-                fullDesc
-                venue
-                date
-                time
-                demo
-                    .padding(.bottom)
-            }.navigationBarTitle("New Event", displayMode: .inline)
+            
+            Form {
+                Section {
+                    TextField("Title of Event", text: $newEvent.Title)
+                      
+                    TextField("Short Description", text: $newEvent.ShortDesc)
+                    
+                    TextField("Venue (if applicable)", text: $newEvent.Venue)
+                }
+                
+                Section(header: Text("Body")) {
+                    VStack {
+                        TextEditor(text: $newEvent.FullDesc)
+                        
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                UIApplication.shared.dismissKeyboard()
+                            }) {
+                                Image(systemName: "keyboard.chevron.compact.down")
+                            }
+                        }
+                    }
+                    
+                }
+                
+                Section {
+                    VStack {
+                        Toggle(isOn: $boolStart) {
+                            Text("Start")
+                        }
+                        Group {
+                            if (boolStart && boolAllDay) {
+                                DatePicker(selection: $newEvent.Start, displayedComponents: .date) {}
+                            } else if (boolStart && !boolAllDay) {
+                                DatePicker(selection: $newEvent.Start) {}
+                            }
+                        }
+                    }
+                    
+                    VStack {
+                        Toggle(isOn: $boolEnd) {
+                            Text("End")
+                        }
+                        Group {
+                            if (boolEnd && boolAllDay) {
+                                DatePicker(selection: $newEvent.End, displayedComponents: .date) {}
+                            } else if (boolEnd && !boolAllDay) {
+                                DatePicker(selection: $newEvent.End) {}
+                            }
+                        }
+                    }
+                    
+                    Group {
+                        if (boolStart || boolEnd) {
+                            Toggle(isOn: $boolAllDay) {
+                                Text("All-Day")
+                            }
+                        }
+                    }
+                }
+                
+                Section {
+                    VStack {
+                        Toggle(isOn: $boolTimeStamp) {
+                            Text("Time Stamp")
+                        }
+                        HStack {
+                            Group {
+                                if boolTimeStamp {
+                                    DatePicker(selection: $newEvent.TimeStamp) {}
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+                
+                Section(header: Text("Image")) {
+                    
+                    if newEvent.Cover != UIImage() {
+                        Button(action: {
+                            newEvent.Cover = UIImage()
+                        }) {
+                            Text("Cancel Image")
+                        }
+                    } else {
+                        Button(action: {
+                            isShowingImagePicker = true
+                        }) {
+                            Text("Choose Image...")
+                            
+                        }.sheet(isPresented: $isShowingImagePicker, content: {
+                            ImagePickerView(isPresented: self.$isShowingImagePicker,
+                                            selectedImage: $newEvent.Cover)
+                        })
+                    }
+                    
+                    Group {
+                        if newEvent.Cover != UIImage() {
+                            Image(uiImage: newEvent.Cover)
+                                .resizable()
+                                .scaledToFit()
+                        }
+                    }
+                }
+                
+                Section {
+                    NavigationLink(destination: EventFullView(thisEvent:
+                                                                newEvent.convertAllToString(),
+                                                              demoCardImage: newEvent.Cover),
+                                   isActive: $showDemoPage) {
+                        EventCardView(thisEvent: newEvent.convertAllToString(),
+                                      demoCardImage: newEvent.Cover)
+                            .offset(x: -14, y: 0)
+                    }
+                }
+            }
+            
+            .navigationBarTitle("New Event", displayMode: .inline)
             .navigationBarItems(
                 
                 leading: Button(action: {
@@ -35,203 +149,73 @@ struct NewEventSheet: View {
                 },
                 
                 trailing: Button(action: {
-                    FBService.uploadNewEvent(newEvent: newEvent) { (result) in
-                        switch result {
-                        case .failure (let error):
-                            errorMessage = error.localizedDescription
-                            showErrorMessage = true
-                        case .success(_):
-                            break
-                        }}
+                    
+                    if !boolTimeStamp {
+                        newEvent.TimeStamp = Date()
+                    }
+                    
+                    if newEvent.Cover != UIImage() {
+                        FBService.uploadImage(chosenImage: newEvent.Cover,
+                                              location: "Events",
+                                              timeStamp: "\(Int(newEvent.TimeStamp.timeIntervalSince1970*1000))",
+                                              name: newEvent.Title) { (result) in
+                            switch result {
+                            
+                            case .failure (let error):
+                                self.errorMessage = error.localizedDescription
+                                self.showErrorMessage = true
+                                
+                                FBService.uploadNewEvent(newEvent: newEvent,
+                                                         boolAllDay: boolAllDay,
+                                                         boolStart: boolStart,
+                                                         boolEnd: boolEnd) { (result) in
+                                    switch result {
+                                    case .failure (let error):
+                                        errorMessage = error.localizedDescription
+                                        showErrorMessage = true
+                                    case .success(_):
+                                        break
+                                    }
+                                    newEvent = NewEvent()
+                                }
+                                
+                            case .success (let url):
+                                self.newEvent.CoverString = url.absoluteString
+                                
+                                FBService.uploadNewEvent(newEvent: newEvent,
+                                                         boolAllDay: boolAllDay,
+                                                         boolStart: boolStart,
+                                                         boolEnd: boolEnd) { (result) in
+                                    switch result {
+                                    case .failure (let error):
+                                        errorMessage = error.localizedDescription
+                                        showErrorMessage = true
+                                    case .success(_):
+                                        break
+                                    }
+                                    newEvent = NewEvent()
+                                }
+                            }
+                        }
+                    } else {
+                        FBService.uploadNewEvent(newEvent: newEvent,
+                                                 boolAllDay: boolAllDay,
+                                                 boolStart: boolStart,
+                                                 boolEnd: boolEnd) { (result) in
+                            switch result {
+                            case .failure (let error):
+                                errorMessage = error.localizedDescription
+                                showErrorMessage = true
+                            case .success(_):
+                                break
+                            }
+                            newEvent = NewEvent()
+                        }
+                    }
                     isPresented = false
-                    newEvent = Event()
                 }) {
                     Text("Upload")
                 })
-        }
-    }
-    
-    var title: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Title")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                VStack {
-                    HStack {
-                        TextField("Title of Event", text: $newEvent.Title)
-                            .frame(width: UIScreen.main.bounds.width * 7/8, height: 30)
-                            .autocapitalization(.none)
-                        
-                        Spacer()
-                    }
-                    
-                    Divider()
-                        .frame(width: UIScreen.main.bounds.width * 7/8, height: 2)
-                }
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var shortDesc: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Short Description")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                VStack {
-                    HStack {
-                        TextField("Short Description", text: $newEvent.ShortDesc)
-                            .frame(width: UIScreen.main.bounds.width * 7/8, height: 30)
-                            .autocapitalization(.none)
-                        
-                        Spacer()
-                    }
-                    
-                    Divider()
-                        .frame(width: UIScreen.main.bounds.width * 7/8, height: 2)
-                }
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var fullDesc: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Full Description")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                VStack {
-                    if #available(iOS 14.0, *) {
-                        TextEditor(text: $newEvent.FullDesc)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
-                            .cornerRadius(10)
-                            .border(Color("LightGrey"), width: 1)
-                    }
-                }
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var venue: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Venue")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                VStack {
-                    HStack {
-                        TextField("Venue", text: $newEvent.Venue)
-                            .frame(width: UIScreen.main.bounds.width * 7/8, height: 30)
-                            .autocapitalization(.none)
-                        
-                        Spacer()
-                    }
-                    
-                    Divider()
-                        .frame(width: UIScreen.main.bounds.width * 7/8, height: 2)
-                }
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var date: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Date")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                TextField("DD/MM/YYYY", text: $newEvent.StartDate)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: UIScreen.main.bounds.width * 3/8, height: 30)
-                    .autocapitalization(.none)
-                
-                Text("to")
-                
-                TextField("DD/MM/YYYY", text: $newEvent.EndDate)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: UIScreen.main.bounds.width * 3/8, height: 30)
-                    .autocapitalization(.none)
-                
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var time: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Time")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }
-            HStack {
-                TextField("HH:MM", text: $newEvent.StartTime)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: UIScreen.main.bounds.width * 2/8, height: 30)
-                    .autocapitalization(.none)
-                
-                Text("to")
-                
-                TextField("HH:MM", text: $newEvent.EndTime)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: UIScreen.main.bounds.width * 2/8, height: 30)
-                    .autocapitalization(.none)
-                
-                Spacer()
-            }
-        }.padding(.horizontal)
-        .padding(.top)
-    }
-    
-    var demo: some View {
-        Group {
-            HStack {
-                VStack {
-                    Text("Demo")
-                        .modifier(MediumText(textColor: Color("Black")))
-                }
-                Spacer()
-            }.padding(.horizontal)
-            .padding(.top)
-            
-            // Demo Card
-            NavigationLink(destination: EventFullView(thisEvent:
-                                                        newEvent.eventWithRandomTimeStamp()),
-                           isActive: $showDemoPage) {
-                EventCardView(thisEvent: newEvent.eventWithRandomTimeStamp())
-            }.padding(.horizontal)
         }
     }
 }

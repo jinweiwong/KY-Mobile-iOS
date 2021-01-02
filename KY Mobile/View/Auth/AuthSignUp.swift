@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct SignUpView: View {
@@ -12,7 +13,7 @@ struct SignUpView: View {
     
     @State private var showingSignInView: Bool = false
     @State private var isShowingImagePicker: Bool = false
-    @State private var profilePicture: UIImage = UIImage()
+    @State private var selectedPicture: UIImage = UIImage()
     
     var body: some View {
         ZStack {
@@ -49,7 +50,7 @@ struct SignUpView: View {
         Button(action: {
             isShowingImagePicker = true
         }) {
-            Image(uiImage: profilePicture)
+            Image(uiImage: selectedPicture)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120, height: 120)
@@ -61,7 +62,7 @@ struct SignUpView: View {
         }.buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isShowingImagePicker, content: {
             ImagePickerView(isPresented: self.$isShowingImagePicker,
-                            selectedImage: self.$profilePicture)
+                            selectedImage: self.$selectedPicture)
         })
     }
     
@@ -237,30 +238,33 @@ struct SignUpView: View {
         VStack (spacing: 10) {
             //Create account
             Button(action: {
-                if profilePicture != UIImage() {
-                    FBService.uploadImage(chosenImage: profilePicture, location: "Users_ProfilePic/") { (result) in
+                
+                if selectedPicture != UIImage() {
+                    FBService.uploadImage(chosenImage: selectedPicture,
+                                          location: "Users_ProfilePic",
+                                          timeStamp: "\(Int(Date().timeIntervalSince1970 * 1000))",
+                                          name: newUser.name) { (result) in
                         switch result {
+                        
                         case .failure (let error):
                             self.errorMessage = error.localizedDescription
                             self.showErrorMessage = true
-                        
+                            
                         case .success (let url):
-                            do {
-                                try self.newUser.image = String(contentsOf: url)
-                            } catch {}
+                            self.newUser.image = url.absoluteString
+                            
+                            FBAuthFunctions.createUser(user: newUser) { (result) in
+                                                        switch result {
+                                                        case .failure (let error):
+                                                            self.errorMessage = error.localizedDescription
+                                                            self.showErrorMessage = true
+                                                            
+                                                        case .success(_):
+                                                            break
+                                                        }}
                         }
                     }
                 }
-                    
-                FBAuthFunctions.createUser(user: newUser) { (result) in
-                                            switch result {
-                                            case .failure (let error):
-                                                self.errorMessage = error.localizedDescription
-                                                self.showErrorMessage = true
-                                                
-                                            case .success(_):
-                                                break
-                                            }}
             }) {
                 Text("Create Account")
             }.modifier(LargeButton(width: UIScreen.main.bounds.size.width * (7/8), height: 50, textColor: Color("White"), backgroundColor: Color("NormalBlue")))
