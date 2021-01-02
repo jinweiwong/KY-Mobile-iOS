@@ -5,6 +5,7 @@ enum FirebaseError: Error {
     case noAuthDataResult
     case noCurrentUser
     case noDocumentSnapshot
+    case noQuerySnapshot
     case noSnapshotData
     case noUser
 }
@@ -19,6 +20,8 @@ extension FirebaseError: LocalizedError {
             return NSLocalizedString("No Current User", comment: "")
         case .noDocumentSnapshot:
             return NSLocalizedString("No Document Snapshot", comment: "")
+        case .noQuerySnapshot:
+            return NSLocalizedString("No Query Snapshot", comment: "")
         case .noSnapshotData:
             return NSLocalizedString("No Snapshot Data", comment: "")
         case .noUser:

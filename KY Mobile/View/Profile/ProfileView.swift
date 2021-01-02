@@ -3,7 +3,12 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var currentUser = CurrentUserInfo()
+    @ObservedObject var currentUser = ProfileViewModel()
+    
+    @State private var errorMessage: String = ""
+    @State private var showErrorMessage: Bool = false
+
+    @State private var isShowingEditProfile: Bool = false
     
     var body: some View {
         NavigationView {
@@ -12,45 +17,61 @@ struct ProfileView: View {
                 Color("VeryLightGrey")
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack {
-                    ProfileCardView(user: currentUser.currentUser)
-                    form
-                }
-
-            }.navigationBarTitle(Text("Profile"))
-        }
-    }
-    
-    var form: some View {
-        Form {
-            
-            Section() {
-                NavigationLink(destination: Text("Feedback")) {
-                    Label {
-                        Text("Feedback")
-                    } icon: {
-                        Image(systemName: "message.circle")
-                            .renderingMode(.original)
+                Form {
+                    
+                    Section(header: Text("Profile")
+                                .font(.system(size: 34, weight: .bold, design: .default))
+                                .bold()
+                                .padding(.top, 20)
+                                .padding(.bottom, 10)
+                                .foregroundColor(Color("Black"))) {
+                        NavigationLink(destination: EditProfileView(currentUser: currentUser.currentUser,
+                                                                    errorMessage: $errorMessage,
+                                                                    showErrorMessage: $showErrorMessage,
+                                                                    isShowingEditProfile: $isShowingEditProfile), isActive: $isShowingEditProfile) {
+                            ProfileCardView(user: currentUser.currentUser)
+                        }
+                    }.textCase(nil)
+                    
+                    Section() {
+                        
+                        NavigationLink(destination: SavedPostsView()) {
+                            Label {
+                                Text("Saved Posts")
+                            } icon: {
+                                Image(systemName: "bookmark")
+                                    .renderingMode(.original)
+                            }
+                        }
+                        
+                        NavigationLink(destination: SettingsView()) {
+                            Label {
+                                Text("Settings")
+                            } icon: {
+                                Image(systemName: "gear")
+                                    .renderingMode(.original)
+                            }
+                        }
+                        
+                        NavigationLink(destination: FeedbackView()) {
+                            Label {
+                                Text("Feedback")
+                            } icon: {
+                                Image(systemName: "message.circle")
+                                    .renderingMode(.original)
+                            }
+                        }
+                    }
+                    
+                    Section() {
+                        HStack {
+                            Button("Logout") {
+                                FBAuthFunctions.logout { (result) in
+                                }}
+                        }
                     }
                 }
-            }
-            
-            Section() {
-                NavigationLink(destination: Text("Change Password")) {
-                    Label {
-                        Text("Change Password")
-                    } icon: {
-                        Image(systemName: "lock")
-                            .renderingMode(.original)
-                    }
-                }
-                
-                HStack {
-                    Button("Logout") {
-                        FBAuthFunctions.logout { (result) in
-                        }}
-                }
-            }
+            }.navigationBarHidden(true)
         }
     }
 }
@@ -61,66 +82,63 @@ struct ProfileCardView: View {
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
 
     var body: some View {
-        ZStack{
-            Rectangle()
-                .fill(Color.white)
-                .frame(width: self.cardWidth, height: 125)
-                .cornerRadius(15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 2 , x: -1, y: 1)
-
-            HStack (spacing: 12) {
-                UserCardImage(url: user.Image)
-                VStack (spacing: 8) {
-                    title
-                    shortDesc
-                    timeStamp
-                }.frame(width: self.cardWidth - 120)
-            }.cornerRadius(15)
-            .foregroundColor(.white)
+        HStack (spacing: 12) {
+            UserCardImage(url: user.Image)
+            VStack (spacing: 3) {
+                name
+                email
+                studentID
+                batch
+            }
         }
     }
 
-    var title: some View {
+    var name: some View {
         HStack {
             VStack(alignment: .leading){
-
                 Text("\(user.Name)")
                     .lineLimit(2)
-                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .font(.system(size: 20, design: .default))
                     .foregroundColor(Color("Black"))
-
             }
             Spacer()
         }
     }
 
-    var shortDesc: some View {
+    var email: some View {
         HStack {
             VStack (alignment: .leading) {
                 Text(user.Email)
                     .lineLimit(2)
                     .font(.system(size: 12))
                     .foregroundColor(Color("DarkGrey"))
-
             }
             Spacer()
         }
     }
 
-    var timeStamp: some View {
+    var studentID: some View {
         HStack {
             VStack (alignment: .leading) {
-                Text(user.StudentID)
+                Text("#\(user.StudentID)")
                     .font(.system(size: 12, design: .default))
-                    .foregroundColor(Color("NormalBlue"))
-
+                    .foregroundColor(Color("DarkGrey"))
+            }
+            Spacer()
+        }
+    }
+    
+    var batch: some View {
+        HStack {
+            VStack (alignment: .leading) {
+                Text("Batch \(user.Batch)")
+                    .font(.system(size: 12, design: .default))
+                    .foregroundColor(Color("DarkGrey"))
             }
             Spacer()
         }
     }
 }
-
 
 struct UserCardImage: View {
     @ObservedObject var imageLoader = ImageLoaderViewModel()
@@ -135,25 +153,20 @@ struct UserCardImage: View {
 
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipped()
-                .cornerRadius(10)
-                .padding(.leading, 15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 1 , x: -1, y: 1)
+            return Image(uiImage: UIImage(data: data)!).userCardImageModifier()
         } else {
-            return Image("placeholder")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipped()
-                .cornerRadius(10)
-                .padding(.leading, 15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 1 , x: -1, y: 1)
+            return Image("placeholder").userCardImageModifier()
         }
     }
+}
+
+extension Image {
+    func userCardImageModifier() -> some View {
+        self
+            .resizable()
+            .scaledToFill()
+            .frame(width: 80, height: 80)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(lineWidth: 0.5))
+   }
 }

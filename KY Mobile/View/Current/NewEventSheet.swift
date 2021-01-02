@@ -155,9 +155,9 @@ struct NewEventSheet: View {
                     }
                     
                     if newEvent.Cover != UIImage() {
-                        FBService.uploadImage(chosenImage: newEvent.Cover,
+                        FBStorage.uploadImage(chosenImage: newEvent.Cover,
                                               location: "Events",
-                                              timeStamp: "\(Int(newEvent.TimeStamp.timeIntervalSince1970*1000))",
+                                              identifier: "\(Int(newEvent.TimeStamp.timeIntervalSince1970*1000))",
                                               name: newEvent.Title) { (result) in
                             switch result {
                             
@@ -165,7 +165,7 @@ struct NewEventSheet: View {
                                 self.errorMessage = error.localizedDescription
                                 self.showErrorMessage = true
                                 
-                                FBService.uploadNewEvent(newEvent: newEvent,
+                                FBCurrent.uploadNewEvent(newEvent: newEvent,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
                                                          boolEnd: boolEnd) { (result) in
@@ -182,7 +182,7 @@ struct NewEventSheet: View {
                             case .success (let url):
                                 self.newEvent.CoverString = url.absoluteString
                                 
-                                FBService.uploadNewEvent(newEvent: newEvent,
+                                FBCurrent.uploadNewEvent(newEvent: newEvent,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
                                                          boolEnd: boolEnd) { (result) in
@@ -198,7 +198,7 @@ struct NewEventSheet: View {
                             }
                         }
                     } else {
-                        FBService.uploadNewEvent(newEvent: newEvent,
+                        FBCurrent.uploadNewEvent(newEvent: newEvent,
                                                  boolAllDay: boolAllDay,
                                                  boolStart: boolStart,
                                                  boolEnd: boolEnd) { (result) in

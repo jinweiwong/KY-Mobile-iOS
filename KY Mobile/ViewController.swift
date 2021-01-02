@@ -9,7 +9,6 @@ struct ViewController: View {
     var body: some View {
         
         Group {
-
             // Checks if user is signed in or signed out
             if currentUserInfo.isUserAuthenticated == .undefined {
                 Text("Loading...")
@@ -24,46 +23,29 @@ struct ViewController: View {
                             Image(systemName: "house")
                                 .font(.system(size: 20))
                             Text("Home")
-                        })
-                        .tag(0)
+                        }).tag(0)
 
                     CurrentView()
                         .tabItem({
                             Image(systemName: "calendar")
                                 .font(.system(size: 20))
                             Text("Current")
-                        })
-                        .tag(1)
+                        }).tag(1)
 
                     NoticesView()
                         .tabItem({
                             Image(systemName: "bell")
                                 .font(.system(size: 20))
                             Text("Notices")
-                        })
-                        .tag(2)
+                        }).tag(2)
 
                     ProfileView()
                         .tabItem({
                             Image(systemName: "person")
                                 .font(.system(size: 20))
                             Text("Profile")
-                        })
-                        .tag(3)
-                }.onAppear {
-                    guard let uid = Auth.auth().currentUser?.uid else {
-                        return
-                    }
-                    FBService.retrieveFBUser(uid: uid) { (result) in
-                        switch result {
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                            // Display some kind of alert
-                        case .success(let user):
-                            self.currentUserInfo.currentUser = user
-                        }
-                    }
-            }
+                        }).tag(3)
+                }
             }
         }.onAppear {
             self.currentUserInfo.configureFirebaseStateDidChange()

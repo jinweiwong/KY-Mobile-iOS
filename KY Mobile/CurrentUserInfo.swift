@@ -3,12 +3,14 @@ import SwiftUI
 import FirebaseAuth
 
 class CurrentUserInfo: ObservableObject {
+    
+    @Published var isUserAuthenticated: FBAuthState = .undefined
+    @Published var currentUser: User = User()
+    
     enum FBAuthState {
         case undefined, signedOut, signedIn
     }
     
-    @Published var isUserAuthenticated: FBAuthState = .undefined
-    @Published var currentUser: User = User()
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     
     func configureFirebaseStateDidChange() {

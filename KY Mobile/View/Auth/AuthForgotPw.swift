@@ -67,7 +67,7 @@ struct ForgotPasswordView: View {
                 
                 VStack (spacing: 30) {
                     VStack (spacing: 0) {
-                        TextField("Enter your email", text: $newUser.email)
+                        TextField("Enter your email", text: $newUser.Email)
                             .frame(width: 300, height: 30)
                             .autocapitalization(.none)
                         
@@ -82,7 +82,7 @@ struct ForgotPasswordView: View {
                 VStack (spacing: 10) {
                     Button(action: {
                     
-                        FBAuthFunctions.resetPassword(email: newUser.email) { (result) in
+                        FBAuthFunctions.resetPassword(email: newUser.Email) { (result) in
                             switch result {
                             
                             case .failure(let error):
@@ -91,7 +91,7 @@ struct ForgotPasswordView: View {
                                 
                             case .success(_):
                                 resetPasswordUsing = .email
-                                emailAddress = newUser.email
+                                emailAddress = newUser.Email
                             }}
                     }) {
                         Text("Send Email")

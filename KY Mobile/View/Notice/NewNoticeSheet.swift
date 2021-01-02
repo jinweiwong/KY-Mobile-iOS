@@ -58,7 +58,7 @@ struct NewNoticeSheet: View {
                         .frame(width: 22, height: 22)
                 },
                 trailing: Button(action: {
-                    FBService.uploadNewNotice(newNotice: newNotice) { (result) in
+                    FBNotice.uploadNewNotice(newNotice: newNotice) { (result) in
                         switch result {
                         case .failure (let error):
                             errorMessage = error.localizedDescription

@@ -66,7 +66,7 @@ struct SignInView: View {
             VStack (spacing: 30) {
                 //Email
                 VStack (spacing: 0) {
-                    TextField("Enter your email", text: $newUser.email)
+                    TextField("Enter your email", text: $newUser.Email)
                         .frame(width: 300, height: 30)
                     
                     Divider()
@@ -75,7 +75,7 @@ struct SignInView: View {
                 
                 //Password
                 VStack (spacing: 0) {
-                    SecureField("Enter your password", text: $newUser.password)
+                    SecureField("Enter your password", text: $newUser.Password)
                         .frame(width: 300, height: 30)
                     
                     Divider()
@@ -89,8 +89,8 @@ struct SignInView: View {
         VStack (spacing: 10) {
             //Log in
             Button(action: {
-                FBAuthFunctions.authenticate(email: newUser.email,
-                                             password: newUser.password) { (result) in
+                FBAuthFunctions.authenticate(email: newUser.Email,
+                                             password: newUser.Password) { (result) in
                     switch result {
                     
                     case .failure(let error):

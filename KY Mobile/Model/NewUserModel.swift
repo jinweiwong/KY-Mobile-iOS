@@ -1,33 +1,33 @@
 import Foundation
 
 struct NewUser {
-    var name: String
-    var studentID: String
-    var batch: String
-    var email: String
-    var image: String
-    var password: String
-    var confirmPassword: String
+    var Name: String
+    var StudentID: String
+    var Batch: String
+    var Email: String
+    var Image: String
+    var Password: String
+    var ConfirmPassword: String
     
     init() {
-        self.name = ""
-        self.studentID = ""
-        self.batch = ""
-        self.email = ""
-        self.image = ""
-        self.password = ""
-        self.confirmPassword = ""
+        self.Name = ""
+        self.StudentID = ""
+        self.Batch = ""
+        self.Email = ""
+        self.Image = ""
+        self.Password = ""
+        self.ConfirmPassword = ""
     }
     
     
     func isNameEmpty() -> Bool {
         // Leading, trailing whitespaces and newlines are ignored
-        return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        return Name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     
     func isStudentIDValid() -> Bool {
-        return studentID.count == 4
+        return StudentID.count == 4
     }
     
     
@@ -35,7 +35,7 @@ struct NewUser {
         let currentYear = Calendar.current.component(.year, from: Date())
         let allowedBatches = [currentYear - 1999, currentYear - 1998, currentYear - 1997]
         
-        let splitedUpBatch = batch.split(separator: ".")
+        let splitedUpBatch = Batch.split(separator: ".")
         
         if splitedUpBatch.count == 2 {
             if allowedBatches.contains((splitedUpBatch[0] as NSString).integerValue) {
@@ -51,7 +51,7 @@ struct NewUser {
     func isEmailValid() -> Bool {
         let emailTest = NSPredicate(format: "SELF MATCHES %@",
                                        "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-        return emailTest.evaluate(with: email)
+        return emailTest.evaluate(with: Email)
     }
     
     
@@ -59,12 +59,12 @@ struct NewUser {
         // Password must be 8 chars, contain a capital letter and a number
         let passwordTest = NSPredicate(format: "SELF MATCHES %@",
                                        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
-        return passwordTest.evaluate(with: password)
+        return passwordTest.evaluate(with: Password)
     }
     
     
     func passwordMatch() -> Bool {
-        return confirmPassword == password
+        return ConfirmPassword == Password
     }
     
     
@@ -83,5 +83,15 @@ struct NewUser {
             return false
         }
         return true
+    }
+    
+    
+    func newUserToDict(userUID: String) -> [String: Any] {
+        return ["UID": userUID,
+                "Name": self.Name,
+                "Image": self.Image,
+                "Email": self.Email,
+                "Batch": self.Batch,
+                "StudentID": self.StudentID]
     }
 }

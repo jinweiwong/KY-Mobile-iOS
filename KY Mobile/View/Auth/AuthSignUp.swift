@@ -5,6 +5,8 @@ struct SignUpView: View {
     
     @Binding var newUser: NewUser
     
+    @State private var newUserUID: String = ""
+    
     @State private var passwordShow: Bool = false
     @State private var confirmPasswordShow: Bool = false
     
@@ -107,7 +109,7 @@ struct SignUpView: View {
                 
                 //Name
                 VStack (spacing: 0) {
-                    TextField("Enter your full name", text: $newUser.name)
+                    TextField("Enter your full name", text: $newUser.Name)
                         .autocapitalization(.words)
                         .frame(width: 300, height: 30)
                     
@@ -119,7 +121,7 @@ struct SignUpView: View {
                 
                 //Student ID
                 VStack (spacing: 0) {
-                    TextField("Enter your Student ID", text: $newUser.studentID)
+                    TextField("Enter your Student ID", text: $newUser.StudentID)
                         .frame(width: 300, height: 30)
                         .autocapitalization(.none)
                         .keyboardType(.numbersAndPunctuation)
@@ -131,7 +133,7 @@ struct SignUpView: View {
                 
                 //Batch
                 VStack (spacing: 0) {
-                    TextField("Enter your batch", text: $newUser.batch)
+                    TextField("Enter your batch", text: $newUser.Batch)
                         .frame(width: 300, height: 30)
                         .autocapitalization(.none)
                         .keyboardType(.numbersAndPunctuation)
@@ -143,7 +145,7 @@ struct SignUpView: View {
                 
                 //Email
                 VStack (spacing: 0) {
-                    TextField("Enter your email", text: $newUser.email)
+                    TextField("Enter your email", text: $newUser.Email)
                         .frame(width: 300, height: 30)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
@@ -157,7 +159,7 @@ struct SignUpView: View {
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
                         if passwordShow {
-                            TextField("Enter your password", text: $newUser.password)
+                            TextField("Enter your password", text: $newUser.Password)
                                 .frame(width: 270, height: 30)
                             
                             Button(action: {
@@ -172,7 +174,7 @@ struct SignUpView: View {
                         }
                             
                         else {
-                            SecureField("Enter your password", text: $newUser.password)
+                            SecureField("Enter your password", text: $newUser.Password)
                                 .frame(width: 270, height: 30)
                             
                             Button(action: {
@@ -196,7 +198,7 @@ struct SignUpView: View {
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
                         if confirmPasswordShow {
-                            TextField("Confirm your password", text: $newUser.confirmPassword)
+                            TextField("Confirm your password", text: $newUser.ConfirmPassword)
                                 .frame(width: 270, height: 30)
                             
                             Button(action: {
@@ -211,7 +213,7 @@ struct SignUpView: View {
                         }
                             
                         else {
-                            SecureField("Confirm your password", text: $newUser.confirmPassword)
+                            SecureField("Confirm your password", text: $newUser.ConfirmPassword)
                                 .frame(width: 270, height: 30)
                             
                             Button(action: {
@@ -238,32 +240,54 @@ struct SignUpView: View {
         VStack (spacing: 10) {
             //Create account
             Button(action: {
-                
                 if selectedPicture != UIImage() {
-                    FBService.uploadImage(chosenImage: selectedPicture,
-                                          location: "Users_ProfilePic",
-                                          timeStamp: "\(Int(Date().timeIntervalSince1970 * 1000))",
-                                          name: newUser.name) { (result) in
+                    // Creates the User in the authentication page
+                    FBAuthFunctions.createUser(user: newUser) { (result) in
                         switch result {
-                        
                         case .failure (let error):
                             self.errorMessage = error.localizedDescription
                             self.showErrorMessage = true
                             
-                        case .success (let url):
-                            self.newUser.image = url.absoluteString
+                        case .success (let UID):
+                            newUserUID = UID
+                            // Uploading the image and saving the URL of the image
+                            FBStorage.uploadImage(chosenImage: selectedPicture,
+                                                  location: "Users_ProfilePic",
+                                                  identifier: newUserUID,
+                                                  name: newUser.Name) { (result) in
+                                switch result {
+                                
+                                case .failure (let error):
+                                    self.errorMessage = error.localizedDescription
+                                    self.showErrorMessage = true
+                                    
+                                case .success (let url):
+                                    self.newUser.Image = url.absoluteString
+                                    // Updating the Firestore with the URL of the image
+                                    FBProfile.mergeFBUser(uid: newUserUID,
+                                                          info: newUser.newUserToDict(userUID: newUserUID)) { (result) in
+                                        switch result {
+                                        case .failure (let error):
+                                            self.errorMessage = error.localizedDescription
+                                            self.showErrorMessage = true
+                                            
+                                        case .success:
+                                            print("Successfully")
+                                        }
+                                    }
+                                }
+                            }
+                        }}
+                } else {
+                    FBAuthFunctions.createUser(user: newUser) { (result) in
+                        switch result {
+                        case .failure (let error):
+                            self.errorMessage = error.localizedDescription
+                            self.showErrorMessage = true
                             
-                            FBAuthFunctions.createUser(user: newUser) { (result) in
-                                                        switch result {
-                                                        case .failure (let error):
-                                                            self.errorMessage = error.localizedDescription
-                                                            self.showErrorMessage = true
-                                                            
-                                                        case .success(_):
-                                                            break
-                                                        }}
-                        }
-                    }
+                        case .success (let UID):
+                            newUserUID = UID
+                        }}
                 }
             }) {
                 Text("Create Account")

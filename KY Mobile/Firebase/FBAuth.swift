@@ -6,10 +6,10 @@ import FirebaseFirestore
 class FBAuthFunctions {
     // Creates a new user
     static func createUser(user: NewUser,
-                           completionHandler: @escaping (Result <Bool, Error>) -> Void ){
+                           completionHandler: @escaping (Result <String, Error>) -> Void ){
         
         // Creating a new user in the authentication
-        Auth.auth().createUser(withEmail: user.email, password: user.password) { (authResult, error) in
+        Auth.auth().createUser(withEmail: user.Email, password: user.Password) { (authResult, error) in
             if error != nil {
                 completionHandler(.failure(error!))
             }
@@ -21,17 +21,24 @@ class FBAuthFunctions {
             
             // Creating a new user in the database
             let data: [String:Any] = ["UID" : newUser.uid,
-                                      "Name" : user.name,
-                                      "StudentID" : user.studentID,
-                                      "Batch" : user.batch,
-                                      "Email" : user.email,
-                                      "Image" : user.image]
+                                      "Name" : user.Name,
+                                      "StudentID" : user.StudentID,
+                                      "Batch" : user.Batch,
+                                      "Email" : user.Email,
+                                      "Image" : user.Image]
             
-            FBService.mergeFBUser(uid: newUser.uid, info: data) { (result) in
-                completionHandler(result)
+            FBProfile.mergeFBUser(uid: newUser.uid, info: data) { (result) in
+                switch result {
+                case .failure (let error):
+                    print("\(error.localizedDescription)")
+                    
+                case .success:
+                    print("Successfully merged new user into Firestore")
+                }
             }
+            completionHandler(.success(newUser.uid))
+            return
             
-            completionHandler(.success(true))
         }
     }
     

@@ -26,4 +26,22 @@ struct User {
         self.Batch = UserData["Batch"] as? String ?? ""
         self.StudentID = UserData["StudentID"] as? String ?? ""
     }
+    
+    func equalTo(_ user: User) -> Bool {
+        return (self.UID == user.UID &&
+                    self.Name == user.Name &&
+                    self.Image == user.Image &&
+                    self.Email == user.Email &&
+                    self.Batch == user.Batch &&
+                    self.StudentID == user.StudentID)
+    }
+    
+    func userToDict() -> [String: Any] {
+        return ["UID": self.UID,
+                "Name": self.Name,
+                "Image": self.Image,
+                "Email": self.Email,
+                "Batch": self.Batch,
+                "StudentID": self.StudentID]
+    }
 }
