@@ -14,6 +14,7 @@ class CurrentUserInfo: ObservableObject {
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     
     func configureFirebaseStateDidChange() {
+        // Detects if there is a change in authentication state
         authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ (_, user) in
             guard let _ = user else {
                 self.isUserAuthenticated = .signedOut

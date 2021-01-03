@@ -3,19 +3,21 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     
+    // Options for how the user wants to reset their password
     enum sentUsing {
         case pending
         case email
-        //case studentID
+//        case studentID
     }
     
     @Binding var newUser: NewUser
     
     @State private var resetPasswordUsing: sentUsing = .pending
+    @State private var emailAddress: String = ""
+    
     @State private var errorMessage: String = "Unknown Error"
     @State private var showErrorMessage: Bool = false
-    @State private var emailAddress: String = ""
-
+    
     var body: some View {
         ZStack {
             
@@ -25,10 +27,10 @@ struct ForgotPasswordView: View {
             ScrollView {
                 VStack (spacing: 50) {
                     Spacer()
-                    //header
+//                    header
                     resetUsingEmail
-                    //divider
-                    //resetUsingStudentID
+//                    divider
+//                    resetUsingStudentID
                     Spacer()
                     
                 }.alert(isPresented: $showErrorMessage) {
@@ -51,12 +53,13 @@ struct ForgotPasswordView: View {
     var resetUsingEmail: some View {
         VStack (alignment: .leading, spacing: 30) {
             
-            // Textfield
+            // Header
             VStack (alignment: .leading, spacing: 8) {
                 Text("Forgot your password?")
                     .modifier(MediumText(textColor: Color("VeryDarkGrey")))
             }.frame(width: UIScreen.main.bounds.size.width * 7/8, alignment: .leading)
             
+            // Icon
             HStack (spacing: 15) {
                 VStack (spacing: 46) {
                     Image(systemName: "envelope")
@@ -65,6 +68,7 @@ struct ForgotPasswordView: View {
                         .frame(height: 15)
                 }.frame(width: 20, alignment: .trailing)
                 
+                // Textfield to reset password using Email
                 VStack (spacing: 30) {
                     VStack (spacing: 0) {
                         TextField("Enter your email", text: $newUser.Email)
@@ -77,7 +81,7 @@ struct ForgotPasswordView: View {
                 }
             }
             
-            // Button
+            // Button to reset password
             VStack (alignment: .leading, spacing: 15) {
                 VStack (spacing: 10) {
                     Button(action: {
@@ -99,7 +103,8 @@ struct ForgotPasswordView: View {
                 }
                 
                 Group {
-                    if resetPasswordUsing == .email {
+                    // Message to show that the email has been sent successfully
+                    if resetPasswordUsing != .pending {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(Color("Green"))

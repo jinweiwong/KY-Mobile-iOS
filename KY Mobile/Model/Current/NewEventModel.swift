@@ -38,6 +38,10 @@ struct NewEvent: Identifiable {
         self.TimeStamp = Date()
     }
     
+    // Convert newEvent to Event
+    // Dates are changed to DD/MM/YYYY
+    // Times are changed to HH:MM (24-hour time)
+    // TimeStamp is changed to Epoch Time
     func convertAllToString() -> Event {
         return Event(Title: self.Title,
                      FullDesc: self.FullDesc,

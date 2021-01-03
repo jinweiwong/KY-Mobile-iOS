@@ -10,6 +10,7 @@ class NoticesViewModel: ObservableObject {
         getAllNotices()
     }
     
+    // Add snapshot listener for all notices
     func getAllNotices() {
         let docRef = Firestore.firestore().collection("Notices")
         
@@ -31,6 +32,7 @@ class NoticesViewModel: ObservableObject {
                     }
                 }
                 
+                // Sort notices based on recency
                 self.notices.sort {
                     $0.TimeStamp > $1.TimeStamp
                 }

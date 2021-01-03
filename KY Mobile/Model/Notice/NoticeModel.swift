@@ -29,9 +29,9 @@ struct Notice: Identifiable {
     }
     
     func noticeWithRandomTimeStamp() -> Notice {
-        return Notice(Title: self.Title,
-                      Exco: self.Exco,
-                      Body: self.Body,
-                      TimeStamp: "1597666032353")
-    }
+            return Notice(Title: self.Title,
+                          Exco: self.Exco,
+                          Body: self.Body,
+                          TimeStamp: "1597666032353")
+        }
 }

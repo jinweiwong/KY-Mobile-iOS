@@ -4,19 +4,27 @@ import SwiftUI
 struct EventFullView: View {
 
     let thisEvent: Event
+    
+    // Assists in displaying the image selected by an admin creating a new event as that image has yet to be uploaded the Firebase Storage
+    // Should be set to UIImage() if it is called from CurrentView
+    // Should be set the image to be uploaded if it is called from NewEventView
     let demoCardImage: UIImage
 
     var body: some View {
         ZStack {
+            // Background
             Color("VeryLightGrey")
                 .edgesIgnoringSafeArea(.all)
 
             ScrollView {
                 VStack {
                     Group {
+                        // Displays the image selected in the new event sheet
                         if demoCardImage != UIImage() {
                             Image(uiImage: demoCardImage).EventFullImage()
-                        } else if thisEvent.Cover != "" {
+                            
+                        } // Displays the image from the image's URL
+                        else if thisEvent.Cover != "" {
                             EventPageImage(url: thisEvent.Cover)
                         }
                     }
@@ -26,13 +34,15 @@ struct EventFullView: View {
                     timeStamp
                     divider
                     fullDesc
-                        //.padding(.bottom, 50)
+                        
                 }
-            }//.offset(y: -50)
-        }//.padding(.bottom)
+            }
+        }
         .edgesIgnoringSafeArea(.horizontal)
     }
 
+    // MARK: Title
+    
     var title: some View {
         HStack {
             Text("\(thisEvent.Title)")
@@ -44,6 +54,8 @@ struct EventFullView: View {
         .padding(.vertical, 2)
     }
 
+    // MARK: Short Description
+    
     var shortDesc: some View {
         HStack {
             Text("\(thisEvent.ShortDesc)")
@@ -52,6 +64,8 @@ struct EventFullView: View {
         }.padding(.horizontal)
     }
 
+    // MARK: Time Stamp
+    
     var timeStamp: some View {
         HStack {
             Text("\(EpochTimeToTimeInterval(epochTime: thisEvent.TimeStamp))")
@@ -63,6 +77,8 @@ struct EventFullView: View {
         .padding(.top, 1)
     }
 
+    // MARK: Divider
+    
     var divider: some View {
         HStack (spacing: 15) {
             VStack { Divider()
@@ -70,6 +86,8 @@ struct EventFullView: View {
             }.padding(0)
         }.padding(.horizontal, 20)
     }
+    
+    // MARK: Full Description
 
     var fullDesc: some View {
         HStack {
@@ -84,6 +102,7 @@ struct EventFullView: View {
     }
 }
 
+// Retrieves the image for EventFullView from a URL
 struct EventPageImage: View {
     @ObservedObject var imageLoader = ImageLoaderViewModel()
     let url: String
@@ -104,7 +123,7 @@ struct EventPageImage: View {
     }
 }
 
-
+// Modifier for the image in the EventFullView
 extension Image {
     func EventFullImage() -> some View {
         self

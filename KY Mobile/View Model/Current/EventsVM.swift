@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 
-class CurrentViewModel: ObservableObject {
+class EventsViewModel: ObservableObject {
     
     @Published var events: [Event] = []
     
@@ -10,6 +10,7 @@ class CurrentViewModel: ObservableObject {
         getAllEvents()
     }
     
+    // Add snapshot listener for all events
     func getAllEvents() {
         let docRef = Firestore.firestore().collection("Events")
         
@@ -44,6 +45,7 @@ class CurrentViewModel: ObservableObject {
                     }
                 }
                 
+                // Sort events based on recency
                 self.events.sort {
                     $0.TimeStamp > $1.TimeStamp
                 }

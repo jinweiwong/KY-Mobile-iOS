@@ -13,6 +13,7 @@ class RecentPostsViewModel: ObservableObject {
         let eventsRef = Firestore.firestore().collection("Events")
         let noticesRef = Firestore.firestore().collection("Notices")
         
+        // Add snapshot listener for recent events
         eventsRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting recent events: \(error)")
@@ -32,6 +33,7 @@ class RecentPostsViewModel: ObservableObject {
             }
         }
         
+        // Add snapshot listener for recent notices
         noticesRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting recent notices: \(error)")
@@ -49,6 +51,8 @@ class RecentPostsViewModel: ObservableObject {
                     }
                 }
             }
+            
+            // Sort posts based on recency
             self.recentPosts.sort {
                 $0.TimeStamp > $1.TimeStamp
             }

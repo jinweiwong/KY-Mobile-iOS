@@ -9,7 +9,7 @@ struct ViewController: View {
     var body: some View {
         
         Group {
-            // Checks if user is signed in or signed out
+            
             if currentUserInfo.isUserAuthenticated == .undefined {
                 Text("Loading...")
             }
@@ -17,6 +17,7 @@ struct ViewController: View {
                 IntroductionView()
             }
             else {
+                // Controls which page will be displayed using the bottom navigation bar
                 TabView {
                     HomeView()
                         .tabItem({
@@ -32,7 +33,7 @@ struct ViewController: View {
                             Text("Current")
                         }).tag(1)
 
-                    NoticesView()
+                    NoticeView()
                         .tabItem({
                             Image(systemName: "bell")
                                 .font(.system(size: 20))
@@ -48,13 +49,8 @@ struct ViewController: View {
                 }
             }
         }.onAppear {
+            // Allow app to react if user signs out or signs in
             self.currentUserInfo.configureFirebaseStateDidChange()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewController()
     }
 }

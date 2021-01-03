@@ -4,6 +4,10 @@ import FirebaseStorage
 
 class FBStorage {
     
+    // Uploads an image to Storage and returns the URL
+    // Location refers to the Collection name in Storage
+    // Identifier refers to either the UID of a user or the TimeStamp of something
+    // Name refers to either the name of a user or the Title of something
     static func uploadImage(chosenImage: UIImage,
                             location: String,
                             identifier: String,
@@ -33,7 +37,10 @@ class FBStorage {
         }
     }
     
-    
+    // Deletes an image from Storage
+    // Location refers to the Collection name in Storage
+    // Identifier refers to either the UID of a user or the TimeStamp of something
+    // Name refers to either the name of a user or the Title of something
     static func deleteImage(location: String,
                             identifier: String,
                             name: String,

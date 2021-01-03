@@ -37,7 +37,7 @@ struct SignInView: View {
     }
     
     var header: some View {
-        //Heading
+        // Header
         VStack (alignment: .leading) {
             Text("Welcome back")
                 .modifier(Title(textColor: Color("Black")))
@@ -49,7 +49,7 @@ struct SignInView: View {
     
     var textfields: some View {
         HStack (spacing: 15) {
-            //Icons
+            // Icons
             VStack (spacing: 46) {
                 Image(systemName: "envelope")
                     .resizable()
@@ -62,9 +62,9 @@ struct SignInView: View {
                     .frame(height: 18)
             }.frame(width: 20, alignment: .trailing)
             
-            //Textfields
+            // Textfields
             VStack (spacing: 30) {
-                //Email
+                // Email
                 VStack (spacing: 0) {
                     TextField("Enter your email", text: $newUser.Email)
                         .frame(width: 300, height: 30)
@@ -73,7 +73,7 @@ struct SignInView: View {
                         .frame(width: 300, height: 2)
                 }
                 
-                //Password
+                // Password
                 VStack (spacing: 0) {
                     SecureField("Enter your password", text: $newUser.Password)
                         .frame(width: 300, height: 30)
@@ -87,7 +87,7 @@ struct SignInView: View {
     
     var buttons: some View {
         VStack (spacing: 10) {
-            //Log in
+            // Log in Button
             Button(action: {
                 FBAuthFunctions.authenticate(email: newUser.Email,
                                              password: newUser.Password) { (result) in
@@ -104,7 +104,7 @@ struct SignInView: View {
                 Text("Log In")
             }.modifier(LargeButton(width: UIScreen.main.bounds.size.width * (7/8), height: 50, textColor: Color("White"), backgroundColor: Color("NormalBlue")))
             
-            //Forgot password
+            // Forgot password Button
             NavigationLink(destination: ForgotPasswordView(newUser: $newUser), isActive: self.$showingForgotPasswordView) {
                 Button(action: {
                     print("Forgot your password?")

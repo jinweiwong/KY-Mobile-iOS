@@ -3,10 +3,11 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var currentUser = ProfileViewModel()
+    @ObservedObject var currentUser = CurrentUserViewModel()
     
     @State private var errorMessage: String = ""
     @State private var showErrorMessage: Bool = false
+    @State private var showLogOutConfirmation: Bool = false
 
     @State private var isShowingEditProfile: Bool = false
     
@@ -65,13 +66,24 @@ struct ProfileView: View {
                     
                     Section() {
                         HStack {
-                            Button("Logout") {
-                                FBAuthFunctions.logout { (result) in
-                                }}
+                            Button("Log out") {
+                                showLogOutConfirmation = true
+                            }
                         }
                     }
                 }
             }.navigationBarHidden(true)
+        }.alert(isPresented: self.$showErrorMessage) {
+            Alert(title: Text("Error"),
+                  message: Text(self.errorMessage),
+                  dismissButton: .default(Text("OK")))
+        }
+        .alert(isPresented: self.$showLogOutConfirmation) {
+            Alert(title: Text("Log out Confirmation"),
+                  message: Text("Log out of \(currentUser.currentUser.Email)?"),
+                  primaryButton: .destructive(Text("OK")) {
+                    FBAuthFunctions.logout { (result) in }
+                  }, secondaryButton: .cancel())
         }
     }
 }

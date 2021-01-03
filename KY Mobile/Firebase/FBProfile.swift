@@ -4,36 +4,12 @@ import FirebaseStorage
 
 class FBProfile {
     
-    //  Retrieves FBUser information using its UID
-    static func retrieveFBUser(uid: String,
-                               completion: @escaping (Result<User, Error>) -> () ){
-        let reference = Firestore
-            .firestore()
-            .collection("Users")
-            .whereField("UID", isEqualTo: uid)
+    // Edit User details to the currentUser's document
+    static func editUserDetails(uid: String,
+                                info: [String: Any],
+                                completion: @escaping (Result<Bool, Error>) -> () ){
         
-        reference.addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let snapshot = querySnapshot else {
-                print("Error getting query Snapshot")
-                return
-            }
-            
-            snapshot.documentChanges.forEach { diff in
-                completion(.success(User(UserData: diff.document.data())!))
-            }
-        }
-    }
-    
-    
-    // Merges FBUser information with a UUID-specified document
-    static func mergeFBUser(uid: String,
-                            info: [String: Any],
-                            completion: @escaping (Result<Bool, Error>) -> () ){
+        // Searches for User's document named (UID)_(Name)
         let reference = Firestore
             .firestore()
             .collection("Users")
@@ -47,5 +23,4 @@ class FBProfile {
             completion(.success(true))
         }
     }
-    
 }

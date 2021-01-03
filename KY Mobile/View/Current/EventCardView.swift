@@ -4,6 +4,10 @@ import SwiftUI
 struct EventCardView: View {
     
     let thisEvent: Event
+    
+    // Assists in displaying the image selected by an admin creating a new event as that image has yet to be uploaded the Firebase Storage
+    // Should be set to UIImage() if it is called from CurrentView
+    // Should be set the image to be uploaded if it is called from NewEventView
     let demoCardImage: UIImage
     
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
@@ -14,11 +18,10 @@ struct EventCardView: View {
                 .fill(Color.white)
                 .frame(width: self.cardWidth, height: 120)
                 .cornerRadius(15)
-                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1)
-                        , radius: 1 , x: -1, y: 0)
+                .shadow(color: .init(red: 0.1, green: 0.1, blue: 0.1),
+                        radius: 1 , x: -1, y: 0)
             
             HStack (spacing: 12) {
-                
                 
                 Group {
                     if demoCardImage != UIImage() {
@@ -37,7 +40,7 @@ struct EventCardView: View {
             .foregroundColor(.white)
         }
     }
-
+    
     var title: some View {
         HStack {
             VStack(alignment: .leading){
@@ -52,6 +55,8 @@ struct EventCardView: View {
         }
     }
     
+    // MARK: Short Description
+    
     var shortDesc: some View {
         HStack {
             VStack (alignment: .leading) {
@@ -64,6 +69,8 @@ struct EventCardView: View {
             Spacer()
         }
     }
+    
+    // MARK: Time Stamp
     
     var timeStamp: some View {
         HStack {
@@ -78,7 +85,7 @@ struct EventCardView: View {
     }
 }
 
-
+// Fetches the image for the card from a URL
 struct EventCardImage: View {
     @ObservedObject var imageLoader = ImageLoaderViewModel()
     let url: String
@@ -99,6 +106,7 @@ struct EventCardImage: View {
     }
 }
 
+// Modifier for the event card image
 extension Image {
     func EventCardImage() -> some View {
         self

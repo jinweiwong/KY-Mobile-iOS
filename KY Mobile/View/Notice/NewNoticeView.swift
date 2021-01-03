@@ -1,13 +1,16 @@
 import Foundation
 import SwiftUI
 
-struct NewNoticeSheet: View {
+struct NewNoticeView: View {
     @Binding var isPresented: Bool
     @Binding var newNotice: Notice
+    
+    @Binding var boolTimeStamp: Bool
     
     @Binding var errorMessage: String
     @Binding var showErrorMessage: Bool
     
+    // Variables to help with the Exco Picker
     let excos: [String] = ["General", "Academic", "Food", "Religious", "Special Task", "Sports", "Welfare"]
     @State var selectedExcoDigit: Int = 0
     
@@ -15,8 +18,10 @@ struct NewNoticeSheet: View {
         NavigationView {
             Form {
                 Section {
+                    // Title
                     TextField("Title of Notice", text: $newNotice.Title)
                     
+                    // Exco Picker
                     Picker(selection: $selectedExcoDigit, label: Text("Exco")) {
                         ForEach(0 ..< excos.count) {
                             Text(excos[$0])
@@ -27,6 +32,7 @@ struct NewNoticeSheet: View {
                 }
                 
                 Section (header: Text("Message")) {
+                    // Body Text Editor
                     VStack {
                         TextEditor(text: $newNotice.Body)
                         
@@ -42,14 +48,17 @@ struct NewNoticeSheet: View {
                 }
                 
                 Section {
+                    // Demo Notice Card
                     NoticeCardView(thisNotice: newNotice.noticeWithRandomTimeStamp())
                         .offset(x: -12, y: 0)
-                }.onAppear(perform: {
+                } // Sets the default Exco to General
+                .onAppear(perform: {
                     newNotice.Exco = "General"
                 })
                 
             }.navigationBarTitle("New Notice", displayMode: .inline)
             .navigationBarItems(
+                // Cancel Sheet Button
                 leading: Button(action: {
                     isPresented = false
                 }) {
@@ -57,6 +66,7 @@ struct NewNoticeSheet: View {
                         .resizable()
                         .frame(width: 22, height: 22)
                 },
+                // Upload new notice Button
                 trailing: Button(action: {
                     FBNotice.uploadNewNotice(newNotice: newNotice) { (result) in
                         switch result {
@@ -66,7 +76,7 @@ struct NewNoticeSheet: View {
                         case .success(_):
                             break
                         }}
-                    
+                    // Closes the sheet and resets newNotice
                     isPresented = false
                     newNotice = Notice()
                     

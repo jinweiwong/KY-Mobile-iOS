@@ -1,11 +1,19 @@
 import Foundation
 import SwiftUI
 
-struct NoticesView: View {
+struct NoticeView: View {
     @ObservedObject var notices = NoticesViewModel()
     
     @State var isShowingSheet: Bool = false
     @State var newNotice = Notice()
+    @State var boolTimeStamp: Bool = false
+    
+    // Date formatter for the header
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, d MMMM"
+        return formatter
+    }
     
     @State private var errorMessage: String = "Unknown Error"
     @State private var showErrorMessage = false
@@ -14,18 +22,24 @@ struct NoticesView: View {
     
     var body: some View {
         ZStack{
+            // Background
             Color("VeryLightGrey")
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 header
-                noticeFeed
-                    
+                
+                // Notice feed
+                LazyVGrid(columns: [GridItem(.flexible())], spacing: 12) {
+                    noticeFeed
+                }
             }
         }
+        // New event sheet
         .sheet(isPresented: $isShowingSheet,
-               content: { NewNoticeSheet(isPresented: $isShowingSheet,
+               content: { NewNoticeView(isPresented: $isShowingSheet,
                                          newNotice: $newNotice,
+                                         boolTimeStamp: $boolTimeStamp,
                                          errorMessage: $errorMessage,
                                          showErrorMessage: $showErrorMessage) })
         
@@ -36,17 +50,23 @@ struct NoticesView: View {
         }
     }
     
+    // MARK: Header
+    
     var header: some View {
         HStack{
             VStack (alignment: .leading) {
+                // Today's date
+                Text("\(dateFormatter.string(from: Date()))")
+                    .foregroundColor(Color("VeryDarkGrey"))
                 
+                // "Today"
                 Text("Student Council")
                     .font(.system(size: 34, weight: .bold, design: .default))
                     .foregroundColor(.black)
-                
             }
             Spacer()
             
+            // Create new event button
             Button(action: {
                 isShowingSheet = true
             }) {
@@ -54,13 +74,13 @@ struct NoticesView: View {
                     .resizable()
                     .frame(width: 24, height: 24)
             }
-            
         }.padding(.leading)
         .padding(.top)
+        .padding(.trailing)
         .padding(.bottom, 10)
-        .padding(.trailing, 30)
     }
     
+    // MARK: Notice Feed
     
     var noticeFeed: some View {
         ForEach(notices.notices, id: \.id) { thisNotice in
@@ -82,14 +102,8 @@ struct NoticesView: View {
 //
 //                }.padding(.horizontal, 25)
 //            }
-            
-            ZStack {
-                NoticeCardView(thisNotice: thisNotice)
-            }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
-            .padding(.bottom, 10)
-            
+        
+            NoticeCardView(thisNotice: thisNotice)
         }
     }
 }

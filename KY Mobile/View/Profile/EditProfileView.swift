@@ -100,7 +100,7 @@ struct EditProfileView: View {
                                 editedUser.Image = url.absoluteString
                                 
                                 // Save new image's URL into Firestore
-                                FBProfile.mergeFBUser(uid: editedUser.UID,
+                                FBProfile.editUserDetails(uid: editedUser.UID,
                                                       info: editedUser.userToDict()) { (result) in
                                     switch result {
                                     case .failure (let error):

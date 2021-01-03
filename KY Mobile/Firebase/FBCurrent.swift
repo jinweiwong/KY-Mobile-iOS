@@ -3,6 +3,9 @@ import FirebaseFirestore
 import FirebaseStorage
 
 class FBCurrent {
+    
+    // Upload new event
+    // Takes in boolean variables to see if the event has a Start and End time.
     static func uploadNewEvent(newEvent: NewEvent,
                                boolAllDay: Bool,
                                boolStart: Bool,
@@ -26,6 +29,7 @@ class FBCurrent {
             _newEvent.EndTime = ""
         }
         
+        // Document name is (TimeStamp)_(Title)
         let reference = Firestore
             .firestore()
             .collection("Events")

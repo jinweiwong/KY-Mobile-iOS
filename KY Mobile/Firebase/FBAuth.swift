@@ -4,7 +4,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FBAuthFunctions {
-    // Creates a new user
+    
     static func createUser(user: NewUser,
                            completionHandler: @escaping (Result <String, Error>) -> Void ){
         
@@ -20,6 +20,7 @@ class FBAuthFunctions {
             }
             
             // Creating a new user in the database
+            // Document name is (UID)_(Name)
             let data: [String:Any] = ["UID" : newUser.uid,
                                       "Name" : user.Name,
                                       "StudentID" : user.StudentID,
@@ -27,7 +28,7 @@ class FBAuthFunctions {
                                       "Email" : user.Email,
                                       "Image" : user.Image]
             
-            FBProfile.mergeFBUser(uid: newUser.uid, info: data) { (result) in
+            FBProfile.editUserDetails(uid: newUser.uid, info: data) { (result) in
                 switch result {
                 case .failure (let error):
                     print("\(error.localizedDescription)")

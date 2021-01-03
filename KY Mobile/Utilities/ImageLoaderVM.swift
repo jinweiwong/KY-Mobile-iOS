@@ -1,5 +1,6 @@
 import SwiftUI
 
+// Downloads an image from a URL
 class ImageLoaderViewModel: ObservableObject {
     @Published var downloadedData: Data?
     

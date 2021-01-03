@@ -32,6 +32,9 @@ struct NewUser {
     
     
     func isBatchValid() -> Bool {
+        // Only allows batches from currentYear+1 to year+3
+        // eg. in 2020 it will allow 21.0 to 23.5
+        // eg. in 2021 it will allow 22.0 to 24.5
         let currentYear = Calendar.current.component(.year, from: Date())
         let allowedBatches = [currentYear - 1999, currentYear - 1998, currentYear - 1997]
         

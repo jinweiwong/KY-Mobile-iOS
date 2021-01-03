@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+
+// Open up the Photos app and lets users upload an image
 struct ImagePickerView: UIViewControllerRepresentable {
     
     @Binding var isPresented: Bool

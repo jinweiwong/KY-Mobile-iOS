@@ -4,15 +4,18 @@ import SwiftUI
 struct IntroductionView: View {
     
     @State var newUser = NewUser()
+    
     @State private var showingSignUpView: Bool = false
     @State private var showingSignInView: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack {
-                //Background
+                // Background
                 Color("VeryLightGrey")
                     .edgesIgnoringSafeArea(.all)
+                
+                // Introduction Page
                 VStack {
                     Spacer()
                     header
@@ -62,7 +65,7 @@ struct IntroductionView: View {
     
     var buttons: some View {
         Group {
-            //Sign up
+            // Sign up page
             NavigationLink(destination: SignUpView(newUser: $newUser), isActive: self.$showingSignUpView) {
                 Button("Sign Up") {
                     self.showingSignUpView = true
@@ -75,7 +78,7 @@ struct IntroductionView: View {
             }
             
             NavigationLink(destination: SignInView(newUser: $newUser), isActive: self.$showingSignInView) {
-                //Log in
+                // Log in page
                 Button("Log In") {
                     self.showingSignInView = true
                 }
@@ -85,17 +88,6 @@ struct IntroductionView: View {
                 .cornerRadius(10)
                 .frame(height: 60)
             }
-        }
-    }
-}
-
-
-struct NewIntro_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            IntroductionView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone X"))
-                .previewDisplayName("iPhone 11")
         }
     }
 }

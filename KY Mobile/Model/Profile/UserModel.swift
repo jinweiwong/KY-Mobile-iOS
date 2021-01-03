@@ -27,6 +27,8 @@ struct User {
         self.StudentID = UserData["StudentID"] as? String ?? ""
     }
     
+    // Check if two Users are the same
+    // Used to check if any changes are made to the user's details
     func equalTo(_ user: User) -> Bool {
         return (self.UID == user.UID &&
                     self.Name == user.Name &&

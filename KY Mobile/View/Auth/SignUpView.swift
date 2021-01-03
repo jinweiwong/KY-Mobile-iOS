@@ -5,22 +5,23 @@ struct SignUpView: View {
     
     @Binding var newUser: NewUser
     
+    // Helps in naming the user's profile picture in the Storage
     @State private var newUserUID: String = ""
     
     @State private var passwordShow: Bool = false
     @State private var confirmPasswordShow: Bool = false
     
-    @State private var errorMessage: String = "Unknown Error"
-    @State private var showErrorMessage = false
-    
     @State private var showingSignInView: Bool = false
     @State private var isShowingImagePicker: Bool = false
     @State private var selectedPicture: UIImage = UIImage()
     
+    @State private var errorMessage: String = "Unknown Error"
+    @State private var showErrorMessage = false
+    
     var body: some View {
         ZStack {
             
-            //Background
+            // Background
             Color("VeryLightGrey")
                 .edgesIgnoringSafeArea(.all)
             
@@ -37,7 +38,6 @@ struct SignUpView: View {
                                   dismissButton: .default(Text("OK")))
                         }
                 }.padding(.bottom)
-                //.modifier(Keyboard())
             }
         }.navigationBarTitle("Sign Up", displayMode: .inline)
     }
@@ -52,6 +52,7 @@ struct SignUpView: View {
         Button(action: {
             isShowingImagePicker = true
         }) {
+            // Profile Picture
             Image(uiImage: selectedPicture)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -62,6 +63,7 @@ struct SignUpView: View {
                     .foregroundColor(Color("Black"))
             )
         }.buttonStyle(PlainButtonStyle())
+        // Sheet that allows users to upload an image from their Photos app
         .sheet(isPresented: $isShowingImagePicker, content: {
             ImagePickerView(isPresented: self.$isShowingImagePicker,
                             selectedImage: self.$selectedPicture)
@@ -70,7 +72,7 @@ struct SignUpView: View {
     
     var textfields: some View {
         HStack (spacing: 15) {
-            //Icons
+            // Icons
             VStack (spacing: 42) {
                 Image(systemName: "person")
                     .resizable()
@@ -104,10 +106,10 @@ struct SignUpView: View {
             }.frame(width: 40, alignment: .trailing)
             
             
-            //Textfields
+            // Textfields
             VStack (spacing: 25) {
                 
-                //Name
+                // Name
                 VStack (spacing: 0) {
                     TextField("Enter your full name", text: $newUser.Name)
                         .autocapitalization(.words)
@@ -119,7 +121,7 @@ struct SignUpView: View {
                     
                 }
                 
-                //Student ID
+                // Student ID
                 VStack (spacing: 0) {
                     TextField("Enter your Student ID", text: $newUser.StudentID)
                         .frame(width: 300, height: 30)
@@ -131,7 +133,7 @@ struct SignUpView: View {
                         .background(newUser.isStudentIDValid() ? Color("Green") : Color("VeryLightGrey"))
                 }
                 
-                //Batch
+                // Batch
                 VStack (spacing: 0) {
                     TextField("Enter your batch", text: $newUser.Batch)
                         .frame(width: 300, height: 30)
@@ -143,7 +145,7 @@ struct SignUpView: View {
                         .background(newUser.isBatchValid() ? Color("Green") : Color("VeryLightGrey"))
                 }
                 
-                //Email
+                // Email
                 VStack (spacing: 0) {
                     TextField("Enter your email", text: $newUser.Email)
                         .frame(width: 300, height: 30)
@@ -155,9 +157,10 @@ struct SignUpView: View {
                         .background(newUser.isEmailValid() ? Color("Green") : Color("VeryLightGrey"))
                 }
                 
-                //Password
+                // Password
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
+                        // If hide Password textfield
                         if passwordShow {
                             TextField("Enter your password", text: $newUser.Password)
                                 .frame(width: 270, height: 30)
@@ -173,6 +176,7 @@ struct SignUpView: View {
                             }
                         }
                             
+                        // If hide Password textfield
                         else {
                             SecureField("Enter your password", text: $newUser.Password)
                                 .frame(width: 270, height: 30)
@@ -188,15 +192,15 @@ struct SignUpView: View {
                             }
                         }
                     }
-                    
                     Divider()
                         .frame(width: 300, height: 2)
                         .background(newUser.isPasswordValid() ? Color("Green") : Color("VeryLightGrey"))
                 }
                 
-                //Confirm password
+                // Confirm password
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
+                        // If show Confirm Password textfield
                         if confirmPasswordShow {
                             TextField("Confirm your password", text: $newUser.ConfirmPassword)
                                 .frame(width: 270, height: 30)
@@ -212,6 +216,7 @@ struct SignUpView: View {
                             }
                         }
                             
+                        // If hide Confirm Password textfield
                         else {
                             SecureField("Confirm your password", text: $newUser.ConfirmPassword)
                                 .frame(width: 270, height: 30)
@@ -227,7 +232,6 @@ struct SignUpView: View {
                             }
                         }
                     }
-                    
                     Divider()
                         .frame(width: 300, height: 2)
                         .background(newUser.passwordMatch() && newUser.isPasswordValid() ? Color("Green") : Color("VeryLightGrey"))
@@ -238,10 +242,10 @@ struct SignUpView: View {
     
     var buttons: some View {
         VStack (spacing: 10) {
-            //Create account
+            // Create account
             Button(action: {
                 if selectedPicture != UIImage() {
-                    // Creates the User in the authentication page
+                    // Creates the User in the Firebase Authentication and Firestore, and saves the UID onto newUserUID
                     FBAuthFunctions.createUser(user: newUser) { (result) in
                         switch result {
                         case .failure (let error):
@@ -250,7 +254,8 @@ struct SignUpView: View {
                             
                         case .success (let UID):
                             newUserUID = UID
-                            // Uploading the image and saving the URL of the image
+                            
+                            // Uploads the image to Storage and saves the URL of the string to newUser.Image
                             FBStorage.uploadImage(chosenImage: selectedPicture,
                                                   location: "Users_ProfilePic",
                                                   identifier: newUserUID,
@@ -263,8 +268,9 @@ struct SignUpView: View {
                                     
                                 case .success (let url):
                                     self.newUser.Image = url.absoluteString
-                                    // Updating the Firestore with the URL of the image
-                                    FBProfile.mergeFBUser(uid: newUserUID,
+                                    
+                                    // Updates the Firestore with the URL of the image
+                                    FBProfile.editUserDetails(uid: newUserUID,
                                                           info: newUser.newUserToDict(userUID: newUserUID)) { (result) in
                                         switch result {
                                         case .failure (let error):
@@ -279,6 +285,7 @@ struct SignUpView: View {
                             }
                         }}
                 } else {
+                    // Creates the user in Firebase Authentication and Firestore
                     FBAuthFunctions.createUser(user: newUser) { (result) in
                         switch result {
                         case .failure (let error):
@@ -290,13 +297,14 @@ struct SignUpView: View {
                         }}
                 }
             }) {
+                // Appearance of the "Create Account" Button
                 Text("Create Account")
             }.modifier(LargeButton(width: UIScreen.main.bounds.size.width * (7/8), height: 50, textColor: Color("White"), backgroundColor: Color("NormalBlue")))
             
             
             NavigationLink(destination: SignInView(newUser: $newUser), isActive: self.$showingSignInView)
             {
-                //Already have an account
+                // Already have an account
                 Button(action: {
                     print("Already have an account?")
                     self.showingSignInView = true
