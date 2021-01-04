@@ -2,19 +2,19 @@ import Foundation
 import SwiftUI
 
 struct CurrentView: View {
-    @ObservedObject var events = EventsViewModel()
+    @ObservedObject var posts = PostsViewModel()
     
-    // Variable that stores all the information of the new event to be posted
-    @State var newEvent: NewEvent = NewEvent()
+    // Variable that stores all the information of the new post to be posted
+    @State var newPost: NewPost = NewPost()
     @State var isShowingSheet: Bool = false
     
-    // Switches on the "Create New Event" sheet
+    // Switches on the "Create New Post" sheet
     @State private var boolAllDay: Bool = false
     @State private var boolStart: Bool = false
     @State private var boolEnd: Bool = false
     @State private var boolTimeStamp: Bool = false
     
-    // Measurements of the event card
+    // Measurements of the post card
     let cardHeight: CGFloat = 125
     let cardWidth = UIScreen.main.bounds.width - 40
     
@@ -38,18 +38,14 @@ struct CurrentView: View {
                 
                 ScrollView {
                     header
-                    
-                    // Event feed
-                    LazyVGrid(columns: [GridItem(.flexible())], spacing: 12) {
-                        eventFeed
-                    }
+                    postFeed
                 }
             }.navigationBarHidden(true)
-            // New Event Sheet
+            // New Post Sheet
             .sheet(isPresented: $isShowingSheet,
                    content: {
-                    NewEventView(isPresented: $isShowingSheet,
-                                 newEvent: $newEvent,
+                    NewPostView(isPresented: $isShowingSheet,
+                                 newPost: $newPost,
                                  boolAllDay: $boolAllDay,
                                  boolStart: $boolStart,
                                  boolEnd: $boolEnd,
@@ -80,7 +76,7 @@ struct CurrentView: View {
             }
             Spacer()
             
-            // Create new event button
+            // Create new post button
             Button(action: {
                 isShowingSheet = true
             }) {
@@ -95,17 +91,19 @@ struct CurrentView: View {
     }
     
     
-    var eventFeed: some View {
-        ForEach(events.events, id: \.id) { thisEvent in
-            // NavigationLink to the full event page
-            NavigationLink(destination: EventFullView(thisEvent: thisEvent,
-                                                      demoCardImage: UIImage())) {
-                // Event card
-                EventCardView(thisEvent: thisEvent,
-                              demoCardImage: UIImage())
-                    .frame(height: 120)
-                    .padding(.horizontal, 5)
+    var postFeed: some View {
+        LazyVGrid(columns: [GridItem(.flexible())], spacing: 12) {
+            ForEach(posts.posts, id: \.id) { thisPost in
+                // NavigationLink to the full post page
+                NavigationLink(destination: PostFullView(thisPost: thisPost,
+                                                          demoCardImage: UIImage())) {
+                    // Post card
+                    PostCardView(thisPost: thisPost,
+                                  demoCardImage: UIImage())
+                        .frame(height: 120)
+                        .padding(.horizontal, 5)
+                }
             }
         }
-    }  
+    }
 }

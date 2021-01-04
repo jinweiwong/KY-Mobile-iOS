@@ -1,13 +1,13 @@
 import Foundation
 import SwiftUI
 
-struct EventFullView: View {
+struct PostFullView: View {
 
-    let thisEvent: Event
+    let thisPost: Post
     
-    // Assists in displaying the image selected by an admin creating a new event as that image has yet to be uploaded the Firebase Storage
+    // Assists in displaying the image selected by an admin creating a new post as that image has yet to be uploaded the Firebase Storage
     // Should be set to UIImage() if it is called from CurrentView
-    // Should be set the image to be uploaded if it is called from NewEventView
+    // Should be set the image to be uploaded if it is called from NewPostView
     let demoCardImage: UIImage
 
     var body: some View {
@@ -19,13 +19,13 @@ struct EventFullView: View {
             ScrollView {
                 VStack {
                     Group {
-                        // Displays the image selected in the new event sheet
+                        // Displays the image selected in the new post sheet
                         if demoCardImage != UIImage() {
-                            Image(uiImage: demoCardImage).EventFullImage()
+                            Image(uiImage: demoCardImage).PostFullImage()
                             
                         } // Displays the image from the image's URL
-                        else if thisEvent.Cover != "" {
-                            EventPageImage(url: thisEvent.Cover)
+                        else if thisPost.Cover != "" {
+                            PostPageImage(url: thisPost.Cover)
                         }
                     }
 
@@ -45,7 +45,7 @@ struct EventFullView: View {
     
     var title: some View {
         HStack {
-            Text("\(thisEvent.Title)")
+            Text("\(thisPost.Title)")
                 .bold()
                 .modifier(LargeText(textColor: Color("Black")))
                 .lineLimit(2)
@@ -58,7 +58,7 @@ struct EventFullView: View {
     
     var shortDesc: some View {
         HStack {
-            Text("\(thisEvent.ShortDesc)")
+            Text("\(thisPost.ShortDesc)")
                 .modifier(SmallText(textColor: Color("Black")))
             Spacer()
         }.padding(.horizontal)
@@ -68,7 +68,7 @@ struct EventFullView: View {
     
     var timeStamp: some View {
         HStack {
-            Text("\(EpochTimeToTimeInterval(epochTime: thisEvent.TimeStamp))")
+            Text("\(EpochTimeToTimeInterval(epochTime: thisPost.TimeStamp))")
                 .font(.body)
                 .foregroundColor(Color("NormalBlue"))
 
@@ -92,7 +92,7 @@ struct EventFullView: View {
     var fullDesc: some View {
         HStack {
             VStack {
-                Text("\(thisEvent.FullDesc)")
+                Text("\(thisPost.FullDesc)")
                     .font(.body)
                     .foregroundColor(Color("VeryDarkGrey"))
                     .padding()
@@ -102,8 +102,8 @@ struct EventFullView: View {
     }
 }
 
-// Retrieves the image for EventFullView from a URL
-struct EventPageImage: View {
+// Retrieves the image for PostFullView from a URL
+struct PostPageImage: View {
     @ObservedObject var imageLoader = ImageLoaderViewModel()
     let url: String
     let placeholder: String
@@ -116,16 +116,16 @@ struct EventPageImage: View {
 
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).EventFullImage()
+            return Image(uiImage: UIImage(data: data)!).PostFullImage()
         } else {
-            return Image("placeholder").EventFullImage()
+            return Image("placeholder").PostFullImage()
         }
     }
 }
 
-// Modifier for the image in the EventFullView
+// Modifier for the image in the PostFullView
 extension Image {
-    func EventFullImage() -> some View {
+    func PostFullImage() -> some View {
         self
             .resizable()
             .scaledToFit()

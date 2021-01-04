@@ -10,13 +10,13 @@ class RecentPostsViewModel: ObservableObject {
     }
     
     func getAllRecentPosts() {
-        let eventsRef = Firestore.firestore().collection("Events")
+        let postsRef = Firestore.firestore().collection("Posts")
         let noticesRef = Firestore.firestore().collection("Notices")
         
-        // Add snapshot listener for recent events
-        eventsRef.addSnapshotListener { (querySnapshot, error) in
+        // Add snapshot listener for recent posts
+        postsRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting recent events: \(error)")
+                print("Error getting recent posts: \(error)")
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
                     if diff.type == .added {

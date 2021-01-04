@@ -35,7 +35,7 @@ struct NoticeView: View {
                 }
             }
         }
-        // New event sheet
+        // New post sheet
         .sheet(isPresented: $isShowingSheet,
                content: { NewNoticeView(isPresented: $isShowingSheet,
                                          newNotice: $newNotice,
@@ -66,7 +66,7 @@ struct NoticeView: View {
             }
             Spacer()
             
-            // Create new event button
+            // Create new post button
             Button(action: {
                 isShowingSheet = true
             }) {

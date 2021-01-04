@@ -1,11 +1,11 @@
 import Foundation
 import SwiftUI
 
-struct NewEventView: View {
+struct NewPostView: View {
     @Binding var isPresented: Bool
-    @Binding var newEvent: NewEvent
+    @Binding var newPost: NewPost
     
-    // Below 4 are toggles for the Start and End of the event and TimeStamp
+    // Below 4 are toggles for the Start and End of the post and TimeStamp
     @Binding var boolAllDay: Bool
     @Binding var boolStart: Bool
     @Binding var boolEnd: Bool
@@ -26,19 +26,19 @@ struct NewEventView: View {
             Form {
                 Section {
                     // Title
-                    TextField("Title of Event", text: $newEvent.Title)
+                    TextField("Title of Post", text: $newPost.Title)
                       
                     // Short Description
-                    TextField("Short Description", text: $newEvent.ShortDesc)
+                    TextField("Short Description", text: $newPost.ShortDesc)
                     
                     // Venue
-                    TextField("Venue (if applicable)", text: $newEvent.Venue)
+                    TextField("Venue (if applicable)", text: $newPost.Venue)
                 }
                 
                 // Body text
                 Section(header: Text("Body")) {
                     VStack {
-                        TextEditor(text: $newEvent.FullDesc)
+                        TextEditor(text: $newPost.FullDesc)
                         
                         HStack {
                             Spacer()
@@ -52,30 +52,30 @@ struct NewEventView: View {
                 }
                 
                 Section {
-                    // Start of Event
+                    // Start of Post
                     VStack {
                         Toggle(isOn: $boolStart) {
                             Text("Start")
                         }
                         Group {
                             if (boolStart && boolAllDay) {
-                                DatePicker(selection: $newEvent.Start, displayedComponents: .date) {}
+                                DatePicker(selection: $newPost.Start, displayedComponents: .date) {}
                             } else if (boolStart && !boolAllDay) {
-                                DatePicker(selection: $newEvent.Start) {}
+                                DatePicker(selection: $newPost.Start) {}
                             }
                         }
                     }
                     
-                    // End of Event
+                    // End of Post
                     VStack {
                         Toggle(isOn: $boolEnd) {
                             Text("End")
                         }
                         Group {
                             if (boolEnd && boolAllDay) {
-                                DatePicker(selection: $newEvent.End, displayedComponents: .date) {}
+                                DatePicker(selection: $newPost.End, displayedComponents: .date) {}
                             } else if (boolEnd && !boolAllDay) {
-                                DatePicker(selection: $newEvent.End) {}
+                                DatePicker(selection: $newPost.End) {}
                             }
                         }
                     }
@@ -99,7 +99,7 @@ struct NewEventView: View {
                         HStack {
                             Group {
                                 if boolTimeStamp {
-                                    DatePicker(selection: $newEvent.TimeStamp) {}
+                                    DatePicker(selection: $newPost.TimeStamp) {}
                                 }
                                 Spacer()
                             }
@@ -107,13 +107,13 @@ struct NewEventView: View {
                     }
                 }
                 
-                // Event Image
+                // Post Image
                 Section(header: Text("Image")) {
                     
                     // Cancel Image
-                    if newEvent.Cover != UIImage() {
+                    if newPost.Cover != UIImage() {
                         Button(action: {
-                            newEvent.Cover = UIImage()
+                            newPost.Cover = UIImage()
                         }) {
                             Text("Cancel Image")
                         }
@@ -126,14 +126,14 @@ struct NewEventView: View {
                             
                         }.sheet(isPresented: $isShowingImagePicker, content: {
                             ImagePickerView(isPresented: self.$isShowingImagePicker,
-                                            selectedImage: $newEvent.Cover)
+                                            selectedImage: $newPost.Cover)
                         })
                     }
                     
                     Group {
                         // Display selected image
-                        if newEvent.Cover != UIImage() {
-                            Image(uiImage: newEvent.Cover)
+                        if newPost.Cover != UIImage() {
+                            Image(uiImage: newPost.Cover)
                                 .resizable()
                                 .scaledToFit()
                         }
@@ -141,19 +141,19 @@ struct NewEventView: View {
                 }
                 
                 Section {
-                    // Demo full page for new event
-                    NavigationLink(destination: EventFullView(thisEvent:
-                                                                newEvent.convertAllToString(),
-                                                              demoCardImage: newEvent.Cover),
+                    // Demo full page for new post
+                    NavigationLink(destination: PostFullView(thisPost:
+                                                                newPost.convertAllToString(),
+                                                              demoCardImage: newPost.Cover),
                                    isActive: $showDemoPage) {
-                        // Demo card for new event
-                        EventCardView(thisEvent: newEvent.convertAllToString(),
-                                      demoCardImage: newEvent.Cover)
+                        // Demo card for new post
+                        PostCardView(thisPost: newPost.convertAllToString(),
+                                      demoCardImage: newPost.Cover)
                             .offset(x: -14, y: 0)
                     }
                 }
             }// Sheet header
-            .navigationBarTitle("New Event", displayMode: .inline)
+            .navigationBarTitle("New Post", displayMode: .inline)
             .navigationBarItems(
                 
                 // Sheet cancel button
@@ -165,28 +165,28 @@ struct NewEventView: View {
                         .frame(width: 22, height: 22)
                 },
                 
-                // Upload new event button
+                // Upload new post button
                 trailing: Button(action: {
                     // Set the current TimeStamp if no TimeStamp was specified
                     if !boolTimeStamp {
-                        newEvent.TimeStamp = Date()
+                        newPost.TimeStamp = Date()
                     }
                     
-                    // If an image was selected for the new event
-                    if newEvent.Cover != UIImage() {
+                    // If an image was selected for the new post
+                    if newPost.Cover != UIImage() {
                         // Upload the image
-                        FBStorage.uploadImage(chosenImage: newEvent.Cover,
-                                              location: "Events",
-                                              identifier: "\(Int(newEvent.TimeStamp.timeIntervalSince1970*1000))",
-                                              name: newEvent.Title) { (result) in
+                        FBStorage.uploadImage(chosenImage: newPost.Cover,
+                                              location: "Posts",
+                                              identifier: "\(Int(newPost.TimeStamp.timeIntervalSince1970*1000))",
+                                              name: newPost.Title) { (result) in
                             switch result {
                             // If uploading the image to Storage was not successful
                             case .failure (let error):
                                 self.errorMessage = error.localizedDescription
                                 self.showErrorMessage = true
                                 
-                                // Upload the event regardless (without the image)
-                                FBCurrent.uploadNewEvent(newEvent: newEvent,
+                                // Upload the post regardless (without the image)
+                                FBCurrent.uploadNewPost(newPost: newPost,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
                                                          boolEnd: boolEnd) { (result) in
@@ -198,7 +198,7 @@ struct NewEventView: View {
                                         break
                                     }
                                     // Resets all variables
-                                    newEvent = NewEvent()
+                                    newPost = NewPost()
                                     boolAllDay = false
                                     boolStart = false
                                     boolEnd = false
@@ -207,11 +207,11 @@ struct NewEventView: View {
                                 
                             // Successfully uploaded the image to Storage
                             case .success (let url):
-                                // Saves the URL to newEvent.CoverString
-                                self.newEvent.CoverString = url.absoluteString
+                                // Saves the URL to newPost.CoverString
+                                self.newPost.CoverString = url.absoluteString
                                 
-                                // Uploads the event along with the URL
-                                FBCurrent.uploadNewEvent(newEvent: newEvent,
+                                // Uploads the post along with the URL
+                                FBCurrent.uploadNewPost(newPost: newPost,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
                                                          boolEnd: boolEnd) { (result) in
@@ -223,7 +223,7 @@ struct NewEventView: View {
                                         break
                                     }
                                     // Resets all variables
-                                    newEvent = NewEvent()
+                                    newPost = NewPost()
                                     boolAllDay = false
                                     boolStart = false
                                     boolEnd = false
@@ -231,10 +231,10 @@ struct NewEventView: View {
                                 }
                             }
                         }
-                    } // If no image was selected for the new event
+                    } // If no image was selected for the new post
                     else {
-                        // Upload the event
-                        FBCurrent.uploadNewEvent(newEvent: newEvent,
+                        // Upload the post
+                        FBCurrent.uploadNewPost(newPost: newPost,
                                                  boolAllDay: boolAllDay,
                                                  boolStart: boolStart,
                                                  boolEnd: boolEnd) { (result) in
@@ -246,7 +246,7 @@ struct NewEventView: View {
                                 break
                             }
                             // Resets all variables
-                            newEvent = NewEvent()
+                            newPost = NewPost()
                             boolAllDay = false
                             boolStart = false
                             boolEnd = false

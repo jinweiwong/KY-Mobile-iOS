@@ -4,43 +4,43 @@ import FirebaseStorage
 
 class FBCurrent {
     
-    // Upload new event
-    // Takes in boolean variables to see if the event has a Start and End time.
-    static func uploadNewEvent(newEvent: NewEvent,
+    // Upload new post
+    // Takes in boolean variables to see if the post has a Start and End time.
+    static func uploadNewPost(newPost: NewPost,
                                boolAllDay: Bool,
                                boolStart: Bool,
                                boolEnd: Bool,
                                completion: @escaping (Result<Bool, Error>) -> () ) {
         
-        var _newEvent = newEvent.convertAllToString()
+        var _newPost = newPost.convertAllToString()
         
         if boolAllDay {
-            _newEvent.StartTime = ""
-            _newEvent.EndTime = ""
+            _newPost.StartTime = ""
+            _newPost.EndTime = ""
         }
         
         if !boolStart {
-            _newEvent.StartDate = ""
-            _newEvent.StartTime = ""
+            _newPost.StartDate = ""
+            _newPost.StartTime = ""
         }
         
         if !boolEnd {
-            _newEvent.EndDate = ""
-            _newEvent.EndTime = ""
+            _newPost.EndDate = ""
+            _newPost.EndTime = ""
         }
         
         // Document name is (TimeStamp)_(Title)
         let reference = Firestore
             .firestore()
-            .collection("Events")
-            .document("\(_newEvent.TimeStamp)_\(_newEvent.Title.replacingOccurrences(of: " ", with: ""))")
+            .collection("Posts")
+            .document("\(_newPost.TimeStamp)_\(_newPost.Title.replacingOccurrences(of: " ", with: ""))")
         
-        reference.setData(_newEvent.eventToDict(), merge: true) { (error) in
+        reference.setData(_newPost.postToDict(), merge: true) { (error) in
             if error != nil {
                 completion(.failure(error!))
                 return
             }
-            print("EventToDict: \(_newEvent.eventToDict())")
+            print("PostToDict: \(_newPost.postToDict())")
             completion(.success(true))
         }
     }

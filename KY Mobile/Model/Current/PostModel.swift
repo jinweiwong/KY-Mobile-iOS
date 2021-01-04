@@ -1,6 +1,6 @@
 import Foundation
 
-struct Event: Identifiable {
+struct Post: Identifiable {
     var id = UUID()
     var Title: String
     var FullDesc: String
@@ -41,7 +41,7 @@ struct Event: Identifiable {
         self.TimeStamp = TimeStamp
     }
     
-    func eventToDict() -> [String: Any] {
+    func postToDict() -> [String: Any] {
         return ["Title": self.Title,
                 "FullDesc": self.FullDesc,
                 "ShortDesc": self.ShortDesc,

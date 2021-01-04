@@ -2,17 +2,17 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 
-class EventsViewModel: ObservableObject {
+class PostsViewModel: ObservableObject {
     
-    @Published var events: [Event] = []
+    @Published var posts: [Post] = []
     
     init() {
-        getAllEvents()
+        getAllPosts()
     }
     
-    // Add snapshot listener for all events
-    func getAllEvents() {
-        let docRef = Firestore.firestore().collection("Events")
+    // Add snapshot listener for all posts
+    func getAllPosts() {
+        let docRef = Firestore.firestore().collection("Posts")
         
         docRef.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -31,7 +31,7 @@ class EventsViewModel: ObservableObject {
                         let Cover = diff.document.data()["Cover"] as? String
                         let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
-                        self.events.append(Event(Title: Title ?? "0",
+                        self.posts.append(Post(Title: Title ?? "0",
                                                  FullDesc: FullDesc ?? "0",
                                                  ShortDesc: ShortDesc ?? "0",
                                                  StartDate: StartDate ?? "0",
@@ -45,8 +45,8 @@ class EventsViewModel: ObservableObject {
                     }
                 }
                 
-                // Sort events based on recency
-                self.events.sort {
+                // Sort posts based on recency
+                self.posts.sort {
                     $0.TimeStamp > $1.TimeStamp
                 }
             }

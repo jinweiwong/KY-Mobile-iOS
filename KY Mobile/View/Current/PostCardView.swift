@@ -1,13 +1,13 @@
 import Foundation
 import SwiftUI
 
-struct EventCardView: View {
+struct PostCardView: View {
     
-    let thisEvent: Event
+    let thisPost: Post
     
-    // Assists in displaying the image selected by an admin creating a new event as that image has yet to be uploaded the Firebase Storage
+    // Assists in displaying the image selected by an admin creating a new post as that image has yet to be uploaded the Firebase Storage
     // Should be set to UIImage() if it is called from CurrentView
-    // Should be set the image to be uploaded if it is called from NewEventView
+    // Should be set the image to be uploaded if it is called from NewPostView
     let demoCardImage: UIImage
     
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
@@ -25,9 +25,9 @@ struct EventCardView: View {
                 
                 Group {
                     if demoCardImage != UIImage() {
-                        Image(uiImage: demoCardImage).EventCardImage()
+                        Image(uiImage: demoCardImage).PostCardImage()
                     } else {
-                        EventCardImage(url: thisEvent.Cover)
+                        PostCardImage(url: thisPost.Cover)
                     }
                 }
                 
@@ -45,7 +45,7 @@ struct EventCardView: View {
         HStack {
             VStack(alignment: .leading){
                 
-                Text("\(thisEvent.Title)")
+                Text("\(thisPost.Title)")
                     .lineLimit(2)
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .foregroundColor(Color("Black"))
@@ -60,7 +60,7 @@ struct EventCardView: View {
     var shortDesc: some View {
         HStack {
             VStack (alignment: .leading) {
-                Text("\(thisEvent.ShortDesc)")
+                Text("\(thisPost.ShortDesc)")
                     .lineLimit(2)
                     .font(.system(size: 12))
                     .foregroundColor(Color("DarkGrey"))
@@ -75,7 +75,7 @@ struct EventCardView: View {
     var timeStamp: some View {
         HStack {
             VStack (alignment: .leading) {
-                Text("\(EpochTimeToTimeInterval(epochTime: thisEvent.TimeStamp))")
+                Text("\(EpochTimeToTimeInterval(epochTime: thisPost.TimeStamp))")
                     .font(.system(size: 12, design: .default))
                     .foregroundColor(Color("NormalBlue"))
                 
@@ -86,7 +86,7 @@ struct EventCardView: View {
 }
 
 // Fetches the image for the card from a URL
-struct EventCardImage: View {
+struct PostCardImage: View {
     @ObservedObject var imageLoader = ImageLoaderViewModel()
     let url: String
     let placeholder: String
@@ -99,16 +99,16 @@ struct EventCardImage: View {
     
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).EventCardImage()
+            return Image(uiImage: UIImage(data: data)!).PostCardImage()
         } else {
-            return Image("placeholder").EventCardImage()
+            return Image("placeholder").PostCardImage()
         }
     }
 }
 
-// Modifier for the event card image
+// Modifier for the post card image
 extension Image {
-    func EventCardImage() -> some View {
+    func PostCardImage() -> some View {
         self
             .resizable()
             .scaledToFill()

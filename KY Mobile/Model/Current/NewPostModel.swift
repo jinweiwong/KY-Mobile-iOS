@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct NewEvent: Identifiable {
+struct NewPost: Identifiable {
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -38,12 +38,12 @@ struct NewEvent: Identifiable {
         self.TimeStamp = Date()
     }
     
-    // Convert newEvent to Event
+    // Convert newPost to Post
     // Dates are changed to DD/MM/YYYY
     // Times are changed to HH:MM (24-hour time)
     // TimeStamp is changed to Epoch Time
-    func convertAllToString() -> Event {
-        return Event(Title: self.Title,
+    func convertAllToString() -> Post {
+        return Post(Title: self.Title,
                      FullDesc: self.FullDesc,
                      ShortDesc: self.ShortDesc,
                      StartDate: dateFormatter.string(from: self.Start),
