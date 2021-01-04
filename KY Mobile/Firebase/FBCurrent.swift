@@ -10,9 +10,16 @@ class FBCurrent {
                                boolAllDay: Bool,
                                boolStart: Bool,
                                boolEnd: Bool,
+                               boolTimeStamp: Bool,
                                completion: @escaping (Result<Bool, Error>) -> () ) {
         
+        // Converts newPost to type Post
         var _newPost = newPost.convertAllToString()
+        
+        // Set the current TimeStamp if no TimeStamp was specified
+        if !boolTimeStamp {
+            _newPost.TimeStamp = "\(Int(Date().timeIntervalSince1970 * 1000))"
+        }
         
         if boolAllDay {
             _newPost.StartTime = ""
@@ -29,18 +36,16 @@ class FBCurrent {
             _newPost.EndTime = ""
         }
         
-        // Document name is (TimeStamp)_(Title)
         let reference = Firestore
             .firestore()
             .collection("Posts")
-            .document("\(_newPost.TimeStamp)_\(_newPost.Title.replacingOccurrences(of: " ", with: ""))")
+            .document(_newPost.UUID)
         
         reference.setData(_newPost.postToDict(), merge: true) { (error) in
             if error != nil {
                 completion(.failure(error!))
                 return
             }
-            print("PostToDict: \(_newPost.postToDict())")
             completion(.success(true))
         }
     }

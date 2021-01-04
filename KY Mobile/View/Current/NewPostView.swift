@@ -167,18 +167,13 @@ struct NewPostView: View {
                 
                 // Upload new post button
                 trailing: Button(action: {
-                    // Set the current TimeStamp if no TimeStamp was specified
-                    if !boolTimeStamp {
-                        newPost.TimeStamp = Date()
-                    }
                     
                     // If an image was selected for the new post
                     if newPost.Cover != UIImage() {
                         // Upload the image
                         FBStorage.uploadImage(chosenImage: newPost.Cover,
                                               location: "Posts",
-                                              identifier: "\(Int(newPost.TimeStamp.timeIntervalSince1970*1000))",
-                                              name: newPost.Title) { (result) in
+                                              identifier: newPost.UUID) { (result) in
                             switch result {
                             // If uploading the image to Storage was not successful
                             case .failure (let error):
@@ -189,7 +184,8 @@ struct NewPostView: View {
                                 FBCurrent.uploadNewPost(newPost: newPost,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
-                                                         boolEnd: boolEnd) { (result) in
+                                                         boolEnd: boolEnd,
+                                                         boolTimeStamp: boolTimeStamp) { (result) in
                                     switch result {
                                     case .failure (let error):
                                         errorMessage = error.localizedDescription
@@ -214,7 +210,8 @@ struct NewPostView: View {
                                 FBCurrent.uploadNewPost(newPost: newPost,
                                                          boolAllDay: boolAllDay,
                                                          boolStart: boolStart,
-                                                         boolEnd: boolEnd) { (result) in
+                                                         boolEnd: boolEnd,
+                                                         boolTimeStamp: boolTimeStamp) { (result) in
                                     switch result {
                                     case .failure (let error):
                                         errorMessage = error.localizedDescription
@@ -237,7 +234,8 @@ struct NewPostView: View {
                         FBCurrent.uploadNewPost(newPost: newPost,
                                                  boolAllDay: boolAllDay,
                                                  boolStart: boolStart,
-                                                 boolEnd: boolEnd) { (result) in
+                                                 boolEnd: boolEnd,
+                                                 boolTimeStamp: boolTimeStamp) { (result) in
                             switch result {
                             case .failure (let error):
                                 errorMessage = error.localizedDescription

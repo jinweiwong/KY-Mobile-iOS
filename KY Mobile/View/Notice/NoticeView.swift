@@ -3,9 +3,9 @@ import SwiftUI
 
 struct NoticeView: View {
     @ObservedObject var notices = NoticesViewModel()
+    @State var newNotice: NewNotice = NewNotice()
     
     @State var isShowingSheet: Bool = false
-    @State var newNotice = Notice()
     @State var boolTimeStamp: Bool = false
     
     // Date formatter for the header
@@ -83,7 +83,7 @@ struct NoticeView: View {
     // MARK: Notice Feed
     
     var noticeFeed: some View {
-        ForEach(notices.notices, id: \.id) { thisNotice in
+        ForEach(notices.notices, id: \.UUID) { thisNotice in
             
 //            if TimePeriodBefore != EpochTimePeriod(epochTime: thisNotice.TimeStamp) {
 //

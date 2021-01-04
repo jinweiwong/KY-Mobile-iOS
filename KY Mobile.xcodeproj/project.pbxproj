@@ -55,6 +55,7 @@
 		5F7483AB25A1A7D9008CC04E /* MessageSCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7483AA25A1A7D9008CC04E /* MessageSCView.swift */; };
 		5F7483AE25A1A7E4008CC04E /* LibraryArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7483AD25A1A7E4008CC04E /* LibraryArchiveView.swift */; };
 		5F7483B125A1A7F3008CC04E /* QRLeavingPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7483B025A1A7F3008CC04E /* QRLeavingPassView.swift */; };
+		5F7483C025A2B74E008CC04E /* NewNoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7483BF25A2B74D008CC04E /* NewNoticeModel.swift */; };
 		5F967A69259F306900F4669F /* NewPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A68259F306900F4669F /* NewPostModel.swift */; };
 		5F967A6C25A0124500F4669F /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A6B25A0124500F4669F /* Keyboard.swift */; };
 		5F967A6F25A0383A00F4669F /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A6E25A0383A00F4669F /* EditProfileView.swift */; };
@@ -118,6 +119,7 @@
 		5F7483AA25A1A7D9008CC04E /* MessageSCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSCView.swift; sourceTree = "<group>"; };
 		5F7483AD25A1A7E4008CC04E /* LibraryArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryArchiveView.swift; sourceTree = "<group>"; };
 		5F7483B025A1A7F3008CC04E /* QRLeavingPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRLeavingPassView.swift; sourceTree = "<group>"; };
+		5F7483BF25A2B74D008CC04E /* NewNoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoticeModel.swift; sourceTree = "<group>"; };
 		5F967A68259F306900F4669F /* NewPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostModel.swift; sourceTree = "<group>"; };
 		5F967A6B25A0124500F4669F /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		5F967A6E25A0383A00F4669F /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				5F3B50A32598343400CA710E /* NoticeModel.swift */,
+				5F7483BF25A2B74D008CC04E /* NewNoticeModel.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				5F3B509D2598340600CA710E /* NotificationModel.swift in Sources */,
 				5F3B50A12598342600CA710E /* PostModel.swift in Sources */,
 				5F3B513125983B2400CA710E /* CurrentView.swift in Sources */,
+				5F7483C025A2B74E008CC04E /* NewNoticeModel.swift in Sources */,
 				5F7483AB25A1A7D9008CC04E /* MessageSCView.swift in Sources */,
 				5F3B513525983B3000CA710E /* ProfileView.swift in Sources */,
 				5FD6E2D82599BC6D0085132B /* PostFullView.swift in Sources */,

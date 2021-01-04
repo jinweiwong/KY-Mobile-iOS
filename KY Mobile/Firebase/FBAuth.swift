@@ -28,7 +28,8 @@ class FBAuthFunctions {
                                       "Email" : user.Email,
                                       "Image" : user.Image]
             
-            FBProfile.editUserDetails(uid: newUser.uid, info: data) { (result) in
+            FBProfile.editUserDetails(uid: newUser.uid,
+                                      info: data) { (result) in
                 switch result {
                 case .failure (let error):
                     print("\(error.localizedDescription)")
@@ -45,7 +46,8 @@ class FBAuthFunctions {
     
     
     // Authenticate user's email and password
-    static func authenticate(email: String, password: String,
+    static func authenticate(email: String,
+                             password: String,
                              completionHandler: @escaping (Result <Bool, Error>) -> () ){
         
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in

@@ -11,12 +11,11 @@ class FBStorage {
     static func uploadImage(chosenImage: UIImage,
                             location: String,
                             identifier: String,
-                            name: String,
                             completionHandler: @escaping (Result<URL, Error>) -> () ){
         
         let storageRef = Storage.storage().reference()
             .child(location)
-            .child("\(identifier)_\(name.replacingOccurrences(of: " ", with: ""))")
+            .child(identifier)
         let imagePNG = chosenImage.pngData()
         
         storageRef.putData(imagePNG!, metadata: nil) { (metadata, error) in
@@ -43,11 +42,10 @@ class FBStorage {
     // Name refers to either the name of a user or the Title of something
     static func deleteImage(location: String,
                             identifier: String,
-                            name: String,
                             completionHandler: @escaping (Result<Bool, Error>) -> () ){
         let storageRef = Storage.storage().reference()
             .child(location)
-            .child("\(identifier)_\(name.replacingOccurrences(of: " ", with: ""))")
+            .child(identifier)
         
         storageRef.delete { error in
             if error != nil {

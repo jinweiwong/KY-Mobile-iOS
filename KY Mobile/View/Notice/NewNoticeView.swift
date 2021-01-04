@@ -3,7 +3,7 @@ import SwiftUI
 
 struct NewNoticeView: View {
     @Binding var isPresented: Bool
-    @Binding var newNotice: Notice
+    @Binding var newNotice: NewNotice 
     
     @Binding var boolTimeStamp: Bool
     
@@ -48,8 +48,24 @@ struct NewNoticeView: View {
                 }
                 
                 Section {
+                    VStack {
+                        Toggle(isOn: $boolTimeStamp) {
+                            Text("Time Stamp")
+                        }
+                        HStack {
+                            Group {
+                                if boolTimeStamp {
+                                    DatePicker(selection: $newNotice.TimeStamp) {}
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+                
+                Section {
                     // Demo Notice Card
-                    NoticeCardView(thisNotice: newNotice.noticeWithRandomTimeStamp())
+                    NoticeCardView(thisNotice: newNotice.convertAllToString())
                         .offset(x: -12, y: 0)
                 } // Sets the default Exco to General
                 .onAppear(perform: {
@@ -68,7 +84,7 @@ struct NewNoticeView: View {
                 },
                 // Upload new notice Button
                 trailing: Button(action: {
-                    FBNotice.uploadNewNotice(newNotice: newNotice) { (result) in
+                    FBNotice.uploadNewNotice(newNotice: newNotice, boolTimeStamp: boolTimeStamp) { (result) in
                         switch result {
                         case .failure (let error):
                             errorMessage = error.localizedDescription
@@ -76,10 +92,10 @@ struct NewNoticeView: View {
                         case .success(_):
                             break
                         }}
-                    // Closes the sheet and resets newNotice
+                    // Closes the sheet and resets variables
                     isPresented = false
-                    newNotice = Notice()
-                    
+                    boolTimeStamp = false
+                    newNotice = NewNotice()
                 }) {
                     Text("Upload")
                 })

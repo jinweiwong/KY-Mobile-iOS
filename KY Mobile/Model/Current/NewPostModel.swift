@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct NewPost: Identifiable {
+struct NewPost {
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -14,7 +14,7 @@ struct NewPost: Identifiable {
         return formatter
     }
     
-    var id = UUID()
+    var UUID: String
     var Title: String
     var FullDesc: String
     var ShortDesc: String
@@ -26,7 +26,7 @@ struct NewPost: Identifiable {
     var TimeStamp: Date
     
     init() {
-        self.id = UUID()
+        self.UUID = Foundation.UUID().uuidString
         self.Title = ""
         self.FullDesc = ""
         self.ShortDesc = ""
@@ -43,15 +43,16 @@ struct NewPost: Identifiable {
     // Times are changed to HH:MM (24-hour time)
     // TimeStamp is changed to Epoch Time
     func convertAllToString() -> Post {
-        return Post(Title: self.Title,
-                     FullDesc: self.FullDesc,
-                     ShortDesc: self.ShortDesc,
-                     StartDate: dateFormatter.string(from: self.Start),
-                     EndDate: dateFormatter.string(from: self.End),
-                     StartTime: timeFormatter.string(from: self.Start),
-                     EndTime: timeFormatter.string(from: self.End),
-                     Venue: self.Venue,
-                     Cover: self.CoverString,
-                     TimeStamp: "\(Int(self.TimeStamp.timeIntervalSince1970 * 1000))")
+        return Post(UUID: self.UUID,
+                    Title: self.Title,
+                    FullDesc: self.FullDesc,
+                    ShortDesc: self.ShortDesc,
+                    StartDate: dateFormatter.string(from: self.Start),
+                    EndDate: dateFormatter.string(from: self.End),
+                    StartTime: timeFormatter.string(from: self.Start),
+                    EndTime: timeFormatter.string(from: self.End),
+                    Venue: self.Venue,
+                    Cover: self.CoverString,
+                    TimeStamp: "\(Int(self.TimeStamp.timeIntervalSince1970 * 1000))")
     }
 }

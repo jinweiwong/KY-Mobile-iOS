@@ -93,7 +93,7 @@ struct CurrentView: View {
     
     var postFeed: some View {
         LazyVGrid(columns: [GridItem(.flexible())], spacing: 12) {
-            ForEach(posts.posts, id: \.id) { thisPost in
+            ForEach(posts.posts, id: \.UUID) { thisPost in
                 // NavigationLink to the full post page
                 NavigationLink(destination: PostFullView(thisPost: thisPost,
                                                           demoCardImage: UIImage())) {

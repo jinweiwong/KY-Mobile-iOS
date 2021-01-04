@@ -13,7 +13,7 @@ class FBProfile {
         let reference = Firestore
             .firestore()
             .collection("Users")
-            .document("\(String(describing: info["UID"]!))_\(String(describing: info["Name"]!).replacingOccurrences(of: " ", with: ""))")
+            .document(uid)
         
         reference.setData(info, merge: true) { (error) in
             if let error = error {

@@ -1,7 +1,7 @@
 import Foundation
 
-struct Post: Identifiable {
-    var id = UUID()
+struct Post {
+    var UUID: String
     var Title: String
     var FullDesc: String
     var ShortDesc: String
@@ -14,7 +14,7 @@ struct Post: Identifiable {
     var TimeStamp: String  // Epoch Time
     
     init() {
-        self.id = UUID()
+        self.UUID = Foundation.UUID().uuidString
         self.Title = ""
         self.FullDesc = ""
         self.ShortDesc = ""
@@ -27,8 +27,8 @@ struct Post: Identifiable {
         self.TimeStamp = ""
     }
     
-    init(Title: String, FullDesc: String, ShortDesc: String, StartDate: String, EndDate: String, StartTime: String, EndTime: String, Venue: String, Cover: String, TimeStamp: String) {
-        self.id = UUID()
+    init(UUID: String, Title: String, FullDesc: String, ShortDesc: String, StartDate: String, EndDate: String, StartTime: String, EndTime: String, Venue: String, Cover: String, TimeStamp: String) {
+        self.UUID = UUID
         self.Title = Title
         self.FullDesc = FullDesc
         self.ShortDesc = ShortDesc
@@ -42,7 +42,8 @@ struct Post: Identifiable {
     }
     
     func postToDict() -> [String: Any] {
-        return ["Title": self.Title,
+        return ["UUID": self.UUID,
+                "Title": self.Title,
                 "FullDesc": self.FullDesc,
                 "ShortDesc": self.ShortDesc,
                 "StartDate": self.StartDate,

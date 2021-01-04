@@ -20,12 +20,14 @@ class NoticesViewModel: ObservableObject {
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
                     if diff.type == .added {
+                        let UUID = diff.document.data()["UUID"] as? String
                         let Title = diff.document.data()["Title"] as? String
                         let Exco = diff.document.data()["Exco"] as? String
                         let Body = diff.document.data()["Body"] as? String
                         let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
-                        self.notices.append(Notice(Title: Title ?? "0",
+                        self.notices.append(Notice(UUID: UUID ?? "0",
+                                                   Title: Title ?? "0",
                                                    Exco: Exco ?? "0",
                                                    Body: Body ?? "0",
                                                    TimeStamp: TimeStamp ?? "0"))

@@ -20,12 +20,15 @@ class RecentPostsViewModel: ObservableObject {
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
                     if diff.type == .added {
+                        let UUID = diff.document.data()["UUID"] as? String
                         let Title = diff.document.data()["Title"] as? String
                         let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
                         if TimeStamp != nil {
                             if Int(TimeStamp!)! > Int(Int(Date().timeIntervalSince1970 * 1000) - 86400000) {
-                            self.recentPosts.append(NotificationModel(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
+                                self.recentPosts.append(NotificationModel(UUID: UUID ?? "",
+                                                                          Title: Title ?? "",
+                                                                          TimeStamp: TimeStamp ?? ""))
                             }
                         }
                     }
@@ -40,12 +43,15 @@ class RecentPostsViewModel: ObservableObject {
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
                     if diff.type == .added {
+                        let UUID = diff.document.data()["UUID"] as? String
                         let Title = diff.document.data()["Title"] as? String
                         let TimeStamp = diff.document.data()["TimeStamp"] as? String
                         
                         if TimeStamp != nil {
                             if Int(TimeStamp!)! > Int(Int(Date().timeIntervalSince1970 * 1000) - 86400000) {
-                            self.recentPosts.append(NotificationModel(Title: Title ?? "", TimeStamp: TimeStamp ?? ""))
+                                self.recentPosts.append(NotificationModel(UUID: UUID ?? "",
+                                                                          Title: Title ?? "",
+                                                                          TimeStamp: TimeStamp ?? ""))
                             }
                         }
                     }
@@ -56,7 +62,6 @@ class RecentPostsViewModel: ObservableObject {
             self.recentPosts.sort {
                 $0.TimeStamp > $1.TimeStamp
             }
-            print(self.recentPosts)
         }
     }
 }

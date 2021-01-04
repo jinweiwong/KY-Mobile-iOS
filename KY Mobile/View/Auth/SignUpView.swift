@@ -258,8 +258,7 @@ struct SignUpView: View {
                             // Uploads the image to Storage and saves the URL of the string to newUser.Image
                             FBStorage.uploadImage(chosenImage: selectedPicture,
                                                   location: "Users_ProfilePic",
-                                                  identifier: newUserUID,
-                                                  name: newUser.Name) { (result) in
+                                                  identifier: newUserUID) { (result) in
                                 switch result {
                                 
                                 case .failure (let error):

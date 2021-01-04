@@ -77,8 +77,7 @@ struct EditProfileView: View {
             if newProfilePicture != UIImage() {
                 // Delete previous image
                 FBStorage.deleteImage(location: "Users_ProfilePic",
-                                      identifier: editedUser.UID,
-                                      name: editedUser.Name) { (result) in
+                                      identifier: editedUser.UID) { (result) in
                     switch result {
                     case .failure (let error):
                         self.errorMessage = error.localizedDescription
@@ -88,8 +87,7 @@ struct EditProfileView: View {
                         // Upload new image
                         FBStorage.uploadImage(chosenImage: newProfilePicture,
                                               location: "Users_ProfilePic",
-                                              identifier: editedUser.UID,
-                                              name: editedUser.Name) { (result) in
+                                              identifier: editedUser.UID) { (result) in
                             switch result {
                             
                             case .failure (let error):

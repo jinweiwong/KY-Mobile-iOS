@@ -69,7 +69,7 @@ struct HomeView: View {
             if recentPosts.recentPosts.count <= 4 {
                 VStack {
                     ScrollView {
-                        ForEach(recentPosts.recentPosts, id: \.id) { notification in
+                        ForEach(recentPosts.recentPosts, id: \.UUID) { notification in
                             
                             HStack {
                                 Text("• \(notification.Title)")
@@ -93,7 +93,7 @@ struct HomeView: View {
             else {
                 VStack {
                     ScrollView {
-                        ForEach(recentPosts.recentPosts, id: \.id) { notification in
+                        ForEach(recentPosts.recentPosts, id: \.UUID) { notification in
                             HStack {
                                 Text("• \(notification.Title)")
                                     .modifier(TinyText(textColor: Color("Black")))
