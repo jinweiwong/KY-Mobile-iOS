@@ -38,6 +38,21 @@ struct NewPost {
         self.TimeStamp = Date()
     }
     
+    init(UUID: String, Title: String, FullDesc: String, ShortDesc: String, Start: Date, End: Date, Venue: String, Cover: UIImage, CoverString: String, TimeStamp: Date) {
+        self.UUID = UUID
+        self.Title = Title
+        self.FullDesc = FullDesc
+        self.ShortDesc = ShortDesc
+        self.Start = Start
+        self.End = End
+        self.Venue = Venue
+        self.Cover = Cover
+        self.CoverString = CoverString
+        self.TimeStamp = TimeStamp
+    }
+    
+    
+    
     // Convert newPost to Post
     // Dates are changed to DD/MM/YYYY
     // Times are changed to HH:MM (24-hour time)

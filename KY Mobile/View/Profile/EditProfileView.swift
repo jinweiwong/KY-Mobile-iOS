@@ -136,7 +136,7 @@ struct UserEditProfileImage: View {
 
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).userEditProfileImageModifier()
+            return Image(uiImage: UIImage(data: data) ?? UIImage()).userEditProfileImageModifier()
         } else {
             return Image("placeholder").userEditProfileImageModifier()
         }

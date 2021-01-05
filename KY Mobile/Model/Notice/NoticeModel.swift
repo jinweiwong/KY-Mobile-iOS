@@ -23,6 +23,14 @@ struct Notice {
         self.TimeStamp = TimeStamp
     }
     
+    init?(noticeDict: [String: Any]) {
+        self.UUID = noticeDict["UUID"] as? String ?? ""
+        self.Title = noticeDict["Title"] as? String ?? ""
+        self.Exco = noticeDict["Exco"] as? String ?? ""
+        self.Body = noticeDict["Body"] as? String ?? ""
+        self.TimeStamp = noticeDict["TimeStamp"] as? String ?? ""
+    }
+    
     func noticeToDict() -> [String: Any] {
         return ["UUID": self.UUID,
                 "Title": self.Title,

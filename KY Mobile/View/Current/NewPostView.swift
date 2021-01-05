@@ -11,10 +11,7 @@ struct NewPostView: View {
     @Binding var boolEnd: Bool
     @Binding var boolTimeStamp: Bool
     
-    // Selecting image
     @State private var isShowingImagePicker: Bool = false
-    
-    // Showing Demo page
     @State private var showDemoPage: Bool = false
     
     @Binding var errorMessage: String
@@ -142,13 +139,13 @@ struct NewPostView: View {
                 
                 Section {
                     // Demo full page for new post
-                    NavigationLink(destination: PostFullView(thisPost:
-                                                                newPost.convertAllToString(),
-                                                              demoCardImage: newPost.Cover),
+                    NavigationLink(destination: PostFullView(thisPost: newPost.convertAllToString(),
+                                                             demoCardImage: newPost.Cover,
+                                                             viewingType: .demo),
                                    isActive: $showDemoPage) {
                         // Demo card for new post
                         PostCardView(thisPost: newPost.convertAllToString(),
-                                      demoCardImage: newPost.Cover)
+                                     demoCardImage: newPost.Cover)
                             .offset(x: -14, y: 0)
                     }
                 }

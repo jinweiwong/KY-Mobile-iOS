@@ -62,6 +62,7 @@
 		5F967A7325A03C2500F4669F /* SavedPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A7225A03C2500F4669F /* SavedPostsView.swift */; };
 		5F967A7625A03C4E00F4669F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A7525A03C4E00F4669F /* SettingsView.swift */; };
 		5F967A7925A03C6100F4669F /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F967A7825A03C6100F4669F /* FeedbackView.swift */; };
+		5FC8209D25A2E5A30067B227 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC8209C25A2E5A30067B227 /* EditPostView.swift */; };
 		5FD6E2D82599BC6D0085132B /* PostFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6E2D72599BC6D0085132B /* PostFullView.swift */; };
 		5FD6E2E42599DFDE0085132B /* ImageLoaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6E2E32599DFDE0085132B /* ImageLoaderVM.swift */; };
 		D83A57C49FD7843360ED3553 /* Pods_KY_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */; };
@@ -126,6 +127,7 @@
 		5F967A7225A03C2500F4669F /* SavedPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsView.swift; sourceTree = "<group>"; };
 		5F967A7525A03C4E00F4669F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5F967A7825A03C6100F4669F /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		5FC8209C25A2E5A30067B227 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		5FD6E2D72599BC6D0085132B /* PostFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFullView.swift; sourceTree = "<group>"; };
 		5FD6E2E32599DFDE0085132B /* ImageLoaderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderVM.swift; sourceTree = "<group>"; };
 		9205D62AB0E92D1444612072 /* Pods-KY Mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KY Mobile.debug.xcconfig"; path = "Target Support Files/Pods-KY Mobile/Pods-KY Mobile.debug.xcconfig"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				5F3B512D25983B2400CA710E /* PostCardView.swift */,
 				5FD6E2D72599BC6D0085132B /* PostFullView.swift */,
 				5F3B512F25983B2400CA710E /* NewPostView.swift */,
+				5FC8209C25A2E5A30067B227 /* EditPostView.swift */,
 			);
 			path = Current;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				5F60624D25A0A5A9009F28BC /* CurrentUserVM.swift in Sources */,
 				5F74839925A1A783008CC04E /* StudentResourcesView.swift in Sources */,
 				5F3B511F25983AA800CA710E /* SignUpView.swift in Sources */,
+				5FC8209D25A2E5A30067B227 /* EditPostView.swift in Sources */,
 				5F3B512B25983AE700CA710E /* NoticeCardView.swift in Sources */,
 				5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */,
 				5F74839C25A1A796008CC04E /* PeerTutoringView.swift in Sources */,

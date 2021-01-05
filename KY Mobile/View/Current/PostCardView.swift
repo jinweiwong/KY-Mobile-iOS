@@ -99,7 +99,7 @@ struct PostCardImage: View {
     
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).PostCardImage()
+            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostCardImage()
         } else {
             return Image("placeholder").PostCardImage()
         }

@@ -165,7 +165,7 @@ struct UserCardImage: View {
 
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).userCardImageModifier()
+            return Image(uiImage: UIImage(data: data) ?? UIImage()).userCardImageModifier()
         } else {
             return Image("placeholder").userCardImageModifier()
         }

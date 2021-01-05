@@ -6,7 +6,7 @@ struct CurrentView: View {
     
     // Variable that stores all the information of the new post to be posted
     @State var newPost: NewPost = NewPost()
-    @State var isShowingSheet: Bool = false
+    @State var isShowingNewPostSheet: Bool = false
     
     // Switches on the "Create New Post" sheet
     @State private var boolAllDay: Bool = false
@@ -41,18 +41,6 @@ struct CurrentView: View {
                     postFeed
                 }
             }.navigationBarHidden(true)
-            // New Post Sheet
-            .sheet(isPresented: $isShowingSheet,
-                   content: {
-                    NewPostView(isPresented: $isShowingSheet,
-                                 newPost: $newPost,
-                                 boolAllDay: $boolAllDay,
-                                 boolStart: $boolStart,
-                                 boolEnd: $boolEnd,
-                                 boolTimeStamp: $boolTimeStamp,
-                                 errorMessage: $errorMessage,
-                                 showErrorMessage: $showErrorMessage)})
-            
             .alert(isPresented: self.$showErrorMessage) {
                 Alert(title: Text("Error"),
                       message: Text(self.errorMessage),
@@ -78,12 +66,22 @@ struct CurrentView: View {
             
             // Create new post button
             Button(action: {
-                isShowingSheet = true
+                isShowingNewPostSheet = true
             }) {
                 Image(systemName: "square.and.pencil")
                     .resizable()
                     .frame(width: 24, height: 24)
-            }
+            }// New Post Sheet
+            .sheet(isPresented: $isShowingNewPostSheet,
+                   content: {
+                    NewPostView(isPresented: $isShowingNewPostSheet,
+                                 newPost: $newPost,
+                                 boolAllDay: $boolAllDay,
+                                 boolStart: $boolStart,
+                                 boolEnd: $boolEnd,
+                                 boolTimeStamp: $boolTimeStamp,
+                                 errorMessage: $errorMessage,
+                                 showErrorMessage: $showErrorMessage)})
         }.padding(.leading)
         .padding(.top)
         .padding(.trailing)
@@ -95,11 +93,14 @@ struct CurrentView: View {
         LazyVGrid(columns: [GridItem(.flexible())], spacing: 12) {
             ForEach(posts.posts, id: \.UUID) { thisPost in
                 // NavigationLink to the full post page
-                NavigationLink(destination: PostFullView(thisPost: thisPost,
-                                                          demoCardImage: UIImage())) {
+                NavigationLink(destination:
+                                PostFullView(thisPost: thisPost,
+                                             unEditedPost: thisPost.postToNewPost(),
+                                             demoCardImage: UIImage(),
+                                             viewingType: .view)) {
                     // Post card
                     PostCardView(thisPost: thisPost,
-                                  demoCardImage: UIImage())
+                                 demoCardImage: UIImage())
                         .frame(height: 120)
                         .padding(.horizontal, 5)
                 }

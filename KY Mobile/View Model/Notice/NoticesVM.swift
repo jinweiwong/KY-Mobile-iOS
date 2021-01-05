@@ -19,18 +19,18 @@ class NoticesViewModel: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
+                    
+                    let notice: Notice = Notice(noticeDict: diff.document.data())!
+                    
                     if diff.type == .added {
-                        let UUID = diff.document.data()["UUID"] as? String
-                        let Title = diff.document.data()["Title"] as? String
-                        let Exco = diff.document.data()["Exco"] as? String
-                        let Body = diff.document.data()["Body"] as? String
-                        let TimeStamp = diff.document.data()["TimeStamp"] as? String
-                        
-                        self.notices.append(Notice(UUID: UUID ?? "0",
-                                                   Title: Title ?? "0",
-                                                   Exco: Exco ?? "0",
-                                                   Body: Body ?? "0",
-                                                   TimeStamp: TimeStamp ?? "0"))
+                        self.notices.append(notice)
+                    }
+                    else if diff.type == .modified {
+                        self.notices = self.notices.filter { $0.UUID != notice.UUID }
+                        self.notices.append(notice)
+                    }
+                    else if diff.type == .removed {
+                        self.notices = self.notices.filter { $0.UUID != notice.UUID }
                     }
                 }
                 

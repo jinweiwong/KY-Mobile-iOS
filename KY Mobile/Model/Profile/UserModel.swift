@@ -18,13 +18,13 @@ struct User {
     }
 
     // Adding data to FBUser using a retrieved document from Firebase
-    init?(UserData: [String: Any]) {
-        self.UID = UserData["UID"] as? String ?? ""
-        self.Name = UserData["Name"] as? String ?? ""
-        self.Image = UserData["Image"] as? String ?? ""
-        self.Email = UserData["Email"] as? String ?? ""
-        self.Batch = UserData["Batch"] as? String ?? ""
-        self.StudentID = UserData["StudentID"] as? String ?? ""
+    init?(userDict: [String: Any]) {
+        self.UID = userDict["UID"] as? String ?? ""
+        self.Name = userDict["Name"] as? String ?? ""
+        self.Image = userDict["Image"] as? String ?? ""
+        self.Email = userDict["Email"] as? String ?? ""
+        self.Batch = userDict["Batch"] as? String ?? ""
+        self.StudentID = userDict["StudentID"] as? String ?? ""
     }
     
     // Check if two Users are the same

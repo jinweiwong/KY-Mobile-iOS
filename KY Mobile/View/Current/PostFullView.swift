@@ -2,45 +2,98 @@ import Foundation
 import SwiftUI
 
 struct PostFullView: View {
-
+    
     let thisPost: Post
     
-    // Assists in displaying the image selected by an admin creating a new post as that image has yet to be uploaded the Firebase Storage
+    // Created for Editing Post purposes
+    let unEditedPost: NewPost
+    @State var editedPost: NewPost = NewPost()
+    
+    // Assists in displaying the image in the demo full view as that image has yet to be uploaded the Firebase Storage
     // Should be set to UIImage() if it is called from CurrentView
-    // Should be set the image to be uploaded if it is called from NewPostView
+    // Should be set to the image to be uploaded if it is used to demo
     let demoCardImage: UIImage
-
-    var body: some View {
-        ZStack {
-            // Background
-            Color("VeryLightGrey")
-                .edgesIgnoringSafeArea(.all)
-
-            ScrollView {
-                VStack {
-                    Group {
-                        // Displays the image selected in the new post sheet
-                        if demoCardImage != UIImage() {
-                            Image(uiImage: demoCardImage).PostFullImage()
-                            
-                        } // Displays the image from the image's URL
-                        else if thisPost.Cover != "" {
-                            PostPageImage(url: thisPost.Cover)
-                        }
-                    }
-
-                    title
-                    shortDesc
-                    timeStamp
-                    divider
-                    fullDesc
-                        
-                }
-            }
-        }
-        .edgesIgnoringSafeArea(.horizontal)
+    
+    // Makes sure the cover image is only downloaded from the URL once
+    enum editPostConfigurationStatus {
+        case pending, configured }
+    @State var editPostConfigurationStatus: editPostConfigurationStatus = .pending
+    
+    enum ViewingType {
+        case demo, view }
+    var viewingType: ViewingType
+    
+    // All these boolean values are set momentarily only
+    // They will be changed when the "Edit" button is pressed
+    @State var boolStart: Bool = false
+    @State var boolEnd: Bool = false
+    @State var boolAllDay: Bool = false
+    @State var boolTimeStamp: Bool = true
+    
+    @State var isShowingEditPostSheet: Bool = false
+    
+    @State var errorMessage: String = ""
+    @State var showErrorMessage: Bool = false
+    
+    init(thisPost: Post, unEditedPost: NewPost? = NewPost(), demoCardImage: UIImage, viewingType: ViewingType) {
+        self.thisPost = thisPost
+        self.unEditedPost = unEditedPost!
+        self.demoCardImage = demoCardImage
+        self.viewingType = viewingType
     }
-
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                // Background
+                Color("VeryLightGrey")
+                    .edgesIgnoringSafeArea(.all)
+                
+                ScrollView {
+                    VStack {
+                        Group {
+                            // Displays the image selected in the new post sheet
+                            if demoCardImage != UIImage() {
+                                Image(uiImage: demoCardImage).PostFullImage()
+                                
+                            } // Displays the image from the image's URL
+                            else if thisPost.Cover != "" {
+                                PostPageImage(url: thisPost.Cover)
+                            }
+                        }
+                        
+                        title
+                        shortDesc
+                        
+                        HStack {
+                            timeStamp
+                            Spacer()
+                            buttons
+                        }
+                        
+                        divider
+                        fullDesc
+                        
+                    }.offset(y: -50)
+                }.navigationBarHidden(true)
+                .sheet(isPresented: $isShowingEditPostSheet,
+                       content: {
+                        EditPostView(isPresented: $isShowingEditPostSheet,
+                                     unEditedPost: unEditedPost,
+                                     editedPost: $editedPost,
+                                     boolAllDay: $boolAllDay,
+                                     boolStart: $boolStart,
+                                     boolEnd: $boolEnd,
+                                     boolTimeStamp: $boolTimeStamp,
+                                     errorMessage: $errorMessage,
+                                     showErrorMessage: $showErrorMessage)})
+            }.onAppear(perform: {
+                editedPost = unEditedPost
+            })
+        }
+    }
+    
+    
     // MARK: Title
     
     var title: some View {
@@ -53,7 +106,7 @@ struct PostFullView: View {
         }.padding(.horizontal)
         .padding(.vertical, 2)
     }
-
+    
     // MARK: Short Description
     
     var shortDesc: some View {
@@ -63,7 +116,7 @@ struct PostFullView: View {
             Spacer()
         }.padding(.horizontal)
     }
-
+    
     // MARK: Time Stamp
     
     var timeStamp: some View {
@@ -71,12 +124,48 @@ struct PostFullView: View {
             Text("\(EpochTimeToTimeInterval(epochTime: thisPost.TimeStamp))")
                 .font(.body)
                 .foregroundColor(Color("NormalBlue"))
-
+            
             Spacer()
         }.padding(.horizontal)
         .padding(.top, 1)
     }
-
+    
+    // MARK: Buttons
+    
+    var buttons: some View {
+        HStack {
+            Group {
+                if viewingType == .view {
+                    Button(action: {
+                        // Makes sure the cover image is only downloaded from the URL once
+                        if (self.editPostConfigurationStatus == .pending) {
+                            boolStart = (thisPost.StartDate != "")
+                            boolEnd = (thisPost.EndDate != "")
+                            boolAllDay = ((thisPost.StartTime == "") && (thisPost.EndTime == ""))
+                            editedPost.Cover = unEditedPost.CoverString.URLToUIImage()
+                            self.editPostConfigurationStatus = .configured
+                        }
+                        isShowingEditPostSheet = true
+                    }) {
+                        Image(systemName: "pencil.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 20)
+                    }
+                }
+            }
+            
+            Button(action: {
+                print("Saving post...")
+            }) {
+                Image(systemName: "bookmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 28)
+            }.padding(.leading, 15)
+        }.padding(.trailing, 20)
+    }
+    
     // MARK: Divider
     
     var divider: some View {
@@ -88,7 +177,7 @@ struct PostFullView: View {
     }
     
     // MARK: Full Description
-
+    
     var fullDesc: some View {
         HStack {
             VStack {
@@ -116,7 +205,7 @@ struct PostPageImage: View {
 
     var body: some View {
         if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data)!).PostFullImage()
+            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostFullImage()
         } else {
             return Image("placeholder").PostFullImage()
         }
@@ -129,7 +218,8 @@ extension Image {
         self
             .resizable()
             .scaledToFit()
-            .frame(maxHeight: UIScreen.main.bounds.height / 3)
+            .frame(maxHeight: (UIScreen.main.bounds.height / 3))
             .cornerRadius(5)
+            
    }
 }

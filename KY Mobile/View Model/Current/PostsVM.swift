@@ -18,32 +18,20 @@ class PostsViewModel: ObservableObject {
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
+                
                 querySnapshot!.documentChanges.forEach { diff in
+                    
+                    let post: Post = Post(postDict: diff.document.data())!
+                    
                     if diff.type == .added {
-                        let UUID = diff.document.data()["UUID"] as? String
-                        let Title = diff.document.data()["Title"] as? String
-                        let FullDesc = diff.document.data()["FullDesc"] as? String
-                        let ShortDesc = diff.document.data()["ShortDesc"] as? String
-                        let StartDate = diff.document.data()["StartDate"] as? String
-                        let EndDate = diff.document.data()["EndDate"] as? String
-                        let StartTime = diff.document.data()["StartTime"] as? String
-                        let EndTime = diff.document.data()["EndTime"] as? String
-                        let Venue = diff.document.data()["Venue"] as? String
-                        let Cover = diff.document.data()["Cover"] as? String
-                        let TimeStamp = diff.document.data()["TimeStamp"] as? String
-                        
-                        self.posts.append(Post(UUID: UUID ?? "0",
-                                               Title: Title ?? "0",
-                                               FullDesc: FullDesc ?? "0",
-                                               ShortDesc: ShortDesc ?? "0",
-                                               StartDate: StartDate ?? "0",
-                                               EndDate: EndDate ?? "0",
-                                               StartTime: StartTime ?? "0",
-                                               EndTime: EndTime ?? "0",
-                                               Venue: Venue ?? "0",
-                                               Cover: Cover ?? "0",
-                                               TimeStamp: TimeStamp ?? "0"))
-                        
+                        self.posts.append(post)
+                    }
+                    else if diff.type == .modified {
+                        self.posts = self.posts.filter { $0.UUID != post.UUID }
+                        self.posts.append(post)
+                    }
+                    else if diff.type == .removed {
+                        self.posts = self.posts.filter { $0.UUID != post.UUID }
                     }
                 }
                 

@@ -20,3 +20,20 @@ class ImageLoaderViewModel: ObservableObject {
         }.resume()
     }
 }
+
+
+extension String {
+    func URLToUIImage() -> UIImage {
+        do {
+            print("Downloading Image from URL...\n\n")
+            guard let url = URL(string: self) else {
+                return UIImage()
+            }
+            let data: Data = try Data(contentsOf: url)
+            
+            return UIImage(data: data) ?? UIImage()
+            
+        } catch {}
+        return UIImage()
+    }
+}

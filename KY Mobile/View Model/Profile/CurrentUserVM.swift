@@ -21,7 +21,7 @@ class CurrentUserViewModel: ObservableObject {
                 print("Error retrieving current user: \(error)")
             } else {
                 querySnapshot!.documentChanges.forEach { diff in
-                    self.currentUser = User(UserData: diff.document.data())!
+                    self.currentUser = User(userDict: diff.document.data())!
                 }
             }
         }

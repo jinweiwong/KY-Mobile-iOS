@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct Post {
     var UUID: String
@@ -41,6 +42,20 @@ struct Post {
         self.TimeStamp = TimeStamp
     }
     
+    init?(postDict: [String: Any]) {
+        self.UUID = postDict["UUID"] as? String ?? ""
+        self.Title = postDict["Title"] as? String ?? ""
+        self.FullDesc = postDict["FullDesc"] as? String ?? ""
+        self.ShortDesc = postDict["ShortDesc"] as? String ?? ""
+        self.StartDate = postDict["StartDate"] as? String ?? ""
+        self.EndDate = postDict["EndDate"] as? String ?? ""
+        self.StartTime = postDict["StartTime"] as? String ?? ""
+        self.EndTime = postDict["EndTime"] as? String ?? ""
+        self.Venue = postDict["Venue"] as? String ?? ""
+        self.Cover = postDict["Cover"] as? String ?? ""
+        self.TimeStamp = postDict["TimeStamp"] as? String ?? ""
+    }
+    
     func postToDict() -> [String: Any] {
         return ["UUID": self.UUID,
                 "Title": self.Title,
@@ -54,4 +69,18 @@ struct Post {
                 "Cover": self.Cover,
                 "TimeStamp": self.TimeStamp]
     }
+    
+    func postToNewPost() -> NewPost {
+        return NewPost(UUID: self.UUID,
+                       Title: self.Title,
+                       FullDesc: self.FullDesc,
+                       ShortDesc: self.ShortDesc,
+                       Start: DateTimeToDate(date: self.StartDate, time: self.StartTime),
+                       End: DateTimeToDate(date: self.EndDate, time: self.EndTime),
+                       Venue: self.Venue,
+                       Cover: UIImage(),
+                       CoverString: self.Cover,
+                       TimeStamp: Date(timeIntervalSince1970: Double((Double(self.TimeStamp)! / 1000))))
+    }
 }
+

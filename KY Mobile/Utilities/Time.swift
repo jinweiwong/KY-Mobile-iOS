@@ -88,3 +88,21 @@ func EpochTimeToTimeInterval(epochTime: String) -> String {
         return "Just now"
     }
 }
+
+// date: DD/MM/YYYY
+// time: HH:MM
+// Used mainly for posts
+func DateTimeToDate(date: String?, time: String?) -> Date {
+    let dateFormatter = DateFormatter()
+    
+    if date == "" {
+        return Date()
+    } else if time == "" {
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.date(from: date!)!
+    } else {
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        let dateTime = "\(date!) \(time!)"
+        return dateFormatter.date(from: dateTime)!
+    }
+}
