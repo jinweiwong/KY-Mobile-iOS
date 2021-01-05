@@ -84,7 +84,16 @@ struct NoticeView: View {
     
     var noticeFeed: some View {
         ForEach(notices.notices, id: \.UUID) { thisNotice in
-            
+        
+            NoticeCardView(thisNotice: thisNotice)
+        }
+    }
+}
+
+
+
+
+
 //            if TimePeriodBefore != EpochTimePeriod(epochTime: thisNotice.TimeStamp) {
 //
 //                HStack (spacing: 15) {
@@ -102,11 +111,9 @@ struct NoticeView: View {
 //
 //                }.padding(.horizontal, 25)
 //            }
-        
-            NoticeCardView(thisNotice: thisNotice)
-        }
-    }
-}
+
+
+
 
 //func ChangeTimePeriodBefore(epochTime: String, TimePeriodBefore: inout String) -> String {
 //    TimePeriodBefore = EpochTimePeriod(epochTime: epochTime)

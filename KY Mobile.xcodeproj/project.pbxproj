@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F0F944225A46C05005C515A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F944125A46C05005C515A /* LaunchScreenView.swift */; };
 		5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50662598245F00CA710E /* KY_MobileApp.swift */; };
 		5F3B506B2598246500CA710E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506A2598246500CA710E /* Assets.xcassets */; };
 		5F3B506E2598246500CA710E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506D2598246500CA710E /* Preview Assets.xcassets */; };
@@ -33,7 +34,6 @@
 		5F3B513E25983B6100CA710E /* NoticesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B513D25983B6100CA710E /* NoticesVM.swift */; };
 		5F3B514625983B7B00CA710E /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514025983B7A00CA710E /* ImagePickerView.swift */; };
 		5F3B514825983B7B00CA710E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514225983B7B00CA710E /* Elements.swift */; };
-		5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */; };
 		5F3B514B25983B7B00CA710E /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B514525983B7B00CA710E /* Time.swift */; };
 		5F3B514F259874B200CA710E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B514E259874B200CA710E /* GoogleService-Info.plist */; };
 		5F3B5184259878EF00CA710E /* PostsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B5183259878EF00CA710E /* PostsVM.swift */; };
@@ -70,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KY_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F0F944125A46C05005C515A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		5F3B50632598245F00CA710E /* KY Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KY Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3B50662598245F00CA710E /* KY_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KY_MobileApp.swift; sourceTree = "<group>"; };
 		5F3B506A2598246500CA710E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		5F3B513D25983B6100CA710E /* NoticesVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticesVM.swift; sourceTree = "<group>"; };
 		5F3B514025983B7A00CA710E /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		5F3B514225983B7B00CA710E /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
-		5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserInfo.swift; sourceTree = "<group>"; };
 		5F3B514525983B7B00CA710E /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		5F3B514E259874B200CA710E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F3B5183259878EF00CA710E /* PostsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVM.swift; sourceTree = "<group>"; };
@@ -235,6 +235,7 @@
 				5F3B511225983A3000CA710E /* Current */,
 				5F3B511125983A2300CA710E /* Notice */,
 				5F3B511325983A3500CA710E /* Profile */,
+				5F0F944125A46C05005C515A /* LaunchScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,7 +394,6 @@
 			children = (
 				5F3B50662598245F00CA710E /* KY_MobileApp.swift */,
 				5F3B51A625987CC000CA710E /* ViewController.swift */,
-				5F3B514325983B7B00CA710E /* CurrentUserInfo.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -547,10 +547,10 @@
 				5F3B50AE259834A200CA710E /* FBStorage.swift in Sources */,
 				5F967A7925A03C6100F4669F /* FeedbackView.swift in Sources */,
 				5F3B51A725987CC000CA710E /* ViewController.swift in Sources */,
-				5F3B514925983B7B00CA710E /* CurrentUserInfo.swift in Sources */,
 				5F74839F25A1A7A0008CC04E /* YourWelfareView.swift in Sources */,
 				5F7483A525A1A7C3008CC04E /* OperatingHoursView.swift in Sources */,
 				5F74839625A1A76F008CC04E /* RentBicycleView.swift in Sources */,
+				5F0F944225A46C05005C515A /* LaunchScreenView.swift in Sources */,
 				5F3B513E25983B6100CA710E /* NoticesVM.swift in Sources */,
 				5F3B512025983AA800CA710E /* IntroductionView.swift in Sources */,
 				5F60624D25A0A5A9009F28BC /* CurrentUserVM.swift in Sources */,

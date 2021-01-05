@@ -4,17 +4,22 @@ import Firebase
 @main
 struct KY_MobileApp: App {
     
-    var currentUserInfo = CurrentUserInfo()
+    var currentUser: CurrentUserViewModel
+    var posts: PostsViewModel
     
     init() {
         // Connect the app to Firebase when the app is opened
         FirebaseApp.configure()
+        self.currentUser = CurrentUserViewModel()
+        self.posts = PostsViewModel()
     }
     
     var body: some Scene {
         WindowGroup {
             // Allow currentUserInfo to be accessible throughout the entire app
-            ViewController().environmentObject(currentUserInfo)
+            ViewController()
+                .environmentObject(currentUser)
+                .environmentObject(posts)
         }
     }
 }

@@ -3,17 +3,17 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct ViewController: View {
-    @EnvironmentObject var currentUserInfo: CurrentUserInfo
+    @EnvironmentObject var currentUser: CurrentUserViewModel
     @State private var currentTab: Int = 0
     
     var body: some View {
         
         Group {
-            
-            if currentUserInfo.isUserAuthenticated == .undefined {
-                Text("Loading...")
+            if currentUser.authenticationState == .undefined {
+                LaunchScreenView()
+                    .animation(.easeInOut(duration: 0.5))
             }
-            else if currentUserInfo.isUserAuthenticated == .signedOut {
+            else if currentUser.authenticationState == .signedOut {
                 IntroductionView()
             }
             else {
@@ -50,7 +50,7 @@ struct ViewController: View {
             }
         }.onAppear {
             // Allow app to react if user signs out or signs in
-            self.currentUserInfo.configureFirebaseStateDidChange()
+            self.currentUser.configureFirebaseStateDidChange()
         }
     }
 }

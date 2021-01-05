@@ -6,9 +6,25 @@ import FirebaseAuth
 class CurrentUserViewModel: ObservableObject {
     
     @Published var currentUser: User = User()
+    @Published var authenticationState: AuthenticationState = .undefined
+    enum AuthenticationState {
+        case undefined, signedOut, signedIn
+    }
+    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     
     init() {
         getCurrentUser()
+    }
+    
+    func configureFirebaseStateDidChange() {
+        // Detects if there is a change in authentication state
+        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ (_, user) in
+            guard let _ = user else {
+                self.authenticationState = .signedOut
+                return
+            }
+            self.authenticationState = .signedIn
+        })
     }
     
     // Add snapshot listener for current user's details
@@ -25,5 +41,5 @@ class CurrentUserViewModel: ObservableObject {
                 }
             }
         }
-    }
+    } 
 }
