@@ -3,6 +3,8 @@ import SwiftUI
 
 struct PostFullView: View {
     
+    @EnvironmentObject var imageArchive: ImageArchive
+    
     let thisPost: Post
     
     // Created for Editing Post purposes
@@ -35,10 +37,10 @@ struct PostFullView: View {
     @State var errorMessage: String = ""
     @State var showErrorMessage: Bool = false
     
-    init(thisPost: Post, unEditedPost: NewPost? = NewPost(), demoCardImage: UIImage, viewingType: ViewingType) {
+    init(thisPost: Post, unEditedPost: NewPost? = NewPost(), demoCardImage: UIImage? = UIImage(), viewingType: ViewingType) {
         self.thisPost = thisPost
         self.unEditedPost = unEditedPost!
-        self.demoCardImage = demoCardImage
+        self.demoCardImage = demoCardImage!
         self.viewingType = viewingType
     }
     
@@ -54,11 +56,11 @@ struct PostFullView: View {
                         Group {
                             // Displays the image selected in the new post sheet
                             if demoCardImage != UIImage() {
-                                Image(uiImage: demoCardImage).PostFullImage()
+                                UIImageToImage(uiImage: demoCardImage).PostFullImage()
                                 
                             } // Displays the image from the image's URL
                             else if thisPost.Cover != "" {
-                                PostPageImage(url: thisPost.Cover)
+                                UIImageToImage(uiImage: imageArchive.uiImageFromURL(id: thisPost.UUID, url: thisPost.Cover)).PostFullImage()
                             }
                         }
                         
@@ -142,7 +144,7 @@ struct PostFullView: View {
                             boolStart = (thisPost.StartDate != "")
                             boolEnd = (thisPost.EndDate != "")
                             boolAllDay = ((thisPost.StartTime == "") && (thisPost.EndTime == ""))
-                            editedPost.Cover = unEditedPost.CoverString.URLToUIImage()
+                            editedPost.Cover = imageArchive.uiImageFromURL(id: unEditedPost.UUID, url: unEditedPost.CoverString)
                             self.editPostConfigurationStatus = .configured
                         }
                         isShowingEditPostSheet = true
@@ -192,25 +194,25 @@ struct PostFullView: View {
 }
 
 // Retrieves the image for PostFullView from a URL
-struct PostPageImage: View {
-    @ObservedObject var imageLoader = ImageLoaderViewModel()
-    let url: String
-    let placeholder: String
-
-    init(url: String, placeholder: String = "placeholder") {
-        self.url = url
-        self.placeholder = placeholder
-        self.imageLoader.downloadImage(url: self.url)
-    }
-
-    var body: some View {
-        if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostFullImage()
-        } else {
-            return Image("placeholder").PostFullImage()
-        }
-    }
-}
+//struct PostPageImage: View {
+//    @ObservedObject var imageLoader = ImageLoaderViewModel()
+//    let url: String
+//    let placeholder: String
+//
+//    init(url: String, placeholder: String = "placeholder") {
+//        self.url = url
+//        self.placeholder = placeholder
+//        self.imageLoader.downloadImage(url: self.url)
+//    }
+//
+//    var body: some View {
+//        if let data = self.imageLoader.downloadedData {
+//            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostFullImage()
+//        } else {
+//            return Image("placeholder").PostFullImage()
+//        }
+//    }
+//}
 
 // Modifier for the image in the PostFullView
 extension Image {

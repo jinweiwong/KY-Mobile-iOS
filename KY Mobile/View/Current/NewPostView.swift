@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 struct NewPostView: View {
+    @EnvironmentObject var imageArchive: ImageArchive
+    
     @Binding var isPresented: Bool
     @Binding var newPost: NewPost
     
@@ -145,7 +147,8 @@ struct NewPostView: View {
                                    isActive: $showDemoPage) {
                         // Demo card for new post
                         PostCardView(thisPost: newPost.convertAllToString(),
-                                     demoCardImage: newPost.Cover)
+                                     demoCardImage: newPost.Cover,
+                                     viewingType: .demo)
                             .offset(x: -14, y: 0)
                     }
                 }
@@ -200,6 +203,10 @@ struct NewPostView: View {
                                 
                             // Successfully uploaded the image to Storage
                             case .success (let url):
+                                
+                                // Saves the image to imageArchive
+                                imageArchive.modifyImageArchive(id: newPost.UUID, uiImage: newPost.Cover, .add)
+                                
                                 // Saves the URL to newPost.CoverString
                                 self.newPost.CoverString = url.absoluteString
                                 

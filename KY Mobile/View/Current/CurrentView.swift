@@ -96,11 +96,9 @@ struct CurrentView: View {
                 NavigationLink(destination:
                                 PostFullView(thisPost: thisPost,
                                              unEditedPost: thisPost.postToNewPost(),
-                                             demoCardImage: UIImage(),
                                              viewingType: .view)) {
                     // Post card
-                    PostCardView(thisPost: thisPost,
-                                 demoCardImage: UIImage())
+                    PostCardView(thisPost: thisPost)
                         .frame(height: 120)
                         .padding(.horizontal, 5)
                 }

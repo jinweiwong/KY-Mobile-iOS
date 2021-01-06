@@ -22,6 +22,15 @@ class ImageLoaderViewModel: ObservableObject {
 }
 
 
+func UIImageToImage(uiImage: UIImage) -> Image {
+    if uiImage == UIImage() {
+        return Image("placeholder")
+    } else {
+        return Image(uiImage: uiImage)
+    }
+}
+
+
 extension String {
     func URLToUIImage() -> UIImage {
         do {

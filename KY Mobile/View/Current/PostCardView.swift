@@ -3,6 +3,8 @@ import SwiftUI
 
 struct PostCardView: View {
     
+    @EnvironmentObject var imageArchive: ImageArchive
+    
     let thisPost: Post
     
     // Assists in displaying the image selected by an admin creating a new post as that image has yet to be uploaded the Firebase Storage
@@ -10,7 +12,17 @@ struct PostCardView: View {
     // Should be set the image to be uploaded if it is called from NewPostView
     let demoCardImage: UIImage
     
+    enum ViewingType {
+        case demo, view }
+    var viewingType: ViewingType
+    
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
+    
+    init(thisPost: Post, demoCardImage: UIImage? = UIImage(), viewingType: ViewingType? = .view) {
+        self.thisPost = thisPost
+        self.demoCardImage = demoCardImage!
+        self.viewingType = viewingType! 
+    }
     
     var body: some View {
         ZStack{
@@ -22,12 +34,11 @@ struct PostCardView: View {
                         radius: 1 , x: -1, y: 0)
             
             HStack (spacing: 12) {
-                
                 Group {
-                    if demoCardImage != UIImage() {
-                        Image(uiImage: demoCardImage).PostCardImage()
+                    if viewingType == .demo {
+                        UIImageToImage(uiImage: demoCardImage).PostCardImage()
                     } else {
-                        PostCardImage(url: thisPost.Cover)
+                        UIImageToImage(uiImage: imageArchive.uiImageFromURL(id: thisPost.UUID, url: thisPost.Cover)).PostCardImage()
                     }
                 }
                 
@@ -86,25 +97,25 @@ struct PostCardView: View {
 }
 
 // Fetches the image for the card from a URL
-struct PostCardImage: View {
-    @ObservedObject var imageLoader = ImageLoaderViewModel()
-    let url: String
-    let placeholder: String
-    
-    init(url: String, placeholder: String = "placeholder") {
-        self.url = url
-        self.placeholder = placeholder
-        self.imageLoader.downloadImage(url: self.url)
-    }
-    
-    var body: some View {
-        if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostCardImage()
-        } else {
-            return Image("placeholder").PostCardImage()
-        }
-    }
-}
+//struct PostCardImage: View {
+//    @ObservedObject var imageLoader = ImageLoaderViewModel()
+//    let url: String
+//    let placeholder: String
+//    
+//    init(url: String, placeholder: String = "placeholder") {
+//        self.url = url
+//        self.placeholder = placeholder
+//        self.imageLoader.downloadImage(url: self.url)
+//    }
+//    
+//    var body: some View {
+//        if let data = self.imageLoader.downloadedData {
+//            return Image(uiImage: UIImage(data: data) ?? UIImage()).PostCardImage()
+//        } else {
+//            return Image("placeholder").PostCardImage()
+//        }
+//    }
+//}
 
 // Modifier for the post card image
 extension Image {

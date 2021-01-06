@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F0F944225A46C05005C515A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F944125A46C05005C515A /* LaunchScreenView.swift */; };
+		5F0F944825A47ECA005C515A /* ImageArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F944725A47ECA005C515A /* ImageArchive.swift */; };
 		5F3B50672598245F00CA710E /* KY_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50662598245F00CA710E /* KY_MobileApp.swift */; };
 		5F3B506B2598246500CA710E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506A2598246500CA710E /* Assets.xcassets */; };
 		5F3B506E2598246500CA710E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B506D2598246500CA710E /* Preview Assets.xcassets */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		3164FB62B2B2865994DB02C0 /* Pods_KY_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KY_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F0F944125A46C05005C515A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		5F0F944725A47ECA005C515A /* ImageArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArchive.swift; sourceTree = "<group>"; };
 		5F3B50632598245F00CA710E /* KY Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KY Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3B50662598245F00CA710E /* KY_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KY_MobileApp.swift; sourceTree = "<group>"; };
 		5F3B506A2598246500CA710E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -342,7 +344,6 @@
 		5F74837A25A16EAA008CC04E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5F60624C25A0A5A9009F28BC /* CurrentUserVM.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -394,6 +395,8 @@
 			children = (
 				5F3B50662598245F00CA710E /* KY_MobileApp.swift */,
 				5F3B51A625987CC000CA710E /* ViewController.swift */,
+				5F60624C25A0A5A9009F28BC /* CurrentUserVM.swift */,
+				5F0F944725A47ECA005C515A /* ImageArchive.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				5F7483C025A2B74E008CC04E /* NewNoticeModel.swift in Sources */,
 				5F7483AB25A1A7D9008CC04E /* MessageSCView.swift in Sources */,
 				5F3B513525983B3000CA710E /* ProfileView.swift in Sources */,
+				5F0F944825A47ECA005C515A /* ImageArchive.swift in Sources */,
 				5FD6E2D82599BC6D0085132B /* PostFullView.swift in Sources */,
 				5F60624925A09CD6009F28BC /* FBProfile.swift in Sources */,
 				5F967A6F25A0383A00F4669F /* EditProfileView.swift in Sources */,

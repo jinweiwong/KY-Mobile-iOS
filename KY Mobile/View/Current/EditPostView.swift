@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 struct EditPostView: View {
+    @EnvironmentObject var imageArchive: ImageArchive
+    
     @Binding var isPresented: Bool
     
     var unEditedPost: NewPost
@@ -149,7 +151,8 @@ struct EditPostView: View {
                                    isActive: $showDemoPage) {
                         // Demo card for new post
                         PostCardView(thisPost: editedPost.convertAllToString(),
-                                     demoCardImage: editedPost.Cover)
+                                     demoCardImage: editedPost.Cover,
+                                     viewingType: .demo)
                             .offset(x: -14, y: 0)
                     }
                 }
@@ -185,7 +188,7 @@ struct EditPostView: View {
                                             self.showErrorMessage = true
                                             
                                         case .success(_):
-                                            break
+                                            imageArchive.modifyImageArchive(id: unEditedPost.UUID, .remove)
                                         }}}
                                 
                                 isPresented = false
@@ -243,6 +246,10 @@ struct EditPostView: View {
                                 
                             // Successfully uploaded the image to Storage
                             case .success (let url):
+                                
+                                // Saves the image to the imageArchive
+                                imageArchive.modifyImageArchive(id: unEditedPost.UUID, uiImage: editedPost.Cover, .add)
+                                
                                 // Saves the URL to newPost.CoverString
                                 self.editedPost.CoverString = url.absoluteString
                                 
@@ -280,6 +287,8 @@ struct EditPostView: View {
                                     self.showErrorMessage = true
                                     
                                 case .success(_):
+                                    // Remove the image from imageArchive
+                                    imageArchive.modifyImageArchive(id: unEditedPost.UUID, .remove)
                                     editedPost.CoverString = ""
                                 }}
                         }
