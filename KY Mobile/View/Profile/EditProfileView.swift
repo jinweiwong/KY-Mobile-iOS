@@ -3,6 +3,7 @@ import SwiftUI
 
 struct EditProfileView: View {
     
+    @EnvironmentObject var imageArchive: ImageArchive
     let currentUser: User
     
     @Binding var errorMessage: String
@@ -27,10 +28,11 @@ struct EditProfileView: View {
                             isShowingImagePicker = true
                         }) {
                             if newProfilePicture != UIImage() {
-                                Image(uiImage: newProfilePicture)
+                                UIImageToImage(uiImage: newProfilePicture)
                                     .userEditProfileImageModifier()
                             } else {
-                                UserEditProfileImage(url: currentUser.Image)
+                                UIImageToImage(uiImage: imageArchive.searchArchive(id: currentUser.UID, url: currentUser.Image))
+                                    .userEditProfileImageModifier()
                             }
                         }
                         Spacer()
@@ -95,20 +97,10 @@ struct EditProfileView: View {
                                 self.showErrorMessage = true
                                 
                             case .success (let url):
-                                editedUser.Image = url.absoluteString
                                 
-                                // Save new image's URL into Firestore
-                                FBProfile.editUserDetails(uid: editedUser.UID,
-                                                      info: editedUser.userToDict()) { (result) in
-                                    switch result {
-                                    case .failure (let error):
-                                        self.errorMessage = error.localizedDescription
-                                        self.showErrorMessage = true
-                                        
-                                    case .success:
-                                        print("Successfully saved new profile picture")
-                                    }
-                                }
+                                // Saves the image to imageArchive
+                                imageArchive.modifyImageArchive(id: editedUser.UID, uiImage: newProfilePicture, .replace)
+                                editedUser.Image = url.absoluteString
                             }
                         }
                     }
@@ -116,6 +108,20 @@ struct EditProfileView: View {
             } else if !editedUser.equalTo(currentUser) {
                 print("Edited details of User")
             }
+            
+            // Save new user's new details into Firestore
+            FBProfile.editUserDetails(uid: editedUser.UID,
+                                  info: editedUser.userToDict()) { (result) in
+                switch result {
+                case .failure (let error):
+                    self.errorMessage = error.localizedDescription
+                    self.showErrorMessage = true
+                    
+                case .success:
+                    print("Successfully saved new details of users!")
+                }
+            }
+            
             isShowingEditProfile = false
         }) {
             Text("Save")
@@ -123,25 +129,25 @@ struct EditProfileView: View {
     }
 }
 
-struct UserEditProfileImage: View {
-    @ObservedObject var imageLoader = ImageLoaderViewModel()
-    let url: String
-    let placeholder: String
-
-    init(url: String, placeholder: String = "placeholder") {
-        self.url = url
-        self.placeholder = placeholder
-        self.imageLoader.downloadImage(url: self.url)
-    }
-
-    var body: some View {
-        if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data) ?? UIImage()).userEditProfileImageModifier()
-        } else {
-            return Image("placeholder").userEditProfileImageModifier()
-        }
-    }
-}
+//struct UserEditProfileImage: View {
+//    @ObservedObject var imageLoader = ImageLoaderViewModel()
+//    let url: String
+//    let placeholder: String
+//
+//    init(url: String, placeholder: String = "placeholder") {
+//        self.url = url
+//        self.placeholder = placeholder
+//        self.imageLoader.downloadImage(url: self.url)
+//    }
+//
+//    var body: some View {
+//        if let data = self.imageLoader.downloadedData {
+//            return Image(uiImage: UIImage(data: data) ?? UIImage()).userEditProfileImageModifier()
+//        } else {
+//            return Image("placeholder").userEditProfileImageModifier()
+//        }
+//    }
+//}
 
 extension Image {
     func userEditProfileImageModifier() -> some View {

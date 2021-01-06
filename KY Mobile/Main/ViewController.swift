@@ -4,7 +4,7 @@ import FirebaseAuth
 
 struct ViewController: View {
     @EnvironmentObject var currentUser: CurrentUserViewModel
-    @EnvironmentObject var downloadedImages: ImageArchive
+    @EnvironmentObject var imageArchive: ImageArchive
     
     @State private var currentTab: Int = 0
     

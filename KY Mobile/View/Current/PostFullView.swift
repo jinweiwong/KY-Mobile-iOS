@@ -37,9 +37,9 @@ struct PostFullView: View {
     @State var errorMessage: String = ""
     @State var showErrorMessage: Bool = false
     
-    init(thisPost: Post, unEditedPost: NewPost? = NewPost(), demoCardImage: UIImage? = UIImage(), viewingType: ViewingType) {
+    init(thisPost: Post, demoCardImage: UIImage? = UIImage(), viewingType: ViewingType) {
         self.thisPost = thisPost
-        self.unEditedPost = unEditedPost!
+        self.unEditedPost = thisPost.postToNewPost()
         self.demoCardImage = demoCardImage!
         self.viewingType = viewingType
     }
@@ -60,7 +60,7 @@ struct PostFullView: View {
                                 
                             } // Displays the image from the image's URL
                             else if thisPost.Cover != "" {
-                                UIImageToImage(uiImage: imageArchive.uiImageFromURL(id: thisPost.UUID, url: thisPost.Cover)).PostFullImage()
+                                UIImageToImage(uiImage: imageArchive.searchArchive(id: thisPost.UUID, url: thisPost.Cover)).PostFullImage()
                             }
                         }
                         
@@ -144,7 +144,7 @@ struct PostFullView: View {
                             boolStart = (thisPost.StartDate != "")
                             boolEnd = (thisPost.EndDate != "")
                             boolAllDay = ((thisPost.StartTime == "") && (thisPost.EndTime == ""))
-                            editedPost.Cover = imageArchive.uiImageFromURL(id: unEditedPost.UUID, url: unEditedPost.CoverString)
+                            editedPost.Cover = imageArchive.searchArchive(id: unEditedPost.UUID, url: unEditedPost.CoverString)
                             self.editPostConfigurationStatus = .configured
                         }
                         isShowingEditPostSheet = true

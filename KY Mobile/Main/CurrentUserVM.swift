@@ -7,6 +7,7 @@ class CurrentUserViewModel: ObservableObject {
     
     @Published var currentUser: User = User()
     @Published var authenticationState: AuthenticationState = .undefined
+    
     enum AuthenticationState {
         case undefined, signedOut, signedIn
     }

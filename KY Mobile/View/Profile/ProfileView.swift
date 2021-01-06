@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @EnvironmentObject var imageArchive: ImageArchive
     @ObservedObject var currentUser = CurrentUserViewModel()
     
     @State private var errorMessage: String = ""
@@ -90,12 +91,14 @@ struct ProfileView: View {
 
 struct ProfileCardView: View {
 
+    @EnvironmentObject var imageArchive: ImageArchive
+    
     let user: User
     let cardWidth: CGFloat = UIScreen.main.bounds.width - 40
 
     var body: some View {
         HStack (spacing: 12) {
-            UserCardImage(url: user.Image)
+            UIImageToImage(uiImage: imageArchive.searchArchive(id: user.UID, url: user.Image)).userCardImageModifier()
             VStack (spacing: 3) {
                 name
                 email
@@ -152,25 +155,25 @@ struct ProfileCardView: View {
     }
 }
 
-struct UserCardImage: View {
-    @ObservedObject var imageLoader = ImageLoaderViewModel()
-    let url: String
-    let placeholder: String
-
-    init(url: String, placeholder: String = "placeholder") {
-        self.url = url
-        self.placeholder = placeholder
-        self.imageLoader.downloadImage(url: self.url)
-    }
-
-    var body: some View {
-        if let data = self.imageLoader.downloadedData {
-            return Image(uiImage: UIImage(data: data) ?? UIImage()).userCardImageModifier()
-        } else {
-            return Image("placeholder").userCardImageModifier()
-        }
-    }
-}
+//struct UserCardImage: View {
+//    @ObservedObject var imageLoader = ImageLoaderViewModel()
+//    let url: String
+//    let placeholder: String
+//
+//    init(url: String, placeholder: String = "placeholder") {
+//        self.url = url
+//        self.placeholder = placeholder
+//        self.imageLoader.downloadImage(url: self.url)
+//    }
+//
+//    var body: some View {
+//        if let data = self.imageLoader.downloadedData {
+//            return Image(uiImage: UIImage(data: data) ?? UIImage()).userCardImageModifier()
+//        } else {
+//            return Image("placeholder").userCardImageModifier()
+//        }
+//    }
+//}
 
 extension Image {
     func userCardImageModifier() -> some View {

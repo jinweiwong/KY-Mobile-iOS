@@ -5,13 +5,13 @@ import Firebase
 struct KY_MobileApp: App {
     
     var currentUser: CurrentUserViewModel
-    var downloadedImages: ImageArchive
+    var imageArchive: ImageArchive
     
     init() {
         // Connect the app to Firebase when the app is opened
         FirebaseApp.configure()
         self.currentUser = CurrentUserViewModel()
-        self.downloadedImages = ImageArchive()
+        self.imageArchive = ImageArchive()
     }
     
     var body: some Scene {
@@ -19,7 +19,7 @@ struct KY_MobileApp: App {
             // Allow currentUserInfo to be accessible throughout the entire app
             ViewController()
                 .environmentObject(currentUser)
-                .environmentObject(downloadedImages)
+                .environmentObject(imageArchive)
         }
     }
 }
