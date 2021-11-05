@@ -1,7 +1,7 @@
 # KY Mobile App 📱
 by Jin Wei Wong, 2020.
 
-<img align="top" alt="Logo" width="200px" src="KY%20Mobile%20Logo.png"/>
+<img align="top" alt="Logo" width="200px" src="ky_mobile_logo.png"/>
 
 ## About
 This app is designed to improve the lives of students at the pre-university, [Kolej Yayasan UEM](https://www.kyuem.edu.my/). 
